@@ -17,7 +17,7 @@ default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: postgres
+  host: localhost
   port: 5432
   username: postgres
   password: password
@@ -33,7 +33,7 @@ test:
 production:
   <<: *default
   database: test_app_production
-
+  
   # The specified database role being used to connect to PostgreSQL.
   # To create additional roles in PostgreSQL see `$ createuser --help`.
   # When left blank, PostgreSQL will use the default role. This is
