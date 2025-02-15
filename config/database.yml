@@ -1,13 +1,9 @@
-env:
-  DATABASE_HOST: postgres
-
-
 # config/database.yml
 default: &default
   adapter: postgresql
   encoding: unicode
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
-  host: <%= ENV['DATABASE_HOST'] %>
+  host: postgres
   port: 5432
   username: postgres
   password: password
