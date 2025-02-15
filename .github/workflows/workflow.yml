@@ -4,61 +4,113 @@ env:
   POSTGRES_PASSWORD: password
   DATABASE_USER: postgres
   DATABASE_PASSWORD: password
+  DATABASE_HOST: postgres
 
 name: Rails tests
 on: [push, pull_request]
+
 jobs:
   rspec-test:
     name: RSpec
     runs-on: ubuntu-latest
     services:
       postgres:
-        image: postgres:12
+        image: postgres:latest
         ports:
-        - 5432:5432
+          - 5432:5432
         env:
-          POSTGRES_USER: ${{ env.POSTGRES_USER }}
-          POSTGRES_PASSWORD: ${{ env.POSTGRES_PASSWORD }}
+          POSTGRES_USER: ${{ env.DATABASE_USER }}
+          POSTGRES_PASSWORD: ${{ env.DATABASE_PASSWORD }}
+        options: >-
+          --health-cmd "pg_isready -U postgres"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+
     steps:
       - uses: actions/checkout@v2
       - uses: ruby/setup-ruby@v1
         with:
           ruby-version: ${{ env.RUBY_VERSION }}
+
       - name: Install postgres client
         run: sudo apt-get install libpq-dev
+      
+      - name: Show Environment Variables
+        run: |
+          echo "POSTGRES_USER: $POSTGRES_USER"
+          echo "POSTGRES_PASSWORD: $POSTGRES_PASSWORD"
+          echo "DATABASE_USER: $DATABASE_USER"
+          echo "DATABASE_PASSWORD: $DATABASE_PASSWORD"
+          echo "DATABASE_HOST: $DATABASE_HOST"
+
+      - name: Debug PostgreSQL Connection
+        run: |
+          echo "Checking PostgreSQL connection..."
+          PGPASSWORD=$DATABASE_PASSWORD psql -h postgres -U $DATABASE_USER -p 5432 -c '\l'
+    
+      - name: Test PostgreSQL Port
+        run: |
+          nc -zv postgres 5432
+      - name: Check PostgreSQL Readiness
+        run: pg_isready -h postgres -p 5432 -U $DATABASE_USER
+
+      - name: Wait for PostgreSQL to be ready
+        run: |
+          for i in {1..60}; do
+            if pg_isready -h postgres -p 5432 -U $DATABASE_USER; then
+              echo "Postgres is ready!"
+              exit 0
+            fi
+            echo "Waiting for Postgres..."
+            sleep 2
+          done
+          echo "Postgres did not start in time" && exit 1
+
+      - name: Ensure test database exists
+        run: |
+          PGPASSWORD=$DATABASE_PASSWORD psql -h postgres -U $DATABASE_USER -d postgres -c "CREATE DATABASE test_app_test;" || echo "Database already exists"
+
       - name: Install dependencies
         run: |
           gem install bundler
           bundler install
+
       - name: Create database
         run: |
-          bundler exec rails db:create RAILS_ENV=test
-          bundler exec rails db:migrate RAILS_ENV=test
+          RAILS_ENV=test bundler exec rails db:create
+          RAILS_ENV=test bundler exec rails db:migrate
+
       - uses: borales/actions-yarn@v3.0.0
         with:
           cmd: install
+
       - name: Run tests
         run: bundler exec rspec .
+
       - name: Run brakeman
         run: brakeman -o brakeman.txt
+
       - name: Run rubocop
         run: bundler exec rubocop --force-exclusion vendor/*/** --out rubocop.txt
+
       - name: Upload coverage results
         uses: actions/upload-artifact@master
         if: always()
         with:
           name: coverage-report
           path: coverage
+
       - name: Upload rubocop report
         uses: actions/upload-artifact@master
         if: always()
         with:
           name: rubocop-report.txt
           path: rubocop.txt
+
       - name: Upload brakeman report
         uses: actions/upload-artifact@master
         if: always()
         with:
           name: brakeman-report.txt
           path: brakeman.txt
-
