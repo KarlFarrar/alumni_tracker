@@ -26,3 +26,6 @@ cable:
 
 queue:
   <<: *default
+
+cache: 
+  <<: *default
