@@ -19,3 +19,7 @@ test:
 production:
   <<: *default
   database: test_app_production
+
+cable:
+  <<: *default
+  database: test_app_cable_production
