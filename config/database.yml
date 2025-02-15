@@ -19,3 +19,12 @@ test:
 production:
   <<: *default
   database: test_app_production
+  cable:
+    adapter: postgresql 
+    encoding: unicode
+    database: test_app_production_cable 
+    pool: 5
+    username: postgres
+    password: password
+    host: postgres
+
