@@ -32,6 +32,25 @@ jobs:
 
       - name: Install postgres client
         run: sudo apt-get install libpq-dev
+      
+      - name: Show Environment Variables
+        run: |
+          echo "POSTGRES_USER: $POSTGRES_USER"
+          echo "POSTGRES_PASSWORD: $POSTGRES_PASSWORD"
+          echo "DATABASE_USER: $DATABASE_USER"
+          echo "DATABASE_PASSWORD: $DATABASE_PASSWORD"
+          echo "DATABASE_HOST: $DATABASE_HOST"
+
+      - name: Debug PostgreSQL Connection
+        run: |
+          echo "Checking PostgreSQL connection..."
+          PGPASSWORD=$DATABASE_PASSWORD psql -h postgres -U $DATABASE_USER -p 5432 -c '\l'
+    
+      - name: Test PostgreSQL Port
+        run: |
+          nc -zv postgres 5432
+      - name: Check PostgreSQL Readiness
+        run: pg_isready -h postgres -p 5432 -U $DATABASE_USER
 
       - name: Wait for PostgreSQL to be ready
         run: |
