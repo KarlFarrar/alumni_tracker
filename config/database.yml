@@ -23,6 +23,3 @@ production:
 cable:
   <<: *default
   database: test_app_cable_production
-
-queue:
-  <<: *production
