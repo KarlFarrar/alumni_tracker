@@ -1,7 +1,10 @@
 env:
   RUBY_VERSION: 3.3.0
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: password
   DATABASE_USER: postgres
   DATABASE_PASSWORD: password
+  DATABASE_HOST: postgres
 
 name: Rails tests
 on: [push, pull_request]
