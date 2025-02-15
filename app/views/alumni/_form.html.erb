@@ -1,0 +1,57 @@
+<%= form_with(model: alumnus) do |form| %>
+  <% if alumnus.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(alumnus.errors.count, "error") %> prohibited this alumnus from being saved:</h2>
+
+      <ul>
+        <% alumnus.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :uin, style: "display: block" %>
+    <%= form.number_field :uin %>
+  </div>
+
+  <div>
+    <%= form.label :cohort_year, style: "display: block" %>
+    <%= form.number_field :cohort_year %>
+  </div>
+
+  <div>
+    <%= form.label :team_affiliation, style: "display: block" %>
+    <%= form.text_field :team_affiliation %>
+  </div>
+
+  <div>
+    <%= form.label :profession_title, style: "display: block" %>
+    <%= form.text_field :profession_title %>
+  </div>
+
+  <div>
+    <%= form.label :availability, style: "display: block" %>
+    <%= form.checkbox :availability %>
+  </div>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :phone_number, style: "display: block" %>
+    <%= form.text_field :phone_number %>
+  </div>
+
+  <div>
+    <%= form.label :biography, style: "display: block" %>
+    <%= form.text_field :biography %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
