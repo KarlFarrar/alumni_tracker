@@ -18,13 +18,9 @@ test:
 
 production:
   <<: *default
-  database: test_app_production
+  database: <%= ENV['DATABASE_URL'] %> 
+ 
   cable:
-    adapter: postgresql 
-    encoding: unicode
-    database: test_app_production_cable 
-    pool: 5
-    username: postgres
-    password: password
-    host: postgres
-
+    adapter: redis
+    url: <%= ENV.fetch("REDIS_URL") { "redis://localhost:6379/1" } %>
+    channel_prefix: <%= ENV.fetch("REDIS_CHANNEL_PREFIX") { "your_app_production" } %>
