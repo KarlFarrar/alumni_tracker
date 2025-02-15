@@ -4,6 +4,8 @@ env:
   POSTGRES_PASSWORD: password
   DATABASE_USER: postgres
   DATABASE_PASSWORD: password
+  DATABASE_HOST: localhost
+
 
 name: Rails tests
 on: [push, pull_request]
