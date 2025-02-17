@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe "alumni/show", type: :view do
   before(:each) do
     assign(:alumnus, Alumnus.create!(
-      uin: 2,
-      cohort_year: 3,
+      uin: 123456789,
+      cohort_year: 2021,
       team_affiliation: "Team Affiliation",
       profession_title: "Profession Title",
       availability: false,
       email: "Email",
-      phone_number: "Phone Number",
+      phone_number: "6824728670",
       biography: "Biography"
     ))
   end

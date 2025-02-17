@@ -4,23 +4,23 @@ RSpec.describe "alumni/index", type: :view do
   before(:each) do
     assign(:alumni, [
       Alumnus.create!(
-        uin: 2,
-        cohort_year: 3,
+        uin: 123456789,
+        cohort_year: 2021,
         team_affiliation: "Team Affiliation",
         profession_title: "Profession Title",
         availability: false,
         email: "Email",
-        phone_number: "Phone Number",
+        phone_number: "6824728670",
         biography: "Biography"
       ),
       Alumnus.create!(
-        uin: 2,
-        cohort_year: 3,
+        uin: 123456789,
+        cohort_year: 2021,
         team_affiliation: "Team Affiliation",
         profession_title: "Profession Title",
         availability: false,
         email: "Email",
-        phone_number: "Phone Number",
+        phone_number: "6824728670",
         biography: "Biography"
       )
     ])

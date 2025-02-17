@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe "alumni/edit", type: :view do
   let(:alumnus) {
     Alumnus.create!(
-      uin: 1,
-      cohort_year: 1,
+      uin: 123456789,
+      cohort_year: 2024,
       team_affiliation: "MyString",
       profession_title: "MyString",
       availability: false,
       email: "MyString",
-      phone_number: "MyString",
+      phone_number: "6824728670",
       biography: "MyString"
     )
   }
