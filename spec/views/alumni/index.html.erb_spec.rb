@@ -29,13 +29,13 @@ RSpec.describe "alumni/index", type: :view do
   it "renders a list of alumni" do
     render
     cell_selector = 'div>p'
-    assert_select cell_selector, text: Regexp.new(2.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(3.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new(123456789.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new(2021.to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Team Affiliation".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Profession Title".to_s), count: 2
     assert_select cell_selector, text: Regexp.new(false.to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Email".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Phone Number".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("(682)-472-8670".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Biography".to_s), count: 2
   end
 end
