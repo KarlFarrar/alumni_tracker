@@ -9,7 +9,7 @@ RSpec.describe "alumni/show", type: :view do
       profession_title: "Profession Title",
       availability: false,
       email: "Email",
-      phone_number: "6824728670",
+      phone_number: "(682)-472-8670",
       biography: "Biography"
     ))
   end

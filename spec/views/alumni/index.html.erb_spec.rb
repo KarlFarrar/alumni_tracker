@@ -10,7 +10,7 @@ RSpec.describe "alumni/index", type: :view do
         profession_title: "Profession Title",
         availability: false,
         email: "Email",
-        phone_number: "6824728670",
+        phone_number: "(682)-472-8670",
         biography: "Biography"
       ),
       Alumnus.create!(
@@ -20,7 +20,7 @@ RSpec.describe "alumni/index", type: :view do
         profession_title: "Profession Title",
         availability: false,
         email: "Email",
-        phone_number: "6824728670",
+        phone_number: "(682)-472-8670",
         biography: "Biography"
       )
     ])
