@@ -1,0 +1,1846 @@
+  [1m[35mSQL (0.5ms)[0m  [1m[35mSET search_path TO public /*application='AlumniTracker'*/[0m
+  [1m[35m (186.9ms)[0m  [1m[35mCREATE DATABASE "test_app_development" ENCODING = 'unicode' /*application='AlumniTracker'*/[0m
+  [1m[35mSQL (0.4ms)[0m  [1m[35mSET search_path TO public /*application='AlumniTracker'*/[0m
+  [1m[35m (55.6ms)[0m  [1m[35mCREATE DATABASE "test_app_test" ENCODING = 'unicode' /*application='AlumniTracker'*/[0m
+  [1m[35m (4.6ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY) /*application='AlumniTracker'*/[0m
+  [1m[35m (1.8ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='AlumniTracker'*/[0m
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7992348028875656775) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Create (2.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'development', '2025-02-14 17:34:06.254883', '2025-02-14 17:34:06.254887') RETURNING "key" /*application='AlumniTracker'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_advisory_unlock(7992348028875656775) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+Started GET "/" for 172.18.0.1 at 2025-02-14 17:35:48 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (1.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/bundle/gems/railties-8.0.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/bundle/gems/railties-8.0.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.6ms | GC: 0.0ms)
+Completed 200 OK in 1149ms (Views: 57.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7992348028875656775) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='AlumniTracker'*/[0m
+Migrating to CreateAlumnis (20250215020653)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*application='AlumniTracker'*/[0m
+  [1m[35m (12.4ms)[0m  [1m[35mCREATE TABLE "alumnis" ("id" bigserial primary key, "uin" integer, "cohort_year" integer, "team_affiliation" character varying, "profession_title" character varying, "availability" boolean, "email" character varying, "phone_number" character varying, "biography" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.4ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250215020653') RETURNING "version" /*application='AlumniTracker'*/[0m
+  [1m[36mTRANSACTION (1.4ms)[0m  [1m[35mCOMMIT /*application='AlumniTracker'*/[0m
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_advisory_unlock(7992348028875656775) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+Started GET "/" for 172.18.0.1 at 2025-02-15 02:08:01 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+Processing by Rails::WelcomeController#index as HTML
+  Rendering /usr/local/bundle/gems/railties-8.0.1/lib/rails/templates/rails/welcome/index.html.erb
+  Rendered /usr/local/bundle/gems/railties-8.0.1/lib/rails/templates/rails/welcome/index.html.erb (Duration: 2.1ms | GC: 0.0ms)
+Completed 200 OK in 1102ms (Views: 17.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni" for 172.18.0.1 at 2025-02-15 02:08:08 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/alumni"):
+  
+Started GET "/favicon.ico" for 172.18.0.1 at 2025-02-15 02:08:08 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/alumni" for 172.18.0.1 at 2025-02-15 02:09:59 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+  
+ActionController::RoutingError (No route matches [GET] "/alumni"):
+  
+Started GET "/" for 172.18.0.1 at 2025-02-15 02:10:04 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (uninitialized constant AlumniController)
+Caused by: ActionDispatch::MissingController (uninitialized constant AlumniController)
+Caused by: NameError (uninitialized constant AlumniController)
+
+Information for: ActionController::RoutingError (uninitialized constant AlumniController):
+  
+
+Information for cause: ActionDispatch::MissingController (uninitialized constant AlumniController):
+  
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:102:in `rescue in controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:98:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+
+Information for cause: NameError (uninitialized constant AlumniController):
+  
+activesupport (8.0.1) lib/active_support/inflector/methods.rb:290:in `constantize'
+activesupport (8.0.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:99:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/" for 172.18.0.1 at 2025-02-15 02:11:08 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (1.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+  
+ActionController::RoutingError (uninitialized constant AlumniController)
+Caused by: ActionDispatch::MissingController (uninitialized constant AlumniController)
+Caused by: NameError (uninitialized constant AlumniController)
+
+Information for: ActionController::RoutingError (uninitialized constant AlumniController):
+  
+
+Information for cause: ActionDispatch::MissingController (uninitialized constant AlumniController):
+  
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:102:in `rescue in controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:98:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+
+Information for cause: NameError (uninitialized constant AlumniController):
+  
+activesupport (8.0.1) lib/active_support/inflector/methods.rb:290:in `constantize'
+activesupport (8.0.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:99:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/alumni" for 172.18.0.1 at 2025-02-15 02:11:21 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (uninitialized constant AlumniController)
+Caused by: ActionDispatch::MissingController (uninitialized constant AlumniController)
+Caused by: NameError (uninitialized constant AlumniController)
+
+Information for: ActionController::RoutingError (uninitialized constant AlumniController):
+  
+
+Information for cause: ActionDispatch::MissingController (uninitialized constant AlumniController):
+  
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:102:in `rescue in controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:98:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+
+Information for cause: NameError (uninitialized constant AlumniController):
+  
+activesupport (8.0.1) lib/active_support/inflector/methods.rb:290:in `constantize'
+activesupport (8.0.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:99:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/a" for 172.18.0.1 at 2025-02-15 02:11:24 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/a"):
+  
+Started GET "/" for 172.18.0.1 at 2025-02-15 02:11:37 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (uninitialized constant AlumniController)
+Caused by: ActionDispatch::MissingController (uninitialized constant AlumniController)
+Caused by: NameError (uninitialized constant AlumniController)
+
+Information for: ActionController::RoutingError (uninitialized constant AlumniController):
+  
+
+Information for cause: ActionDispatch::MissingController (uninitialized constant AlumniController):
+  
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:102:in `rescue in controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:98:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+
+Information for cause: NameError (uninitialized constant AlumniController):
+  
+activesupport (8.0.1) lib/active_support/inflector/methods.rb:290:in `constantize'
+activesupport (8.0.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:99:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/alumni" for 172.18.0.1 at 2025-02-15 02:11:57 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (uninitialized constant AlumniController)
+Caused by: ActionDispatch::MissingController (uninitialized constant AlumniController)
+Caused by: NameError (uninitialized constant AlumniController)
+
+Information for: ActionController::RoutingError (uninitialized constant AlumniController):
+  
+
+Information for cause: ActionDispatch::MissingController (uninitialized constant AlumniController):
+  
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:102:in `rescue in controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:98:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+
+Information for cause: NameError (uninitialized constant AlumniController):
+  
+activesupport (8.0.1) lib/active_support/inflector/methods.rb:290:in `constantize'
+activesupport (8.0.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:99:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/" for 172.18.0.1 at 2025-02-15 16:02:15 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (1.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+  
+ActionController::RoutingError (uninitialized constant AlumniController)
+Caused by: ActionDispatch::MissingController (uninitialized constant AlumniController)
+Caused by: NameError (uninitialized constant AlumniController)
+
+Information for: ActionController::RoutingError (uninitialized constant AlumniController):
+  
+
+Information for cause: ActionDispatch::MissingController (uninitialized constant AlumniController):
+  
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:102:in `rescue in controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:98:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+
+Information for cause: NameError (uninitialized constant AlumniController):
+  
+activesupport (8.0.1) lib/active_support/inflector/methods.rb:290:in `constantize'
+activesupport (8.0.1) lib/active_support/core_ext/string/inflections.rb:74:in `constantize'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:99:in `controller_class_for'
+actionpack (8.0.1) lib/action_dispatch/http/request.rb:91:in `controller_class'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:61:in `controller'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:48:in `serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:53:in `block in serve'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:133:in `block in find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `each'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:126:in `find_routes'
+actionpack (8.0.1) lib/action_dispatch/journey/router.rb:34:in `serve'
+actionpack (8.0.1) lib/action_dispatch/routing/route_set.rb:908:in `call'
+railties (8.0.1) lib/rails/engine/lazy_route_set.rb:68:in `call'
+rack (3.1.9) lib/rack/tempfile_reaper.rb:20:in `call'
+rack (3.1.9) lib/rack/etag.rb:29:in `call'
+rack (3.1.9) lib/rack/conditional_get.rb:31:in `call'
+rack (3.1.9) lib/rack/head.rb:15:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/permissions_policy.rb:38:in `call'
+actionpack (8.0.1) lib/action_dispatch/http/content_security_policy.rb:38:in `call'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:274:in `context'
+rack-session (2.1.0) lib/rack/session/abstract/id.rb:268:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/cookies.rb:706:in `call'
+activerecord (8.0.1) lib/active_record/migration.rb:671:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/favicon.ico" for 172.18.0.1 at 2025-02-15 16:02:16 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/favicon.ico"):
+  
+Started GET "/alumnis" for 172.18.0.1 at 2025-02-15 16:02:22 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActionController::RoutingError (No route matches [GET] "/alumnis"):
+  
+Started GET "/alumnis" for 172.18.0.1 at 2025-02-15 16:05:58 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (1.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+  
+ActionController::RoutingError (No route matches [GET] "/alumnis"):
+  
+Started GET "/" for 172.18.0.1 at 2025-02-15 16:06:01 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  Rendered alumni/index.html.erb within layouts/application (Duration: 5.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.4ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 1550ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 2.6ms)
+
+
+  
+ActionView::Template::Error (undefined method `each' for nil)
+Caused by: NoMethodError (undefined method `each' for nil)
+
+Information for: ActionView::Template::Error (undefined method `each' for nil):
+     5: <h1>Alumnis</h1>
+     6: 
+     7: <div id="alumnis">
+     8:   <% @alumnis.each do |alumni| %>
+     9:     <%= render alumni %>
+    10:     <p>
+    11:       <%= link_to "Show this alumni", alumni %>
+  
+app/views/alumni/index.html.erb:8
+
+Information for cause: NoMethodError (undefined method `each' for nil):
+  
+app/views/alumni/index.html.erb:8
+Started GET "/" for 172.18.0.1 at 2025-02-15 16:08:10 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumni Load (25.3ms)[0m  [1m[34mSELECT "alumnis".* FROM "alumnis" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/index.html.erb within layouts/application (Duration: 36.3ms | GC: 0.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 217.6ms | GC: 1.1ms)
+Completed 200 OK in 729ms (Views: 193.2ms | ActiveRecord: 34.8ms (1 query, 0 cached) | GC: 1.1ms)
+
+
+Started GET "/assets/application-c94b29d2.css" for 172.18.0.1 at 2025-02-15 16:08:11 +0000
+Started GET "/assets/turbo.min-fae85750.js" for 172.18.0.1 at 2025-02-15 16:08:11 +0000
+Started GET "/assets/application-ce023cd2.js" for 172.18.0.1 at 2025-02-15 16:08:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/hello_controller-b94c6ec2.js" for 172.18.0.1 at 2025-02-15 16:08:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/index-eaeb0fd6.js" for 172.18.0.1 at 2025-02-15 16:08:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/controllers/application-6f361061.js" for 172.18.0.1 at 2025-02-15 16:08:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/stimulus-loading-1fc53fe7.js" for 172.18.0.1 at 2025-02-15 16:08:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/assets/stimulus.min-4b1e420e.js" for 172.18.0.1 at 2025-02-15 16:08:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-15 16:08:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 4.8ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 115.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 117.4ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 881ms (ActiveRecord: 12.4ms (0 queries, 0 cached) | GC: 1.1ms)
+
+
+  
+ActionView::Template::Error (undefined method `alumnis_path' for an instance of #<Class:0x00007fe123336560>)
+Caused by: NoMethodError (undefined method `alumnis_path' for an instance of #<Class:0x00007fe123336560>)
+
+Information for: ActionView::Template::Error (undefined method `alumnis_path' for an instance of #<Class:0x00007fe123336560>):
+    1: <%= form_with(model: alumni) do |form| %>
+    2:   <% if alumni.errors.any? %>
+    3:     <div style="color: red">
+    4:       <h2><%= pluralize(alumni.errors.count, "error") %> prohibited this alumni from being saved:</h2>
+  
+app/views/alumni/_form.html.erb:1
+app/views/alumni/new.html.erb:5
+
+Information for cause: NoMethodError (undefined method `alumnis_path' for an instance of #<Class:0x00007fe123336560>):
+  
+app/views/alumni/_form.html.erb:1
+app/views/alumni/new.html.erb:5
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-15 16:11:37 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 2.8ms | GC: 0.2ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 15.0ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 16.7ms | GC: 0.2ms)
+Completed 500 Internal Server Error in 612ms (ActiveRecord: 4.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
+  
+ActionView::Template::Error (undefined method `alumnis_path' for an instance of #<Class:0x00007fe12337e608>)
+Caused by: NoMethodError (undefined method `alumnis_path' for an instance of #<Class:0x00007fe12337e608>)
+
+Information for: ActionView::Template::Error (undefined method `alumnis_path' for an instance of #<Class:0x00007fe12337e608>):
+    1: <%= form_with(model: @alumni) do |form| %>
+    2:   <% if alumni.errors.any? %>
+    3:     <div style="color: red">
+    4:       <h2><%= pluralize(alumni.errors.count, "error") %> prohibited this alumni from being saved:</h2>
+  
+app/views/alumni/_form.html.erb:1
+app/views/alumni/new.html.erb:5
+
+Information for cause: NoMethodError (undefined method `alumnis_path' for an instance of #<Class:0x00007fe12337e608>):
+  
+app/views/alumni/_form.html.erb:1
+app/views/alumni/new.html.erb:5
+Started GET "/alumni" for 172.18.0.1 at 2025-02-15 16:11:42 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumni Load (0.4ms)[0m  [1m[34mSELECT "alumnis".* FROM "alumnis" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/index.html.erb within layouts/application (Duration: 6.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 30.3ms | GC: 0.0ms)
+Completed 200 OK in 495ms (Views: 31.1ms | ActiveRecord: 0.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-15 16:11:44 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 0.7ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 2.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 3.5ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 546ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionView::Template::Error (undefined method `alumnis_path' for an instance of #<Class:0x00007fe12337e608>)
+Caused by: NoMethodError (undefined method `alumnis_path' for an instance of #<Class:0x00007fe12337e608>)
+
+Information for: ActionView::Template::Error (undefined method `alumnis_path' for an instance of #<Class:0x00007fe12337e608>):
+    1: <%= form_with(model: @alumni) do |form| %>
+    2:   <% if alumni.errors.any? %>
+    3:     <div style="color: red">
+    4:       <h2><%= pluralize(alumni.errors.count, "error") %> prohibited this alumni from being saved:</h2>
+  
+app/views/alumni/_form.html.erb:1
+app/views/alumni/new.html.erb:5
+
+Information for cause: NoMethodError (undefined method `alumnis_path' for an instance of #<Class:0x00007fe12337e608>):
+  
+app/views/alumni/_form.html.erb:1
+app/views/alumni/new.html.erb:5
+  [1m[35m (0.3ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7992348028875656775) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.3ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='AlumniTracker'*/[0m
+Migrating to CreateAlumni (20250215161445)
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN /*application='AlumniTracker'*/[0m
+  [1m[35m (6.6ms)[0m  [1m[35mCREATE TABLE "alumni" ("id" bigserial primary key, "uin" integer, "cohort_year" integer, "team_affiliation" character varying, "profession_title" character varying, "availability" boolean, "email" character varying, "phone_number" character varying, "biography" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Create (0.5ms)[0m  [1m[32mINSERT INTO "schema_migrations" ("version") VALUES ('20250215161445') RETURNING "version" /*application='AlumniTracker'*/[0m
+  [1m[36mTRANSACTION (1.5ms)[0m  [1m[35mCOMMIT /*application='AlumniTracker'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(7992348028875656775) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-15 16:15:22 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (1.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 134.7ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 147.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 339.0ms | GC: 0.0ms)
+Completed 200 OK in 2181ms (Views: 433.8ms | ActiveRecord: 12.9ms (0 queries, 0 cached) | GC: 1.1ms)
+
+
+Started POST "/alumni" for 172.18.0.1 at 2025-02-15 16:16:48 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alumnus"=>{"uin"=>"432003567", "cohort_year"=>"2022", "team_affiliation"=>"Mighty Ducks", "profession_title"=>"Pediatric Surgeon", "availability"=>"1", "email"=>"[FILTERED]", "phone_number"=>"682-472-8670", "biography"=>"I'm just testing out how I can make a  new alumnus"}, "commit"=>"Create Alumnus"}
+  [1m[36mTRANSACTION (0.7ms)[0m  [1m[35mBEGIN /*action='create',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:27:in `block in create'
+  [1m[36mAlumnus Create (12.4ms)[0m  [1m[32mINSERT INTO "alumni" ("uin", "cohort_year", "team_affiliation", "profession_title", "availability", "email", "phone_number", "biography", "created_at", "updated_at") VALUES (432003567, 2022, 'Mighty Ducks', 'Pediatric Surgeon', TRUE, 'karl.j.farrar@tamu.edu', '682-472-8670', 'I''m just testing out how I can make a  new alumnus', '2025-02-15 16:16:48.965956', '2025-02-15 16:16:48.965956') RETURNING "id" /*action='create',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (2.0ms)[0m  [1m[35mCOMMIT /*action='create',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:27:in `block in create'
+Redirected to http://localhost:3000/alumni/1
+Completed 302 Found in 489ms (ActiveRecord: 15.0ms (1 query, 0 cached) | GC: 31.2ms)
+
+
+Started GET "/alumni/1" for 172.18.0.1 at 2025-02-15 16:16:49 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#show as TURBO_STREAM
+  Parameters: {"id"=>"1"}
+  [1m[36mAlumnus Load (1.2ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" WHERE "alumni"."id" = 1 LIMIT 1 /*action='show',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:63:in `set_alumnus'
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/show.html.erb within layouts/application
+  Rendered alumni/_alumnus.html.erb (Duration: 3.3ms | GC: 0.0ms)
+  Rendered alumni/show.html.erb within layouts/application (Duration: 37.1ms | GC: 0.4ms)
+  Rendered layout layouts/application.html.erb (Duration: 40.6ms | GC: 0.4ms)
+Completed 200 OK in 631ms (Views: 42.0ms | ActiveRecord: 1.2ms (1 query, 0 cached) | GC: 1.0ms)
+
+
+Started GET "/alumni" for 172.18.0.1 at 2025-02-15 16:16:57 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (0.4ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/_alumnus.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered alumni/index.html.erb within layouts/application (Duration: 6.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 8.6ms | GC: 0.5ms)
+Completed 200 OK in 360ms (Views: 9.4ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/alumni/1" for 172.18.0.1 at 2025-02-15 16:17:16 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAlumnus Load (0.6ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" WHERE "alumni"."id" = 1 LIMIT 1 /*action='show',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:63:in `set_alumnus'
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/show.html.erb within layouts/application
+  Rendered alumni/_alumnus.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered alumni/show.html.erb within layouts/application (Duration: 2.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.0ms | GC: 0.0ms)
+Completed 200 OK in 442ms (Views: 4.9ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni" for 172.18.0.1 at 2025-02-15 16:17:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (0.4ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/_alumnus.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered alumni/index.html.erb within layouts/application (Duration: 4.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.9ms | GC: 0.0ms)
+Completed 200 OK in 478ms (Views: 7.7ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-15 16:17:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 4.2ms | GC: 0.3ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 5.2ms | GC: 0.3ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.2ms | GC: 0.3ms)
+Completed 200 OK in 356ms (Views: 7.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/alumni" for 172.18.0.1 at 2025-02-15 16:17:21 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (0.3ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/_alumnus.html.erb (Duration: 0.5ms | GC: 0.0ms)
+  Rendered alumni/index.html.erb within layouts/application (Duration: 5.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.1ms | GC: 0.0ms)
+Completed 200 OK in 405ms (Views: 7.4ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni/1" for 172.18.0.1 at 2025-02-15 16:23:18 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAlumnus Load (43.8ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" WHERE "alumni"."id" = 1 LIMIT 1 /*action='show',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:63:in `set_alumnus'
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/show.html.erb within layouts/application
+  Rendered alumni/_alumnus.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered alumni/show.html.erb within layouts/application (Duration: 2.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.1ms | GC: 0.0ms)
+Completed 200 OK in 630ms (Views: 6.1ms | ActiveRecord: 57.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni/1" for 172.18.0.1 at 2025-02-15 16:23:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#show as HTML
+  Parameters: {"id"=>"1"}
+  [1m[36mAlumnus Load (0.9ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" WHERE "alumni"."id" = 1 LIMIT 1 /*action='show',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:63:in `set_alumnus'
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/show.html.erb within layouts/application
+  Rendered alumni/_alumnus.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered alumni/show.html.erb within layouts/application (Duration: 3.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 4.6ms | GC: 0.0ms)
+Completed 200 OK in 376ms (Views: 5.3ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started DELETE "/alumni/1" for 172.18.0.1 at 2025-02-15 16:23:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#destroy as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "id"=>"1"}
+  [1m[36mAlumnus Load (0.6ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" WHERE "alumni"."id" = 1 LIMIT 1 /*action='destroy',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:63:in `set_alumnus'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN /*action='destroy',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:52:in `destroy'
+  [1m[36mAlumnus Destroy (2.8ms)[0m  [1m[31mDELETE FROM "alumni" WHERE "alumni"."id" = 1 /*action='destroy',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:52:in `destroy'
+  [1m[36mTRANSACTION (1.2ms)[0m  [1m[35mCOMMIT /*action='destroy',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:52:in `destroy'
+Redirected to http://localhost:3000/alumni
+Completed 303 See Other in 421ms (ActiveRecord: 4.8ms (2 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni" for 172.18.0.1 at 2025-02-15 16:23:20 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as TURBO_STREAM
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (0.4ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/index.html.erb within layouts/application (Duration: 5.7ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.7ms | GC: 0.0ms)
+Completed 200 OK in 385ms (Views: 8.5ms | ActiveRecord: 0.3ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-15 16:23:23 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 8.2ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 9.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 11.4ms | GC: 0.0ms)
+Completed 200 OK in 392ms (Views: 12.5ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/alumni" for 172.18.0.1 at 2025-02-15 16:23:46 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alumnus"=>{"uin"=>"432003567", "cohort_year"=>"2022", "team_affiliation"=>"Mighty Ducks", "profession_title"=>"Pediatric Surgeon", "availability"=>"1", "email"=>"[FILTERED]", "phone_number"=>"682-472-8670", "biography"=>"I'm just testing out how I can make a  new alumnus"}, "commit"=>"Create Alumnus"}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN /*action='create',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:27:in `block in create'
+  [1m[36mAlumnus Create (4.8ms)[0m  [1m[32mINSERT INTO "alumni" ("uin", "cohort_year", "team_affiliation", "profession_title", "availability", "email", "phone_number", "biography", "created_at", "updated_at") VALUES (432003567, 2022, 'Mighty Ducks', 'Pediatric Surgeon', TRUE, 'karl.j.farrar@tamu.edu', '682-472-8670', 'I''m just testing out how I can make a  new alumnus', '2025-02-15 16:23:47.161346', '2025-02-15 16:23:47.161346') RETURNING "id" /*action='create',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:27:in `block in create'
+  [1m[36mTRANSACTION (7.4ms)[0m  [1m[35mCOMMIT /*action='create',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:27:in `block in create'
+Redirected to http://localhost:3000/alumni/2
+Completed 302 Found in 598ms (ActiveRecord: 12.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni/2" for 172.18.0.1 at 2025-02-15 16:23:47 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#show as TURBO_STREAM
+  Parameters: {"id"=>"2"}
+  [1m[36mAlumnus Load (1.0ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" WHERE "alumni"."id" = 2 LIMIT 1 /*action='show',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:63:in `set_alumnus'
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/show.html.erb within layouts/application
+  Rendered alumni/_alumnus.html.erb (Duration: 0.3ms | GC: 0.0ms)
+  Rendered alumni/show.html.erb within layouts/application (Duration: 3.1ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.5ms | GC: 0.0ms)
+Completed 200 OK in 645ms (Views: 6.6ms | ActiveRecord: 0.9ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/" for 172.18.0.1 at 2025-02-15 20:55:07 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  
+ActiveRecord::DatabaseConnectionError (There is an issue connecting to your database with your username/password, username: postgres.
+
+Please check your database configuration to ensure the username/password are valid.
+)
+Caused by: PG::ConnectionBad (connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
+)
+
+Information for: ActiveRecord::DatabaseConnectionError (There is an issue connecting to your database with your username/password, username: postgres.
+
+Please check your database configuration to ensure the username/password are valid.
+):
+  
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:65:in `rescue in new_client'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:57:in `new_client'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:934:in `connect'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:946:in `reconnect'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:669:in `block in reconnect!'
+activesupport (8.0.1) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:668:in `reconnect!'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:770:in `block in verify!'
+activesupport (8.0.1) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:761:in `verify!'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:778:in `connect!'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:984:in `block in with_raw_connection'
+activesupport (8.0.1) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:983:in `with_raw_connection'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql/quoting.rb:128:in `quote_string'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract/quoting.rb:76:in `quote'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql/quoting.rb:122:in `quote'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql/schema_statements.rb:1142:in `quoted_scope'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql/schema_statements.rb:1119:in `data_source_sql'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract/schema_statements.rb:60:in `table_exists?'
+activerecord (8.0.1) lib/active_record/schema_migration.rb:55:in `block in create_table'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:418:in `with_connection'
+activerecord (8.0.1) lib/active_record/schema_migration.rb:54:in `create_table'
+activerecord (8.0.1) lib/active_record/migration.rb:1431:in `initialize'
+activerecord (8.0.1) lib/active_record/migration.rb:1279:in `new'
+activerecord (8.0.1) lib/active_record/migration.rb:1279:in `open'
+activerecord (8.0.1) lib/active_record/migration.rb:763:in `block (2 levels) in pending_migrations'
+activerecord (8.0.1) lib/active_record/migration/pending_migration_connection.rb:8:in `with_temporary_pool'
+activerecord (8.0.1) lib/active_record/migration.rb:762:in `block in pending_migrations'
+activerecord (8.0.1) lib/active_record/migration.rb:761:in `each'
+activerecord (8.0.1) lib/active_record/migration.rb:761:in `pending_migrations'
+activerecord (8.0.1) lib/active_record/migration.rb:740:in `check_pending_migrations'
+activerecord (8.0.1) lib/active_record/migration.rb:660:in `block (2 levels) in call'
+activesupport (8.0.1) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.1) lib/active_record/migration.rb:665:in `block in call'
+activerecord (8.0.1) lib/active_record/migration.rb:657:in `synchronize'
+activerecord (8.0.1) lib/active_record/migration.rb:657:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+
+Information for cause: PG::ConnectionBad (connection to server on socket "/var/run/postgresql/.s.PGSQL.5432" failed: No such file or directory
+	Is the server running locally and accepting connections on that socket?
+):
+  
+pg (1.5.9) lib/pg/connection.rb:837:in `connect_start'
+pg (1.5.9) lib/pg/connection.rb:837:in `connect_to_hosts'
+pg (1.5.9) lib/pg/connection.rb:772:in `new'
+pg (1.5.9) lib/pg.rb:63:in `connect'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:58:in `new_client'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:934:in `connect'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql_adapter.rb:946:in `reconnect'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:669:in `block in reconnect!'
+activesupport (8.0.1) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:668:in `reconnect!'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:770:in `block in verify!'
+activesupport (8.0.1) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:761:in `verify!'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:778:in `connect!'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:984:in `block in with_raw_connection'
+activesupport (8.0.1) lib/active_support/concurrency/null_lock.rb:9:in `synchronize'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract_adapter.rb:983:in `with_raw_connection'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql/quoting.rb:128:in `quote_string'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract/quoting.rb:76:in `quote'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql/quoting.rb:122:in `quote'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql/schema_statements.rb:1142:in `quoted_scope'
+activerecord (8.0.1) lib/active_record/connection_adapters/postgresql/schema_statements.rb:1119:in `data_source_sql'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract/schema_statements.rb:60:in `table_exists?'
+activerecord (8.0.1) lib/active_record/schema_migration.rb:55:in `block in create_table'
+activerecord (8.0.1) lib/active_record/connection_adapters/abstract/connection_pool.rb:418:in `with_connection'
+activerecord (8.0.1) lib/active_record/schema_migration.rb:54:in `create_table'
+activerecord (8.0.1) lib/active_record/migration.rb:1431:in `initialize'
+activerecord (8.0.1) lib/active_record/migration.rb:1279:in `new'
+activerecord (8.0.1) lib/active_record/migration.rb:1279:in `open'
+activerecord (8.0.1) lib/active_record/migration.rb:763:in `block (2 levels) in pending_migrations'
+activerecord (8.0.1) lib/active_record/migration/pending_migration_connection.rb:8:in `with_temporary_pool'
+activerecord (8.0.1) lib/active_record/migration.rb:762:in `block in pending_migrations'
+activerecord (8.0.1) lib/active_record/migration.rb:761:in `each'
+activerecord (8.0.1) lib/active_record/migration.rb:761:in `pending_migrations'
+activerecord (8.0.1) lib/active_record/migration.rb:740:in `check_pending_migrations'
+activerecord (8.0.1) lib/active_record/migration.rb:660:in `block (2 levels) in call'
+activesupport (8.0.1) lib/active_support/file_update_checker.rb:85:in `execute'
+activerecord (8.0.1) lib/active_record/migration.rb:665:in `block in call'
+activerecord (8.0.1) lib/active_record/migration.rb:657:in `synchronize'
+activerecord (8.0.1) lib/active_record/migration.rb:657:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:31:in `block in call'
+activesupport (8.0.1) lib/active_support/callbacks.rb:100:in `run_callbacks'
+actionpack (8.0.1) lib/action_dispatch/middleware/callbacks.rb:30:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/actionable_exceptions.rb:18:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/debug_exceptions.rb:31:in `call'
+web-console (4.2.1) lib/web_console/middleware.rb:132:in `call_app'
+web-console (4.2.1) lib/web_console/middleware.rb:19:in `block in call'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `catch'
+web-console (4.2.1) lib/web_console/middleware.rb:17:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/show_exceptions.rb:32:in `call'
+railties (8.0.1) lib/rails/rack/logger.rb:41:in `call_app'
+railties (8.0.1) lib/rails/rack/logger.rb:29:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/remote_ip.rb:96:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/request_id.rb:34:in `call'
+rack (3.1.9) lib/rack/method_override.rb:28:in `call'
+rack (3.1.9) lib/rack/runtime.rb:24:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:61:in `block in call'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:26:in `collect_events'
+actionpack (8.0.1) lib/action_dispatch/middleware/server_timing.rb:60:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/executor.rb:16:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/static.rb:27:in `call'
+rack (3.1.9) lib/rack/sendfile.rb:114:in `call'
+actionpack (8.0.1) lib/action_dispatch/middleware/host_authorization.rb:143:in `call'
+railties (8.0.1) lib/rails/engine.rb:535:in `call'
+puma (6.6.0) lib/puma/configuration.rb:279:in `call'
+puma (6.6.0) lib/puma/request.rb:99:in `block in handle_request'
+puma (6.6.0) lib/puma/thread_pool.rb:390:in `with_force_shutdown'
+puma (6.6.0) lib/puma/request.rb:98:in `handle_request'
+puma (6.6.0) lib/puma/server.rb:472:in `process_client'
+puma (6.6.0) lib/puma/server.rb:254:in `block in run'
+puma (6.6.0) lib/puma/thread_pool.rb:167:in `block in spawn_thread'
+Started GET "/" for 172.18.0.1 at 2025-02-16 21:53:16 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (3.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (17.5ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/_alumnus.html.erb (Duration: 3.9ms | GC: 0.0ms)
+  Rendered alumni/index.html.erb within layouts/application (Duration: 189.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 342.2ms | GC: 0.0ms)
+Completed 200 OK in 2195ms (Views: 425.6ms | ActiveRecord: 38.8ms (1 query, 0 cached) | GC: 0.8ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-16 21:53:23 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 25.5ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 111.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 112.9ms | GC: 0.0ms)
+Completed 500 Internal Server Error in 593ms (ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+  
+ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with(model: alumnus) do |form| %>
+  <% if alumnus.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(alumnus.errors.count, "error") %> prohibited this alumnus from being saved:</h2>
+
+      <ul>
+        <% alumnus.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :uin, style: "display: block" %>
+    <%= form.number_field :uin %>
+  </div>
+
+  <div>
+    <%= form.label :cohort_year, style: "display: block" %>
+    <%= form.number_field :cohort_year %>
+  </div>
+
+  <div>
+    <%= form.label :team_affiliation, style: "display: block" %>
+    <%= form.text_field :team_affiliation %>
+  </div>
+
+  <div>
+    <%= form.label :profession_title, style: "display: block" %>
+    <%= form.text_field :profession_title %>
+  </div>
+
+  <div>
+    <%= form.label :availability, style: "display: block" %>
+    <%= form.checkbox :availability %>
+  </div>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number, placeholder: "(123)-456-7890", 
+          pattern="\(\d{3}\)-\d{3}-\d{4}", 
+          title="Format: (123)-456-7890" %>
+  </div>  
+
+  <div>
+    <%= form.label :biography, style: "display: block" %>
+    <%= form.text_field :biography %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+)
+Caused by: ActiveSupport::SyntaxErrorProxy (/app/alumni_tracker/app/views/alumni/_form.html.erb:47: syntax error, unexpected ',', expecting =>
+...attern="\(\d{3}\)-\d{3}-\d{4}", 
+...                              ^
+)
+
+Information for: ActionView::SyntaxErrorInTemplate (Encountered a syntax error while rendering template: check <%= form_with(model: alumnus) do |form| %>
+  <% if alumnus.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(alumnus.errors.count, "error") %> prohibited this alumnus from being saved:</h2>
+
+      <ul>
+        <% alumnus.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :uin, style: "display: block" %>
+    <%= form.number_field :uin %>
+  </div>
+
+  <div>
+    <%= form.label :cohort_year, style: "display: block" %>
+    <%= form.number_field :cohort_year %>
+  </div>
+
+  <div>
+    <%= form.label :team_affiliation, style: "display: block" %>
+    <%= form.text_field :team_affiliation %>
+  </div>
+
+  <div>
+    <%= form.label :profession_title, style: "display: block" %>
+    <%= form.text_field :profession_title %>
+  </div>
+
+  <div>
+    <%= form.label :availability, style: "display: block" %>
+    <%= form.checkbox :availability %>
+  </div>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number, placeholder: "(123)-456-7890", 
+          pattern="\(\d{3}\)-\d{3}-\d{4}", 
+          title="Format: (123)-456-7890" %>
+  </div>  
+
+  <div>
+    <%= form.label :biography, style: "display: block" %>
+    <%= form.text_field :biography %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>
+
+):
+1:    <%= form_with(model: alumnus) do |form| %>
+2:      <% if alumnus.errors.any? %>
+3:        <div style="color: red">
+4:          <h2><%= pluralize(alumnus.errors.count, "error") %> prohibited this alumnus from being saved:</h2>
+5:    
+6:          <ul>
+7:            <% alumnus.errors.each do |error| %>
+8:              <li><%= error.full_message %></li>
+9:            <% end %>
+10:          </ul>
+11:        </div>
+12:      <% end %>
+13:    
+14:      <div>
+15:        <%= form.label :uin, style: "display: block" %>
+16:        <%= form.number_field :uin %>
+17:      </div>
+18:    
+19:      <div>
+20:        <%= form.label :cohort_year, style: "display: block" %>
+21:        <%= form.number_field :cohort_year %>
+22:      </div>
+23:    
+24:      <div>
+25:        <%= form.label :team_affiliation, style: "display: block" %>
+26:        <%= form.text_field :team_affiliation %>
+27:      </div>
+28:    
+29:      <div>
+30:        <%= form.label :profession_title, style: "display: block" %>
+31:        <%= form.text_field :profession_title %>
+32:      </div>
+33:    
+34:      <div>
+35:        <%= form.label :availability, style: "display: block" %>
+36:        <%= form.checkbox :availability %>
+37:      </div>
+38:    
+39:      <div>
+40:        <%= form.label :email, style: "display: block" %>
+41:        <%= form.text_field :email %>
+42:      </div>
+43:    
+44:      <div class="field">
+45:        <%= form.label :phone_number %>
+46:        <%= form.text_field :phone_number, placeholder: "(123)-456-7890", 
+47:              pattern="\(\d{3}\)-\d{3}-\d{4}", 
+48:              title="Format: (123)-456-7890" %>
+49:      </div>  
+50:    
+51:      <div>
+52:        <%= form.label :biography, style: "display: block" %>
+53:        <%= form.text_field :biography %>
+54:      </div>
+55:    
+56:      <div>
+57:        <%= form.submit %>
+58:      </div>
+59:    <% end %>
+  
+app/views/alumni/_form.html.erb:47: syntax error, unexpected ',', expecting =>
+app/views/alumni/new.html.erb:5
+
+Information for cause: ActiveSupport::SyntaxErrorProxy (/app/alumni_tracker/app/views/alumni/_form.html.erb:47: syntax error, unexpected ',', expecting =>
+...attern="\(\d{3}\)-\d{3}-\d{4}", 
+...                              ^
+):
+  
+app/views/alumni/_form.html.erb:47: syntax error, unexpected ',', expecting =>
+app/views/alumni/new.html.erb:5
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-16 21:55:25 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 89.7ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 175.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 196.5ms | GC: 0.1ms)
+Completed 200 OK in 747ms (Views: 205.5ms | ActiveRecord: 5.0ms (0 queries, 0 cached) | GC: 0.1ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-16 22:02:09 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 8.9ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 19.4ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 45.2ms | GC: 0.0ms)
+Completed 200 OK in 560ms (Views: 53.2ms | ActiveRecord: 5.3ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/assets/turbo.min-5dd5a71a.js.map" for 172.18.0.1 at 2025-02-16 22:02:46 +0000
+Started GET "/assets/stimulus.min-2395e199.js.map" for 172.18.0.1 at 2025-02-16 22:02:46 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Started GET "/alumni" for 172.18.0.1 at 2025-02-16 22:03:27 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (1.4ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/_alumnus.html.erb (Duration: 2.3ms | GC: 0.0ms)
+  Rendered alumni/index.html.erb within layouts/application (Duration: 19.8ms | GC: 0.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 22.4ms | GC: 0.6ms)
+Completed 200 OK in 459ms (Views: 22.5ms | ActiveRecord: 1.3ms (1 query, 0 cached) | GC: 0.6ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-16 22:03:32 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 8.1ms | GC: 0.6ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 12.2ms | GC: 0.6ms)
+  Rendered layout layouts/application.html.erb (Duration: 14.3ms | GC: 0.6ms)
+Completed 200 OK in 368ms (Views: 14.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.6ms)
+
+
+Started POST "/alumni" for 172.18.0.1 at 2025-02-16 22:03:37 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alumnus"=>{"uin"=>"", "cohort_year"=>"", "team_affiliation"=>"", "profession_title"=>"", "availability"=>"0", "email"=>"[FILTERED]", "phone_number"=>"asfdsdfgsd", "biography"=>""}, "commit"=>"Create Alumnus"}
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 7.2ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 8.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 10.7ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 528ms (Views: 11.8ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.3ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-16 22:03:50 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 3.1ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 4.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.6ms | GC: 0.0ms)
+Completed 200 OK in 473ms (Views: 7.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started POST "/alumni" for 172.18.0.1 at 2025-02-16 22:03:55 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alumnus"=>{"uin"=>"", "cohort_year"=>"", "team_affiliation"=>"", "profession_title"=>"", "availability"=>"0", "email"=>"[FILTERED]", "phone_number"=>"(234)-23", "biography"=>""}, "commit"=>"Create Alumnus"}
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 2.3ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 4.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.0ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 441ms (Views: 6.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/alumni" for 172.18.0.1 at 2025-02-16 22:04:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (2.3ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/_alumnus.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered alumni/index.html.erb within layouts/application (Duration: 7.9ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.8ms | GC: 0.0ms)
+Completed 200 OK in 366ms (Views: 8.9ms | ActiveRecord: 2.3ms (1 query, 0 cached) | GC: 0.2ms)
+
+
+Started GET "/alumni" for 172.18.0.1 at 2025-02-16 22:05:47 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (0.6ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/_alumnus.html.erb (Duration: 5.8ms | GC: 0.0ms)
+  Rendered alumni/index.html.erb within layouts/application (Duration: 50.2ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 71.5ms | GC: 0.0ms)
+Completed 200 OK in 648ms (Views: 70.8ms | ActiveRecord: 10.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-16 22:05:49 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 5.3ms | GC: 0.5ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 15.3ms | GC: 0.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 16.8ms | GC: 0.5ms)
+Completed 200 OK in 442ms (Views: 17.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-16 22:05:55 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 8.5ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 10.0ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 12.9ms | GC: 0.0ms)
+Completed 200 OK in 472ms (Views: 14.1ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-16 22:09:50 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 9.4ms | GC: 0.2ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 22.6ms | GC: 0.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 50.5ms | GC: 0.3ms)
+Completed 200 OK in 681ms (Views: 59.5ms | ActiveRecord: 4.0ms (0 queries, 0 cached) | GC: 0.4ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-16 22:11:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 17.8ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 49.6ms | GC: 14.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 109.7ms | GC: 16.4ms)
+Completed 200 OK in 1047ms (Views: 123.4ms | ActiveRecord: 4.1ms (0 queries, 0 cached) | GC: 16.4ms)
+
+
+Started POST "/alumni" for 172.18.0.1 at 2025-02-16 22:11:19 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alumnus"=>{"uin"=>"123212321", "cohort_year"=>"", "team_affiliation"=>"", "profession_title"=>"", "availability"=>"0", "email"=>"[FILTERED]", "phone_number"=>"", "biography"=>""}, "commit"=>"Create Alumnus"}
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 5.4ms | GC: 1.2ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 7.0ms | GC: 1.2ms)
+  Rendered layout layouts/application.html.erb (Duration: 9.2ms | GC: 1.2ms)
+Completed 422 Unprocessable Content in 578ms (Views: 9.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 1.2ms)
+
+
+Started POST "/alumni" for 172.18.0.1 at 2025-02-16 22:11:28 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alumnus"=>{"uin"=>"121121312", "cohort_year"=>"", "team_affiliation"=>"", "profession_title"=>"", "availability"=>"0", "email"=>"[FILTERED]", "phone_number"=>"", "biography"=>""}, "commit"=>"Create Alumnus"}
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 2.4ms | GC: 0.5ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 3.8ms | GC: 0.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 5.3ms | GC: 0.5ms)
+Completed 422 Unprocessable Content in 428ms (Views: 5.9ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
+Started POST "/alumni" for 172.18.0.1 at 2025-02-16 22:11:46 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#create as TURBO_STREAM
+  Parameters: {"authenticity_token"=>"[FILTERED]", "alumnus"=>{"uin"=>"122232121", "cohort_year"=>"", "team_affiliation"=>"", "profession_title"=>"", "availability"=>"0", "email"=>"[FILTERED]", "phone_number"=>"", "biography"=>""}, "commit"=>"Create Alumnus"}
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 3.2ms | GC: 0.0ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 4.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 6.3ms | GC: 0.0ms)
+Completed 422 Unprocessable Content in 442ms (Views: 7.0ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni" for 172.18.0.1 at 2025-02-16 22:11:49 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (0.6ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/_alumnus.html.erb (Duration: 3.3ms | GC: 0.0ms)
+  Rendered alumni/index.html.erb within layouts/application (Duration: 20.8ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 23.5ms | GC: 0.0ms)
+Completed 200 OK in 467ms (Views: 24.0ms | ActiveRecord: 0.5ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni" for 172.18.0.1 at 2025-02-16 22:11:50 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (0.6ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/_alumnus.html.erb (Duration: 0.2ms | GC: 0.0ms)
+  Rendered alumni/index.html.erb within layouts/application (Duration: 7.3ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 15.8ms | GC: 0.0ms)
+Completed 200 OK in 507ms (Views: 16.6ms | ActiveRecord: 0.6ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+  [1m[35m (0.2ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7992348028875656775) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (2.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.9ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='AlumniTracker'*/[0m
+  [1m[35m (0.5ms)[0m  [1m[34mSELECT pg_advisory_unlock(7992348028875656775) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+  [1m[35m (0.4ms)[0m  [1m[34mSELECT pg_try_advisory_lock(7992348028875656775) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (1.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::InternalMetadata Load (1.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = 'environment' ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1 /*application='AlumniTracker'*/[0m
+  [1m[35m (0.7ms)[0m  [1m[34mSELECT pg_advisory_unlock(7992348028875656775) /*application='AlumniTracker'*/[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+Started GET "/" for 172.18.0.1 at 2025-02-17 17:50:05 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+  [1m[36mActiveRecord::SchemaMigration Load (2.5ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC /*application='AlumniTracker'*/[0m
+Processing by AlumniController#index as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/index.html.erb within layouts/application
+  [1m[36mAlumnus Load (18.4ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" /*action='index',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/views/alumni/index.html.erb:8
+  Rendered alumni/_alumnus.html.erb (Duration: 5.3ms | GC: 0.0ms)
+  Rendered alumni/index.html.erb within layouts/application (Duration: 111.6ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 256.3ms | GC: 0.0ms)
+Completed 200 OK in 2073ms (Views: 359.0ms | ActiveRecord: 30.4ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni/2" for 172.18.0.1 at 2025-02-17 17:50:10 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mAlumnus Load (0.8ms)[0m  [1m[34mSELECT "alumni".* FROM "alumni" WHERE "alumni"."id" = 2 LIMIT 1 /*action='show',application='AlumniTracker',controller='alumni'*/[0m
+  ↳ app/controllers/alumni_controller.rb:63:in `set_alumnus'
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/show.html.erb within layouts/application
+  Rendered alumni/_alumnus.html.erb (Duration: 0.1ms | GC: 0.0ms)
+  Rendered alumni/show.html.erb within layouts/application (Duration: 77.5ms | GC: 0.0ms)
+  Rendered layout layouts/application.html.erb (Duration: 79.2ms | GC: 0.0ms)
+Completed 200 OK in 551ms (Views: 80.2ms | ActiveRecord: 0.8ms (1 query, 0 cached) | GC: 0.0ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-17 17:50:11 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 130.1ms | GC: 20.8ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 141.1ms | GC: 20.8ms)
+  Rendered layout layouts/application.html.erb (Duration: 144.7ms | GC: 20.8ms)
+Completed 200 OK in 617ms (Views: 145.6ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 20.8ms)
+
+
+Started GET "/alumni/new" for 172.18.0.1 at 2025-02-17 17:50:12 +0000
+Cannot render console from 172.18.0.1! Allowed networks: 127.0.0.0/127.255.255.255, ::1
+Processing by AlumniController#new as HTML
+  Rendering layout layouts/application.html.erb
+  Rendering alumni/new.html.erb within layouts/application
+  Rendered alumni/_form.html.erb (Duration: 4.2ms | GC: 0.5ms)
+  Rendered alumni/new.html.erb within layouts/application (Duration: 5.4ms | GC: 0.5ms)
+  Rendered layout layouts/application.html.erb (Duration: 7.3ms | GC: 0.5ms)
+Completed 200 OK in 445ms (Views: 8.4ms | ActiveRecord: 0.0ms (0 queries, 0 cached) | GC: 0.5ms)
+
+
