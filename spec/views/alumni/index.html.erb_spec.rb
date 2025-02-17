@@ -31,21 +31,20 @@ RSpec.describe "alumni/index", type: :view do
     cell_selector = 'div>p'
 
     assert_select cell_selector, text: /123456789/, count: 1
-    assert_select cell_selector, text: /2021/, count: 1
-    assert_select cell_selector, text: /Team Affiliation/, count: 1
-    assert_select cell_selector, text: /Profession Title/, count: 1
-    assert_select cell_selector, text: /false/, count: 1
-    assert_select cell_selector, text: /Email/, count: 1
-    assert_select cell_selector, text: /\(682\)-472-8670/, count: 1
-    assert_select cell_selector, text: /Biography/, count: 1
-
     assert_select cell_selector, text: /987654321/, count: 1
+    assert_select cell_selector, text: /2021/, count: 1
     assert_select cell_selector, text: /2022/, count: 1
+    assert_select cell_selector, text: /Team Affiliation/, count: 1
     assert_select cell_selector, text: /Another Team/, count: 1
+    assert_select cell_selector, text: /Profession Title/, count: 1
     assert_select cell_selector, text: /Another Profession/, count: 1
+    assert_select cell_selector, text: /false/, count: 1
     assert_select cell_selector, text: /true/, count: 1
+    assert_select cell_selector, text: /Email/, count: 1
     assert_select cell_selector, text: /Another Email/, count: 1
+    assert_select cell_selector, text: /\(682\)-472-8670/, count: 1
     assert_select cell_selector, text: /\(123\)-456-7890/, count: 1
+    assert_select cell_selector, text: /Biography/, count: 1
     assert_select cell_selector, text: /Another Biography/, count: 1
   end
 end
