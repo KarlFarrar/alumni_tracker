@@ -3,5 +3,6 @@ class ChangeLogsController < ApplicationController
 
   def index
     @logs = ChangeLog.order(created_at: :desc).page(params[:page]).per(20)  # Paginate results (optional)
+    render :index
   end
 end
