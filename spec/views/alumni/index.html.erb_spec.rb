@@ -4,23 +4,13 @@ RSpec.describe "alumni/index", type: :view do
   before(:each) do
     assign(:alumni, [
       Alumnus.create!(
-        uin: 2,
-        cohort_year: 3,
+        uin: 123456789,
+        cohort_year: 2021,
         team_affiliation: "Team Affiliation",
         profession_title: "Profession Title",
         availability: false,
         email: "Email",
-        phone_number: "Phone Number",
-        biography: "Biography"
-      ),
-      Alumnus.create!(
-        uin: 2,
-        cohort_year: 3,
-        team_affiliation: "Team Affiliation",
-        profession_title: "Profession Title",
-        availability: false,
-        email: "Email",
-        phone_number: "Phone Number",
+        phone_number: "(682)-472-8670",
         biography: "Biography"
       )
     ])
@@ -29,13 +19,15 @@ RSpec.describe "alumni/index", type: :view do
   it "renders a list of alumni" do
     render
     cell_selector = 'div>p'
-    assert_select cell_selector, text: Regexp.new(2.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(3.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Team Affiliation".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Profession Title".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new(false.to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Email".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Phone Number".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("Biography".to_s), count: 2
+
+    assert_select cell_selector, text: /123456789/, count: 1
+    assert_select cell_selector, text: /2021/, count: 1
+    assert_select cell_selector, text: /Team Affiliation/, count: 1
+    assert_select cell_selector, text: /Profession Title/, count: 1
+    assert_select cell_selector, text: /false/, count: 1
+    assert_select cell_selector, text: /Email/, count: 1
+    assert_select cell_selector, text: /\(682\)-472-8670/, count: 1
+    assert_select cell_selector, text: /Biography/, count: 1
+   
   end
 end

@@ -11,14 +11,31 @@
     </div>
   <% end %>
 
-  <div>
-    <%= form.label :uin, style: "display: block" %>
-    <%= form.number_field :uin %>
+  <div class="field">
+    <%= form.label :uin %>
+    <%= form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
+          maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
   </div>
 
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const uinInput = document.getElementById("uin");
+
+      uinInput.addEventListener("input", function(e) {
+        let numbers = e.target.value.replace(/\D/g, ""); 
+
+        if (numbers.length > 9) {
+          numbers = numbers.slice(0, 9);
+        }
+
+        e.target.value = numbers;
+      });
+    });
+  </script>
+
   <div>
-    <%= form.label :cohort_year, style: "display: block" %>
-    <%= form.number_field :cohort_year %>
+    <%= form.label :cohort_year, "Class Year", style: "display: block" %>
+    <%= form.select :cohort_year, options_for_select((1950..(Date.today.year + 10)).to_a.reverse, selected: 2025) %>
   </div>
 
   <div>
@@ -41,10 +58,38 @@
     <%= form.text_field :email %>
   </div>
 
-  <div>
-    <%= form.label :phone_number, style: "display: block" %>
-    <%= form.text_field :phone_number %>
+  <div class="field">
+    <%= form.label :phone_number %>
+    <%= form.text_field :phone_number, id: "phone_number", placeholder: "(123)-456-7890", maxlength: 14 %>
   </div>
+
+  <script>
+    document.addEventListener("turbo:load", function() {
+      const phoneInput = document.getElementById("phone_number");
+
+      phoneInput.addEventListener("input", function(e) {
+        let numbers = e.target.value.replace(/\D/g, ""); 
+        
+        if (numbers.length > 10) {
+          numbers = numbers.slice(0, 10);
+        }
+
+        let formattedNumber = "";
+        if (numbers.length > 0) {
+          formattedNumber += `(${numbers.slice(0, 3)}`;
+        }
+        if (numbers.length >= 4) {
+          formattedNumber += `)-${numbers.slice(3, 6)}`;
+        }
+        if (numbers.length >= 7) {
+          formattedNumber += `-${numbers.slice(6, 10)}`;
+        }
+
+        e.target.value = formattedNumber;
+      });
+    });
+  </script>
+
   <div>
     <%= form.label :biography, style: "display: block" %>
     <%= form.text_field :biography %>
