@@ -1,0 +1,33 @@
+<h1>Change Logs</h1>
+
+<table style="width: 100%; border-collapse: collapse;">
+  <thead>
+    <tr style="background-color: #f4f4f4; border-bottom: 2px solid #ccc;">
+      <th style="padding: 10px; text-align: left;">Timestamp</th>
+      <th style="padding: 10px; text-align: left;">User</th>
+      <th style="padding: 10px; text-align: left;">Action</th>
+      <th style="padding: 10px; text-align: left;">Record Type</th>
+      <th style="padding: 10px; text-align: left;">Record ID</th>
+      <th style="padding: 10px; text-align: left;">Changes</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @logs.each do |log| %>
+      <tr style="border-bottom: 1px solid #ddd;">
+        <td style="padding: 10px;"><%= log.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+        <td style="padding: 10px;"><%= log.user.presence || "System" %></td>
+        <td style="padding: 10px;"><strong><%= log.action.capitalize %></strong></td>
+        <td style="padding: 10px;"><%= log.record_type %></td>
+        <td style="padding: 10px;"><%= log.record_id %></td>
+        <td style="padding: 10px; white-space: pre-wrap;">
+          <% changes = JSON.parse(log.change_details) rescue {} %>
+          <% changes.each do |field, values| %>
+            <strong><%= field %></strong>: <%= values.is_a?(Array) ? "#{values.first} → #{values.last}" : values %><br>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<%= paginate @logs %>  <!-- If using Kaminari for pagination -->

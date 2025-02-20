@@ -3,14 +3,14 @@ require 'rails_helper'
 RSpec.describe "alumni/new", type: :view do
   before(:each) do
     assign(:alumnus, Alumnus.new(
-      uin: 1,
-      cohort_year: 1,
-      team_affiliation: "MyString",
-      profession_title: "MyString",
+      uin: 123456789,
+      cohort_year: 2021,
+      team_affiliation: "Team Affiliation",
+      profession_title: "Profession Title",
       availability: false,
-      email: "MyString",
-      phone_number: "MyString",
-      biography: "MyString"
+      email: "Email",
+      phone_number: "(682)-472-8670",
+      biography: "Biography"
     ))
   end
 
@@ -21,7 +21,7 @@ RSpec.describe "alumni/new", type: :view do
 
       assert_select "input[name=?]", "alumnus[uin]"
 
-      assert_select "input[name=?]", "alumnus[cohort_year]"
+      assert_select "select[name=?]", "alumnus[cohort_year]"
 
       assert_select "input[name=?]", "alumnus[team_affiliation]"
 

@@ -3,13 +3,13 @@ require 'rails_helper'
 RSpec.describe "alumni/edit", type: :view do
   let(:alumnus) {
     Alumnus.create!(
-      uin: 1,
-      cohort_year: 1,
+      uin: 123456789,
+      cohort_year: 2024,
       team_affiliation: "MyString",
       profession_title: "MyString",
       availability: false,
       email: "MyString",
-      phone_number: "MyString",
+      phone_number: "(682)-472-8670",
       biography: "MyString"
     )
   }
@@ -25,7 +25,7 @@ RSpec.describe "alumni/edit", type: :view do
 
       assert_select "input[name=?]", "alumnus[uin]"
 
-      assert_select "input[name=?]", "alumnus[cohort_year]"
+      assert_select "select[name=?]", "alumnus[cohort_year]"
 
       assert_select "input[name=?]", "alumnus[team_affiliation]"
 
