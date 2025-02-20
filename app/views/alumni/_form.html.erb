@@ -34,8 +34,8 @@
   </script>
 
   <div>
-    <%= form.label :cohort_year, style: "display: block" %>
-    <%= form.number_field :cohort_year %>
+    <%= form.label :cohort_year, "Class Year", style: "display: block" %>
+    <%= form.select :cohort_year, options_for_select((1950..(Date.today.year + 10)).to_a.reverse, selected: 2025) %>
   </div>
 
   <div>
@@ -64,7 +64,7 @@
   </div>
 
   <script>
-    document.addEventListener("DOMContentLoaded", function() {
+    document.addEventListener("turbo:load", function() {
       const phoneInput = document.getElementById("phone_number");
 
       phoneInput.addEventListener("input", function(e) {
