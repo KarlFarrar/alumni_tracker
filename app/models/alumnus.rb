@@ -1,4 +1,7 @@
 class Alumnus < ApplicationRecord
+  # log all activities. 
+  include Loggable
+  
   # Ensure UIN is exactly 9 digits
   validates :uin, format: { 
     with: /\A\d{9}\z/, 
