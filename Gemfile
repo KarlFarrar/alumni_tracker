@@ -70,3 +70,4 @@ end
 
 gem 'brakeman'
 gem 'rubocop'
+gem "kaminari", "~> 1.2"
