@@ -8,6 +8,17 @@ class AlumniController < ApplicationController
 
   # GET /alumni/1 or /alumni/1.json
   def show
+    @experiences = Experience.where(recepient_uin: nil)  # Only show unclaimed experiences
+  end
+
+  def claim_experience
+    experience = Experience.find(params[:experience_id])
+    
+    if experience.update(recepient_uin: @alumnus.uin)
+      redirect_to @alumnus, notice: "Experience successfully claimed!"
+    else
+      redirect_to @alumnus, alert: "Failed to claim experience."
+    end
   end
 
   # GET /alumni/new
@@ -64,7 +75,10 @@ class AlumniController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def alumnus_params
-      params.expect(alumnus: [ :uin, :cohort_year, :team_affiliation, :profession_title, :availability, :email, :phone_number, :biography ])
+    def alumni_params
+      params.require(:alumnus).permit(
+        :uin, :email,
+        experiences_attributes: [:id, :title, :experience_type, :date_interval, :description, :_destroy]
+      )
     end
 end
