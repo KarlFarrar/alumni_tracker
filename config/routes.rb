@@ -16,7 +16,12 @@ Rails.application.routes.draw do
     end
     post "claim_experiences", on: :member
   end
+  resources :alumni do
+    post "claim_experience", on: :member
+  end
   resources :change_logs, only: [:index]
   resources :experiences
   resources :alumnus_experiences, only: [:edit, :update, :destroy]
+  resources :experiences
+
 end

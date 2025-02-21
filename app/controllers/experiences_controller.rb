@@ -32,7 +32,6 @@ class ExperiencesController < ApplicationController
         format.html { render :new, status: :unprocessable_entity }
         format.js { render json: { errors: @experience.errors.full_messages }, status: :unprocessable_entity }
       end
-    end
   end
 
   def edit; end
