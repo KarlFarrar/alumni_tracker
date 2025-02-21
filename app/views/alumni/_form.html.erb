@@ -90,6 +90,27 @@
     });
   </script>
 
+  <h3>Experiences</h3>
+  <div id="experiences">
+    <%= form.fields_for :experiences do |exp_form| %>
+      <div class="nested-fields">
+        <%= exp_form.label :title, "Experience Title" %>
+        <%= exp_form.text_field :title %>
+
+        <%= exp_form.label :experience_type, "Experience Type" %>
+        <%= exp_form.text_field :experience_type %>
+
+        <%= exp_form.label :date_interval, "Date Interval" %>
+        <%= exp_form.text_field :date_interval, placeholder: "e.g., 2020-2023" %>
+
+        <%= exp_form.label :description, "Description" %>
+        <%= exp_form.text_area :description %>
+
+        <%= link_to "Remove Experience", "#", class: "remove_experience" %>
+      </div>
+    <% end %>
+  </div>
+
   <div>
     <%= form.label :biography, style: "display: block" %>
     <%= form.text_field :biography %>
