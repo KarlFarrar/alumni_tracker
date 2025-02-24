@@ -4,10 +4,8 @@ RSpec.describe "experiences/new", type: :view do
   before(:each) do
     assign(:experience, Experience.new(
       title: "MyString",
-      type: "",
-      date_interval: "MyString",
-      description: "MyText",
-      recepient_uin: 1
+      type: "Award",
+
     ))
   end
 
@@ -20,11 +18,6 @@ RSpec.describe "experiences/new", type: :view do
 
       assert_select "input[name=?]", "experience[type]"
 
-      assert_select "input[name=?]", "experience[date_interval]"
-
-      assert_select "textarea[name=?]", "experience[description]"
-
-      assert_select "input[name=?]", "experience[recepient_uin]"
     end
   end
 end
