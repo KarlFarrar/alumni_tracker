@@ -1,5 +1,5 @@
 class AlumniController < ApplicationController
-  before_action :set_alumnus, only: %i[ show edit update destroy ]
+  before_action :set_alumnus, only: [:show, :claim_experiences]
 
   # GET /alumni or /alumni.json
   def index
@@ -8,6 +8,16 @@ class AlumniController < ApplicationController
 
   # GET /alumni/1 or /alumni/1.json
   def show
+    @experiences = Experience.all   # Only show unclaimed experiences
+  end
+
+  def claim_experiences
+    selected_experience_ids = params[:experience_ids].reject(&:blank?) # Remove blank selections
+    selected_experiences = Experience.where(id: selected_experience_ids)
+
+    @alumnus.experiences << selected_experiences.reject { |exp| @alumnus.experiences.include?(exp) }
+
+    redirect_to @alumnus, notice: "Experiences successfully claimed!"
   end
 
   # GET /alumni/new
@@ -60,11 +70,15 @@ class AlumniController < ApplicationController
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_alumnus
-      @alumnus = Alumnus.find(params.expect(:id))
+      @alumnus = Alumnus.find(params[:id])
     end
 
     # Only allow a list of trusted parameters through.
-    def alumnus_params
-      params.expect(alumnus: [ :uin, :cohort_year, :team_affiliation, :profession_title, :availability, :email, :phone_number, :biography ])
+    def alumni_params
+      params.require(:alumnus).permit(
+        :uin, :email, :cohort_year, :team_affiliation, :profession_title,
+        :availability, :phone_number, :biography,
+        experience_ids: [] # Allow selecting multiple experiences
+      )
     end
 end

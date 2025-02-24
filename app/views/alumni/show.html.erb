@@ -1,10 +1,30 @@
-<p style="color: green"><%= notice %></p>
+<h1>Alumnus Profile</h1>
+<p><strong>UIN:</strong> <%= @alumnus.uin %></p>
+<p><strong>Email:</strong> <%= @alumnus.email %></p>
 
-<%= render @alumnus %>
+<h2>Experiences</h2>
 
-<div>
-  <%= link_to "Edit this alumnus", edit_alumnus_path(@alumnus) %> |
-  <%= link_to "Back to alumni", alumni_path %>
+<% if @alumnus.experiences.any? %>
+  <ul>
+    <% @alumnus.experiences.each do |experience| %>
+      <li>
+        <strong><%= experience.title %> (<%= experience.experience_type %>)</strong>  
+        <br>
+        <small><%= experience.date_interval %></small>
+        <br>
+        <p><%= experience.description %></p>
+      </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>No experiences added yet.</p>
+<% end %>
 
-  <%= button_to "Destroy this alumnus", @alumnus, method: :delete %>
-</div>
+<h3>Claim an Experience</h3>
+<%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post do |f| %>
+  <div>
+    <%= f.label :experience_ids, "Select Experiences" %>
+    <%= f.collection_select :experience_ids, Experience.all, :id, :title, {}, multiple: true %>
+  </div>
+  <%= f.submit "Claim Experience" %>
+<% end %>
