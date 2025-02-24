@@ -3,8 +3,9 @@ class Alumnus < ApplicationRecord
   include Loggable
   
   # Relationship to experience. 
-  has_many :experiences, foreign_key: "recepient_uin", primary_key: "uin", dependent: :destroy
-
+  has_many :alumnus_experiences, dependent: :destroy
+  has_many :experiences, through: :alumnus_experiences
+  
   accepts_nested_attributes_for :experiences, allow_destroy: true
   
   # Ensure UIN is exactly 9 digits

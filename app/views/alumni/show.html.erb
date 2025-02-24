@@ -21,10 +21,10 @@
 <% end %>
 
 <h3>Claim an Experience</h3>
-<%= form_with url: claim_experience_alumnus_path(@alumnus), method: :post do |f| %>
+<%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post do |f| %>
   <div>
-    <%= f.label :experience_id, "Select an Experience" %>
-    <%= f.collection_select :experience_id, Experience.where(recepient_uin: nil), :id, :title, prompt: "Choose an Experience" %>
+    <%= f.label :experience_ids, "Select Experiences" %>
+    <%= f.collection_select :experience_ids, Experience.all, :id, :title, {}, multiple: true %>
   </div>
   <%= f.submit "Claim Experience" %>
 <% end %>
