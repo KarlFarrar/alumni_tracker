@@ -34,6 +34,12 @@ class AlumniController < ApplicationController
         end
       end
     end
+    selected_experience_ids = params[:experience_ids].reject(&:blank?) # Remove blank selections
+    selected_experiences = Experience.where(id: selected_experience_ids)
+
+    @alumnus.experiences << selected_experiences.reject { |exp| @alumnus.experiences.include?(exp) }
+
+    redirect_to @alumnus, notice: "Experiences successfully claimed!"
   end
   
 
