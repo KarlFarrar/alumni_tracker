@@ -90,26 +90,24 @@
     });
   </script>
 
-  <h3>Experiences</h3>
-  <div id="experiences">
-    <%= form.fields_for :experiences do |exp_form| %>
-      <div class="nested-fields">
-        <%= exp_form.label :title, "Experience Title" %>
-        <%= exp_form.text_field :title %>
-
-        <%= exp_form.label :experience_type, "Experience Type" %>
-        <%= exp_form.text_field :experience_type %>
-
-        <%= exp_form.label :date_interval, "Date Interval" %>
-        <%= exp_form.text_field :date_interval, placeholder: "e.g., 2020-2023" %>
-
-        <%= exp_form.label :description, "Description" %>
-        <%= exp_form.text_area :description %>
-
-        <%= link_to "Remove Experience", "#", class: "remove_experience" %>
-      </div>
+  <h3>Claim Experiences</h3>
+  <p>Double-click an experience to claim it.</p>
+  
+  <select id="experience_list" size="5">
+    <% Experience.all.each do |experience| %>
+      <option value="<%= experience.id %>"><%= experience.title %></option>
     <% end %>
-  </div>
+  </select>
+  
+  <ul id="selected_experiences">
+    <% @alumnus.experiences.each do |experience| %>
+      <li data-id="<%= experience.id %>">
+        <%= experience.title %> <a href="#" class="remove_experience">Remove</a>
+      </li>
+    <% end %>
+  </ul>
+  
+  <%= form.hidden_field :experience_ids, id: "experience_ids", value: @alumnus.experience_ids.join(",") %>
 
   <div>
     <%= form.label :biography, style: "display: block" %>
