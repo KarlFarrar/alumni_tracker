@@ -24,6 +24,11 @@ RSpec.describe "/alumni", type: :request do
     skip("Add a hash of attributes invalid for your model")
   }
 
+  before do
+    # Mock authentication by bypassing the authenticate_user! method
+    allow(controller).to receive(:authenticate_user!).and_return(true)
+  end
+
   describe "GET /index" do
     it "renders a successful response" do
       Alumnus.create! valid_attributes
