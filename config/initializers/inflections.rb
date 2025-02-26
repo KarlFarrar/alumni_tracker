@@ -17,4 +17,3 @@
 ActiveSupport::Inflector.inflections do |inflect|
     inflect.irregular 'alumnus', 'alumni'
   end
-  

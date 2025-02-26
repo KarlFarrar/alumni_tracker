@@ -13,7 +13,6 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/alumni", type: :request do
-  
   # This should return the minimal set of attributes required to create a valid
   # Alumnus. As you add validations to Alumnus, be sure to
   # adjust the attributes here as well.
