@@ -28,6 +28,5 @@ RSpec.describe "alumni/index", type: :view do
     assert_select cell_selector, text: /Email/, count: 1
     assert_select cell_selector, text: /\(682\)-472-8670/, count: 1
     assert_select cell_selector, text: /Biography/, count: 1
-   
   end
 end

@@ -1,26 +1,26 @@
 class Alumnus < ApplicationRecord
-  # log all activities. 
+  # log all activities.
   include Loggable
-  
+
   # Ensure UIN is exactly 9 digits
-  validates :uin, format: { 
-    with: /\A\d{9}\z/, 
-    message: "must be exactly 9 digits" 
+  validates :uin, format: {
+    with: /\A\d{9}\z/,
+    message: "must be exactly 9 digits"
   }
 
   # Ensure the user provides at least one: phone number OR email
   validate :phone_or_email_present
 
   # Ensure phone number follows (###)-###-####
-  validates :phone_number, format: { 
-    with: /\A\(\d{3}\)-\d{3}-\d{4}\z/, 
-    message: "must be in the format (###)-###-####" 
+  validates :phone_number, format: {
+    with: /\A\(\d{3}\)-\d{3}-\d{4}\z/,
+    message: "must be in the format (###)-###-####"
   }, allow_blank: true  # Allows blank values so it doesn't interfere with phone_or_email_present
 
   # Format phone number before validating
   before_validation :format_phone_number
 
-  private
+private
 
   def phone_or_email_present
     if phone_number.blank? && email.blank?
