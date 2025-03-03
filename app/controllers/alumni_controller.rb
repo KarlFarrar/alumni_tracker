@@ -14,13 +14,31 @@ class AlumniController < ApplicationController
   end
 
   def claim_experiences
-    selected_experience_ids = params[:experience_ids].reject(&:blank?) # Remove blank selections
-    selected_experiences = Experience.where(id: selected_experience_ids)
-
-    @alumnus.experiences << selected_experiences.reject { |exp| @alumnus.experiences.include?(exp) }
-
-    redirect_to @alumnus, notice: "Experiences successfully claimed!"
+    selected_experience_ids = params[:experience_ids]&.map(&:to_i) || []
+  
+    # Find all experiences the alumnus currently has
+    current_experience_ids = @alumnus.experience_ids
+  
+    # Find experiences to add (newly selected but not already claimed)
+    new_experience_ids = selected_experience_ids - current_experience_ids
+    new_experiences = Experience.where(id: new_experience_ids)
+  
+    # Find experiences to remove (previously claimed but now unselected)
+    removed_experience_ids = current_experience_ids - selected_experience_ids
+    removed_experiences = Experience.where(id: removed_experience_ids)
+  
+    # Add new experiences
+    @alumnus.experiences << new_experiences
+  
+    # Remove deselected experiences
+    @alumnus.experiences.destroy(removed_experiences)
+  
+    respond_to do |format|
+      format.html { redirect_to @alumnus, notice: "Experiences updated!" }
+      format.turbo_stream
+    end
   end
+  
 
   # GET /alumni/new
   def new
