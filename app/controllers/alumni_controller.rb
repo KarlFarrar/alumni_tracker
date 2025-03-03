@@ -1,6 +1,8 @@
 class AlumniController < ApplicationController
   before_action :set_alumnus, only: %i[ show edit update destroy ]
 
+  skip_before_action :authenticate_gmail!, only: [:new]
+
   # GET /alumni or /alumni.json
   def index
     @alumni = Alumnus.all

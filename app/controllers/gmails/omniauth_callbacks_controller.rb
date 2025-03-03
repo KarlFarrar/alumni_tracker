@@ -3,13 +3,18 @@
 class Gmails::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     gmail = Gmail.from_google(**from_google_params)
+    #auth = request.env["omniauth.auth"]
+    #email = auth.info.email
+
+    #gmail = Gmail.find_by(email: email)
+
     if gmail.present?
       sign_out_all_scopes
       flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
       sign_in_and_redirect gmail, event: :authentication
     else
-      flash[:alert] = t 'devise.omniauth_callbacks.failure', kind: 'Google', reason: "#{auth.info.email} is not authorized."
-      redirect_to new_gmail_session_path
+      flash[:alert] = t 'No account found. Please create an account'
+      redirect_to choose_role_registration_path
     end
   end
 

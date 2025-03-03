@@ -1,29 +1,33 @@
 <h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "gmails/shared/error_messages", resource: resource %>
+<%= form_for @gmail, url: new_gmail_registration_path do |f| %>
+  <% if @gmail.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@gmail.errors.count, "error") %> prohibited this gmail from being saved:</h2>
+      <ul>
+        <% @gmail.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
 
   <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+    <%= f.label :email %><br>
+    <%= f.text_field :email, value: @gmail.email, required: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+    <%= f.label :full_name %><br>
+    <%= f.text_field :full_name, value: @gmail.full_name, required: true %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+    <%= f.label :avatar_url %><br>
+    <%= f.text_field :avatar_url, value: @gmail.avatar_url, required: true %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Create Account" %>
   </div>
 <% end %>
-
-<%= render "gmails/shared/links" %>
