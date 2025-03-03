@@ -26,7 +26,7 @@ RSpec.describe "/alumni", type: :request do
 
   before do
     # This will skip the `authenticate_gmails!` before action
-    allow(ApplicationController).to receive(:authenticate_gmails!).and_return(true)
+    allow(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
   end
 
   describe "GET /index" do
