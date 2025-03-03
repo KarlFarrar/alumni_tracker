@@ -5,8 +5,18 @@ document.addEventListener("turbo:load", function() {
   const experienceForm = document.getElementById("experience_form");
   const experienceModal = document.getElementById("experience_modal");
   const claimModal = document.getElementById("claim_experience_modal");
-  const closeModal = document.querySelector(".close");
   const experienceIdInput = document.getElementById("modal_experience_id");
+  const closeButtons = document.querySelectorAll(".close");
+
+  // Loop through each close button and add event listener
+  closeButtons.forEach(button => {
+    button.addEventListener("click", function() {
+      const modal = this.closest(".modal"); // Find the closest modal
+      if (modal) {
+        modal.style.display = "none"; 
+      }
+    });
+  });
 
   if (experienceList && claimedExperiences) {
     experienceList.addEventListener("dblclick", function(e) {
@@ -65,10 +75,6 @@ document.addEventListener("turbo:load", function() {
       }
     });
 
-    closeModal.addEventListener("click", function() {
-      experienceModal.style.display = "none";
-    });
-
     window.addEventListener("click", function(event) {
       if (event.target === experienceModal) {
         experienceModal.style.display = "none";
@@ -81,25 +87,36 @@ document.addEventListener("turbo:load", function() {
     experienceList.addEventListener("dblclick", function(e) {
       const selectedOption = e.target;
       if (selectedOption.value) {
-        experienceIdInput.value = selectedOption.value; // Store experience ID in hidden input
-        claimModal.style.display = "block"; // ✅ Open the modal
+        experienceIdInput.value = selectedOption.value; // Store experience ID
+        claimModal.style.display = "block"; 
+        e.stopPropagation();
       }
     });
 
-    // Prevent form submission when pressing Enter
+    // Prevent immediate form submission
     claimForm.addEventListener("submit", function(e) {
       if (!experienceIdInput.value) {
         e.preventDefault(); // Stop form submission if no experience is selected
       }
     });
 
-    closeModal.addEventListener("click", function() {
-      claimModal.style.display = "none"; // Close modal on 'X' button
-    });
-
+    // Also close modal if user clicks outside it
     window.addEventListener("click", function(event) {
       if (event.target === claimModal) {
-        claimModal.style.display = "none"; // Close modal if clicking outside
+        claimModal.style.display = "none";
+      }
+    });
+  }
+
+  if (claimModal && closeModal) {
+    closeModal.addEventListener("click", function() {
+      claimModal.style.display = "none";
+    });
+
+    // Also close modal if user clicks outside the modal content
+    window.addEventListener("click", function(event) {
+      if (event.target === claimModal) {
+        claimModal.style.display = "none";
       }
     });
   }

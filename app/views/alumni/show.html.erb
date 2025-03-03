@@ -6,19 +6,19 @@
 
 <ul id="claimed_experiences">
   <% @alumnus.alumnus_experiences.each do |alumnus_experience| %>
-    <li data-id="<%= alumnus_experience.experience.id %>">
+    <li id="experience_<%= alumnus_experience.experience.id %>">
       <strong><%= alumnus_experience.experience.title %> (<%= alumnus_experience.experience.experience_type %>)</strong>  
       <br>
       <small>Date Received: <%= alumnus_experience.date_received || "Not Set" %></small>
       <br>
       <p><%= alumnus_experience.custom_description.presence || "No description provided." %></p>
       <br>
-      
-      <!-- Edit Experience Button -->
+
       <%= link_to "Edit", edit_alumnus_experience_path(alumnus_experience), class: "btn btn-primary" %>
       
-      <!-- JavaScript-powered Remove Button -->
-      <a href="#" class="remove_experience" data-id="<%= alumnus_experience.experience.id %>">Remove</a>
+      <%= link_to "Remove", remove_experience_alumnus_path(@alumnus, experience_id: alumnus_experience.experience.id),
+    method: :delete, data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger" %>
+
       <br> 
     </li>
   <% end %>
