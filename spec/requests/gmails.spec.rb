@@ -23,6 +23,22 @@ require 'rails_helper'
 				follow_redirect!
 			end 
 		end
+
+		context "when user does not exist" do 
+			it "redirects them to create account screen" do 
+				auth = OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+					provider: 'google_oauth2'
+					uid: '654321'
+					info: {email: 'newuser@example.com', full_name: 'New User'}
+				})
+			end
+
+			post "/gmails/auth.google_oauth2", params: {omniauth: auth}
+
+			expect(response).to redirect_to(root_path)
+			follow_redirect!
+
+		end
 	end 
   end 
 end
