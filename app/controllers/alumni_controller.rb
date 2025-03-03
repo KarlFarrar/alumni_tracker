@@ -74,6 +74,24 @@ class AlumniController < ApplicationController
     end
   end
 
+  def remove_experience
+    alumnus = Alumnus.find(params[:id])
+    alumnus_experience = AlumnusExperience.find_by(alumnus_id: alumnus.id, experience_id: params[:experience_id])
+
+    if alumnus_experience
+      alumnus_experience.destroy
+
+      respond_to do |format|
+        format.html { redirect_to alumnus_path(alumnus), notice: "Experience removed successfully!" }
+        format.turbo_stream { render turbo_stream: turbo_stream.remove("experience_#{params[:experience_id]}") }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to alumnus_path(alumnus), alert: "Failed to remove experience." }
+      end
+    end
+  end
+
   # DELETE /alumni/1 or /alumni/1.json
   def destroy
     @alumnus.destroy!
