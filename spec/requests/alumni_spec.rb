@@ -24,6 +24,11 @@ RSpec.describe "/alumni", type: :request do
     skip("Add a hash of attributes invalid for your model")
   }
 
+  before do
+    # This will skip the `authenticate_gmails!` before action
+    allow(controller).to receive(:authenticate_gmails!).and_return(true)
+  end
+
   describe "GET /index" do
     it "renders a successful response" do
       Alumnus.create! valid_attributes
