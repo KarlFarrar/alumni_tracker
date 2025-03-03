@@ -4,7 +4,9 @@ document.addEventListener("turbo:load", function() {
   const experienceIdsContainer = document.getElementById("experience_ids_container");
   const experienceForm = document.getElementById("experience_form");
   const experienceModal = document.getElementById("experience_modal");
+  const claimModal = document.getElementById("claim_experience_modal");
   const closeModal = document.querySelector(".close");
+  const experienceIdInput = document.getElementById("modal_experience_id");
 
   if (experienceList && claimedExperiences) {
     experienceList.addEventListener("dblclick", function(e) {
@@ -70,6 +72,34 @@ document.addEventListener("turbo:load", function() {
     window.addEventListener("click", function(event) {
       if (event.target === experienceModal) {
         experienceModal.style.display = "none";
+      }
+    });
+  }
+
+  // Experience Details Logic
+  if (experienceList && claimModal) {
+    experienceList.addEventListener("dblclick", function(e) {
+      const selectedOption = e.target;
+      if (selectedOption.value) {
+        experienceIdInput.value = selectedOption.value; // Store experience ID in hidden input
+        claimModal.style.display = "block"; // ✅ Open the modal
+      }
+    });
+
+    // Prevent form submission when pressing Enter
+    claimForm.addEventListener("submit", function(e) {
+      if (!experienceIdInput.value) {
+        e.preventDefault(); // Stop form submission if no experience is selected
+      }
+    });
+
+    closeModal.addEventListener("click", function() {
+      claimModal.style.display = "none"; // Close modal on 'X' button
+    });
+
+    window.addEventListener("click", function(event) {
+      if (event.target === claimModal) {
+        claimModal.style.display = "none"; // Close modal if clicking outside
       }
     });
   }

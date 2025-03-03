@@ -14,28 +14,25 @@ class AlumniController < ApplicationController
   end
 
   def claim_experiences
-    selected_experience_ids = params[:experience_ids]&.map(&:to_i) || []
-  
-    # Find all experiences the alumnus currently has
-    current_experience_ids = @alumnus.experience_ids
-  
-    # Find experiences to add (newly selected but not already claimed)
-    new_experience_ids = selected_experience_ids - current_experience_ids
-    new_experiences = Experience.where(id: new_experience_ids)
-  
-    # Find experiences to remove (previously claimed but now unselected)
-    removed_experience_ids = current_experience_ids - selected_experience_ids
-    removed_experiences = Experience.where(id: removed_experience_ids)
-  
-    # Add new experiences
-    @alumnus.experiences << new_experiences
-  
-    # Remove deselected experiences
-    @alumnus.experiences.destroy(removed_experiences)
-  
-    respond_to do |format|
-      format.html { redirect_to @alumnus, notice: "Experiences updated!" }
-      format.turbo_stream
+    alumnus = Alumnus.find(params[:id])
+    experience = Experience.find_by(id: params[:experience_id])
+
+    if experience
+      alumnus_experience = AlumnusExperience.create(
+        alumnus: alumnus,
+        experience: experience,
+        date_received: params[:date_received],
+        custom_description: params[:custom_description]
+      )
+
+      respond_to do |format|
+        if alumnus_experience.persisted?
+          format.html { redirect_to alumnus_path(alumnus), notice: "Experience added successfully!" }
+          format.turbo_stream { render turbo_stream: turbo_stream.append("claimed_experiences", partial: "alumnus_experiences/experience", locals: { alumnus_experience: alumnus_experience }) }
+        else
+          format.html { redirect_to alumnus_path(alumnus), alert: "Failed to add experience." }
+        end
+      end
     end
   end
   

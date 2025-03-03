@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_02_24_220156) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_03_180650) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,6 +25,30 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_24_220156) do
     t.string "biography"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "alumnis", force: :cascade do |t|
+    t.integer "uin"
+    t.integer "cohort_year"
+    t.string "team_affiliation"
+    t.string "profession_title"
+    t.boolean "availability"
+    t.string "email"
+    t.string "phone_number"
+    t.string "biography"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "alumnus_experiences", force: :cascade do |t|
+    t.bigint "alumnus_id", null: false
+    t.bigint "experience_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.date "date_received"
+    t.text "custom_description"
+    t.index ["alumnus_id"], name: "index_alumnus_experiences_on_alumnus_id"
+    t.index ["experience_id"], name: "index_alumnus_experiences_on_experience_id"
   end
 
   create_table "change_logs", force: :cascade do |t|

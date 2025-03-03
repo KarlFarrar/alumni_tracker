@@ -15,4 +15,5 @@ Rails.application.routes.draw do
   end
   resources :change_logs, only: [:index]
   resources :experiences
+  resources :alumnus_experiences, only: [:edit, :update, :destroy]
 end
