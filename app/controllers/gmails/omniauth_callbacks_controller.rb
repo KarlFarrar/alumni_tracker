@@ -5,7 +5,6 @@ class Gmails::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     gmail = Gmail.from_google(**from_google_params)
     #auth = request.env["omniauth.auth"]
     #email = auth.info.email
-
     #gmail = Gmail.find_by(email: email)
 
     if gmail.present?
