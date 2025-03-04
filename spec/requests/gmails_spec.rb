@@ -20,7 +20,7 @@ RSpec.describe "Gmails::OmniauthCallbacks", type: :system do
       }
     })
 
-    @gmail = Gmail.create! (
+    @gmail = Gmail.create!(
       email: 'testuser@example.com',
       full_name: 'Test user',
       uid: '123456',
