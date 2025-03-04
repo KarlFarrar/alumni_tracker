@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe Gmails::OmniauthCallbacksController, type: :controller do
+RSpec.describe "Gmails::OmniauthCallbacks", type: :controller do
   let!(:gmail_user) { Gmail.create(email: "testuser@example.com", uid: "123456", full_name: "Test User", avatar_url: "test.jpg") }
 
   before do
