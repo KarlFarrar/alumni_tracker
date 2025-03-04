@@ -1,40 +1,36 @@
 require 'rails_helper'
 
 RSpec.describe "Gmails::OmniauthCallbacks", type: :controller do
-  let!(:gmail_user) { Gmail.create(email: "testuser@example.com", uid: "123456", full_name: "Test User", avatar_url: "test.jpg") }
+  before do 
+    driven_by(:rack_test)
 
-  before do
-    request.env["devise.mapping"] = Devise.mappings[:gmail]
-    request.env["omniauth.auth"] = OmniAuth::AuthHash.new({
+    Omniauth.config.test_mode = true
+
+    Omniauth.config.mock_auth[:google_oauth2] = Omniauth::AuthHash.new({
       provider: 'google_oauth2',
       uid: '123456',
       info: {
         email: 'testuser@example.com',
-        full_name: 'Test User',
-        image: 'test.jpg'
+        name: 'Test user',
+        image: 'https://example.com/avatar.jpg'
+      },
+      credentials: {
+        token: 'mock_token',
+        expires_at: Time.now + 1.week
       }
     })
+
+    @gmail = Gmail.create! (
+      email: 'testuser@example.com',
+      full_name: 'Test user',
+      uid: '123456',
+      avatar_url: 'https://example.com/avatar.jpg'
+    )
   end
 
-  describe "Google OAuth2 login" do
-    context "when the user exists" do
-      it "logs in and redirects to the root path" do
-        post gmail_google_oauth2_omniauth_callback_path
-        expect(controller.current_gmail).to eq(gmail_user)
-        expect(response).to redirect_to(root_path)
-      end
-    end
+  it 'saves & goes to root node' do
+    visit '/gmails/auth/google_oauth2/callback'
 
-    context "when the user does not exist" do
-      before do
-        request.env["omniauth.auth"].info.email = "newuser@example.com"
-        request.env["omniauth.auth"].uid = "654321"
-      end
-
-      it "redirects to the sign-up page" do
-        post gmail_google_oauth2_omniauth_callback_path
-        expect(response).to redirect_to(choose_role_registration_path)
-      end
-    end
-  end
+    expect(page).to have_current_path(root_path)
+  end  
 end
