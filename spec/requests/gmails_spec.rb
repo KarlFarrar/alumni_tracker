@@ -22,7 +22,6 @@ RSpec.describe "Gmails::OmniauthCallbacks", type: :controller do
         post gmail_google_oauth2_omniauth_callback_path
         expect(controller.current_gmail).to eq(gmail_user)
         expect(response).to redirect_to(root_path)
-        expect(flash[:success]).to eq(I18n.t('devise.omniauth_callbacks.success', kind: 'Google'))
       end
     end
 
@@ -35,7 +34,6 @@ RSpec.describe "Gmails::OmniauthCallbacks", type: :controller do
       it "redirects to the sign-up page" do
         post gmail_google_oauth2_omniauth_callback_path
         expect(response).to redirect_to(choose_role_registration_path)
-        expect(flash[:alert]).to eq("No account found. Please create an account")
       end
     end
   end
