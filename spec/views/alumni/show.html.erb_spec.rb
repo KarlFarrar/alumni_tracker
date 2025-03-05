@@ -17,7 +17,7 @@ RSpec.describe "alumni/show", type: :view do
   it "renders attributes in <p>" do
     render
     expect(rendered).to have_text("123456789")
-    expect(rendered).to have_text("2021")
+    expect(rendered).to have_text("2021".to_s)
     expect(rendered).to have_text("Team Affiliation")
     expect(rendered).to have_text("Profession Title")
     expect(rendered).to have_text("false")
