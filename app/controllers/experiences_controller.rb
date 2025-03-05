@@ -12,12 +12,26 @@ class ExperiencesController < ApplicationController
   end
 
   def create
+    Rails.logger.debug "PARAMS RECEIVED: #{params.inspect}"
     @experience = Experience.new(experience_params)
+    alumnus = Alumnus.find_by(id: params[:experience][:alumnus_id]) if params[:experience][:alumnus_id].present?
 
     if @experience.save
-      redirect_to @experience, notice: "Experience was successfully created."
+      alumnus.experiences << @experience if alumnus  # ✅ Associate via join table
+
+      respond_to do |format|
+        if alumnus
+          format.html { redirect_to alumnus_path(alumnus), notice: "Experience added!" }
+        else
+          format.html { redirect_to experiences_path, notice: "Experience added!" }
+        end
+        format.turbo_stream
+      end
     else
-      render :new, status: :unprocessable_entity
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.js { render json: { errors: @experience.errors.full_messages }, status: :unprocessable_entity }
+      end
     end
   end
 
@@ -43,6 +57,6 @@ class ExperiencesController < ApplicationController
   end
 
   def experience_params
-    params.require(:experience).permit(:title, :experience_type, :date_interval, :description, :recepient_uin)
+    params.require(:experience).permit(:title, :experience_type)
   end
 end

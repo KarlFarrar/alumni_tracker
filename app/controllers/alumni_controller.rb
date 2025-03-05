@@ -12,13 +12,28 @@ class AlumniController < ApplicationController
   end
 
   def claim_experiences
-    selected_experience_ids = params[:experience_ids].reject(&:blank?) # Remove blank selections
-    selected_experiences = Experience.where(id: selected_experience_ids)
+    alumnus = Alumnus.find(params[:id])
+    experience = Experience.find_by(id: params[:experience_id])
 
-    @alumnus.experiences << selected_experiences.reject { |exp| @alumnus.experiences.include?(exp) }
+    if experience
+      alumnus_experience = AlumnusExperience.create(
+        alumnus: alumnus,
+        experience: experience,
+        date_received: params[:date_received],
+        custom_description: params[:custom_description]
+      )
 
-    redirect_to @alumnus, notice: "Experiences successfully claimed!"
+      respond_to do |format|
+        if alumnus_experience.persisted?
+          format.html { redirect_to alumnus_path(alumnus), notice: "Experience added successfully!" }
+          format.turbo_stream { render turbo_stream: turbo_stream.append("claimed_experiences", partial: "alumnus_experiences/experience", locals: { alumnus_experience: alumnus_experience }) }
+        else
+          format.html { redirect_to alumnus_path(alumnus), alert: "Failed to add experience." }
+        end
+      end
+    end
   end
+  
 
   # GET /alumni/new
   def new
@@ -53,6 +68,24 @@ class AlumniController < ApplicationController
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @alumnus.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def remove_experience
+    alumnus = Alumnus.find(params[:id])
+    alumnus_experience = AlumnusExperience.find_by(alumnus_id: alumnus.id, experience_id: params[:experience_id])
+
+    if alumnus_experience
+      alumnus_experience.destroy
+
+      respond_to do |format|
+        format.html { redirect_to alumnus_path(alumnus), notice: "Experience removed successfully!" }
+        format.turbo_stream { render turbo_stream: turbo_stream.remove("experience_#{params[:experience_id]}") }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to alumnus_path(alumnus), alert: "Failed to remove experience." }
       end
     end
   end
