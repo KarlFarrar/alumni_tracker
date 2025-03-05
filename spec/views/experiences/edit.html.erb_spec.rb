@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "experiences/edit", type: :view do
   before do
-    assign(:experience, Experience.create!(title: "MyString", experience_type: "Award")) 
+    assign(:experience, Experience.create!(title: "Software Engineering Award", experience_type: "Award")) 
   end
 
   it "renders the edit experience form" do
