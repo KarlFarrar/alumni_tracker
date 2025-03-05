@@ -1,16 +1,19 @@
 require 'rails_helper'
 
-RSpec.describe "experiences/show", type: :view do
-  before(:each) do
-    assign(:experience, Experience.create!(
-      title: "Title",
-      type: "Type",
-    ))
+RSpec.describe "alumni/show", type: :view do
+  before do
+    alumnus = assign(:alumnus, Alumnus.create!(uin: "123456789", email: "test@example.com"))
+    experience = Experience.create!(title: "Best Developer", experience_type: "Award")
+    assign(:alumnus_experiences, [
+      AlumnusExperience.create!(alumnus: alumnus, experience: experience, date_received: "2021-01-01", custom_description: "Won award")
+    ])
   end
 
   it "renders attributes in <p>" do
     render
-    expect(rendered).to match(/Title/)
-    expect(rendered).to match(/Type/)
+    expect(rendered).to have_text("123456789")
+    expect(rendered).to have_text("test@example.com")
+    expect(rendered).to have_text("Best Developer (Award)")
+    expect(rendered).to have_text("2021-01-01") # ✅ Fixes missing date_received issue
   end
 end
