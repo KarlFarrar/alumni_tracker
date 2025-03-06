@@ -71,3 +71,9 @@ end
 gem 'brakeman'
 gem 'rubocop'
 gem "kaminari", "~> 1.2"
+
+gem 'devise'
+gem 'omniauth'
+gem 'omniauth-google-oauth2'
+gem 'omniauth-rails_csrf_protection'
+gem 'dotenv'
