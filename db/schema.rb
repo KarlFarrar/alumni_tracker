@@ -27,6 +27,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_20_171613) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "alumnis", force: :cascade do |t|
+    t.integer "uin"
+    t.integer "cohort_year"
+    t.string "team_affiliation"
+    t.string "profession_title"
+    t.boolean "availability"
+    t.string "email"
+    t.string "phone_number"
+    t.string "biography"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "change_logs", force: :cascade do |t|
     t.string "user"
     t.string "action"
@@ -35,20 +48,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_02_20_171613) do
     t.text "change_details"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-  end
-
-  create_table "users", force: :cascade do |t|
-    t.string "email", default: "", null: false
-    t.string "encrypted_password", default: "", null: false
-    t.string "reset_password_token"
-    t.datetime "reset_password_sent_at"
-    t.datetime "remember_created_at"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "full_name"
-    t.string "uid"
-    t.string "avatar_url"
-    t.index ["email"], name: "index_users_on_email", unique: true
-    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 end

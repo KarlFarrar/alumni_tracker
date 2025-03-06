@@ -1,0 +1,64 @@
+<div class="alumni-index">
+  <header class="page-header">
+    <h1>Alumni Management</h1>
+    <div class="header-actions">
+      <%= link_to "Back to Dashboard", admin_dashboard_path, class: "btn btn-secondary" %>
+    </div>
+  </header>
+
+  <div class="filter-controls mb-4">
+    <!-- Add filter controls here if needed -->
+    <div class="input-group">
+      <input type="text" id="alumniSearch" class="form-control" placeholder="Search alumni...">
+      <button class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>UIN</th>
+          <th>Name</th>
+          <th>Cohort Year</th>
+          <th>Team Affiliation</th>
+          <th>Profession</th>
+          <th>Available</th>
+          <th>Email</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @alumni.each do |alumnus| %>
+          <tr>
+            <td><%= alumnus.uin %></td>
+            <td><%= alumnus.biography.split("\n").first rescue "N/A" %></td>
+            <td><%= alumnus.cohort_year %></td>
+            <td><%= alumnus.team_affiliation %></td>
+            <td><%= alumnus.profession_title %></td>
+            <td><%= alumnus.availability ? "Yes" : "No" %></td>
+            <td><%= alumnus.email %></td>
+            <td class="actions">
+              <%= link_to "View", admin_alumnus_path(alumnus), class: "btn btn-sm btn-info" %>
+              <%= link_to "Edit", edit_admin_alumnus_path(alumnus), class: "btn btn-sm btn-primary" %>
+              <%= button_to "Delete", 
+                 admin_alumnus_path(alumnus), 
+                 method: :delete, 
+                 form: { data: { turbo_confirm: "Are you sure you want to delete this alumnus?" } },
+                 class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <% if @alumni.empty? %>
+    <div class="alert alert-info">
+      No alumni records found in the database.
+    </div>
+  <% end %>
+
+  <div class="pagination-controls">
+    <!-- Add pagination here if needed -->
+  </div>

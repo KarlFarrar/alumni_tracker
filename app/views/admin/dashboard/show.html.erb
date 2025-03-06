@@ -1,0 +1,103 @@
+<div class="admin-show">
+  <header class="admin-header">
+    <h1>Alumnus Details</h1>
+    <div class="admin-actions">
+      <%= link_to "Back to Dashboard","/admin/dashboard", class: "btn btn-secondary" %>
+      <%= link_to "View All Alumni", alumni_path, class: "btn btn-info" %>
+    </div>
+  </header>
+
+  <% if @alumnus.present? %>
+    <div class="alumnus-profile">
+      <div class="profile-section">
+        <h2>Basic Information</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="label">UIN</div>
+            <div class="value"><%= @alumnus.uin %></div>
+          </div>
+          
+          <div class="info-item">
+            <div class="label">Name</div>
+            <div class="value"><%= @alumnus.name || "Not provided" %></div>
+          </div>
+          
+          <div class="info-item">
+            <div class="label">Cohort Year</div>
+            <div class="value"><%= @alumnus.cohort_year %></div>
+          </div>
+          
+          <div class="info-item">
+            <div class="label">Team Affiliation</div>
+            <div class="value"><%= @alumnus.team_affiliation || "Not specified" %></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="profile-section">
+        <h2>Professional Information</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="label">Profession Title</div>
+            <div class="value"><%= @alumnus.profession_title || "Not specified" %></div>
+          </div>
+          
+          <div class="info-item">
+            <div class="label">Availability</div>
+            <div class="value"><%= @alumnus.availability || "Not specified" %></div>
+          </div>
+        </div>
+        
+        <% if @alumnus.biography.present? %>
+          <div class="biography">
+            <h3>Biography</h3>
+            <div class="text-content">
+              <%= simple_format(@alumnus.biography) %>
+            </div>
+          </div>
+        <% end %>
+      </div>
+      
+      <div class="profile-section">
+        <h2>Contact Information</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="label">Email</div>
+            <div class="value">
+              <% if @alumnus.email.present? %>
+                <%= mail_to @alumnus.email, @alumnus.email %>
+              <% else %>
+                Not provided
+              <% end %>
+            </div>
+          </div>
+          
+          <div class="info-item">
+            <div class="label">Phone Number</div>
+            <div class="value"><%= @alumnus.phone_number || "Not provided" %></div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="profile-section">
+        <h2>System Information</h2>
+        <div class="info-grid">
+          <div class="info-item">
+            <div class="label">Created</div>
+            <div class="value"><%= @alumnus.created_at.strftime("%Y-%m-%d %H:%M") %></div>
+          </div>
+          
+          <div class="info-item">
+            <div class="label">Last Updated</div>
+            <div class="value"><%= @alumnus.updated_at.strftime("%Y-%m-%d %H:%M") %></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  <% else %>
+    <div class="error-message">
+      <p>Alumnus not found. Please select a valid alumnus record.</p>
+      <%= link_to "Return to Alumni List", alumni_path, class: "btn btn-primary" %>
+    </div>
+  <% end %>
+</div>

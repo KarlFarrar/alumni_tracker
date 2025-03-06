@@ -1,0 +1,54 @@
+<div class="admin-dashboard">
+  <header class="dashboard-header">
+    <h1>Admin Dashboard</h1>
+    <div class="dashboard-actions">
+      <%= link_to "Back to Site", root_path, class: "btn btn-secondary" %>
+    </div>
+  </header>
+
+  <div class="dashboard-stats">
+    <div class="stats-card">
+      <div class="stats-value"><%= Alumnus.count %></div>
+      <div class="stats-label">Total Alumni</div>
+    </div>
+    
+    <div class="stats-card">
+      <div class="stats-value"><%= Alumnus.where(created_at: 30.days.ago..Time.now).count %></div>
+      <div class="stats-label">New in Last 30 Days</div>
+    </div>
+    
+    <div class="stats-card">
+      <div class="stats-value"><%= Alumnus.distinct.pluck(:cohort_year).count %></div>
+      <div class="stats-label">Cohort Years</div>
+    </div>
+  </div>
+
+  <div class="dashboard-panels">
+    <div class="admin-panel">
+      <h2>Alumni Management</h2>
+      <p>View and manage alumni records in the system.</p>
+      <div class="panel-actions">
+        <%= link_to "View All Alumni", admin_alumni_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+    
+    <!-- Add more admin panels for other features as needed -->
+    <div class="admin-panel">
+      <h2>User Management</h2>
+      <p>Manage user accounts and permissions.</p>
+      <div class="panel-actions">
+        <%= link_to "Manage Users", "#", class: "btn btn-primary" %>
+      </div>
+    </div>
+    
+    <div class="admin-panel">
+      <h2>System Logs</h2>
+      <p>View system activity and audit logs.</p>
+      <div class="panel-actions">
+        <%= link_to "View Logs", admin_logs_path, class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+
+  
+</div>
