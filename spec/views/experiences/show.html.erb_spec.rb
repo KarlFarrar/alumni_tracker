@@ -2,6 +2,10 @@ require 'rails_helper'
 
 RSpec.describe "alumni/show", type: :view do
   before do
+    # This will skip the `authenticate_gmails!` before action
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
+  end
+  before do
     alumnus = assign(:alumnus, Alumnus.create!(uin: "123456789", email: "test@example.com"))
     experience = Experience.create!(title: "Best Developer", experience_type: "Award")
     assign(:alumnus_experiences, [
