@@ -68,6 +68,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_03_180650) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "gmails", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "uid"
+    t.string "avatar_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "full_name"
+    t.index ["email"], name: "index_gmails_on_email", unique: true
+  end
+
   add_foreign_key "alumnus_experiences", "alumni"
   add_foreign_key "alumnus_experiences", "experiences"
 end
