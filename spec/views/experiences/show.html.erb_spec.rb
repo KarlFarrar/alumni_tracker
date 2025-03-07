@@ -1,27 +1,12 @@
 require 'rails_helper'
 
-RSpec.describe "alumni/show", type: :view do
+RSpec.describe "experiences/show", type: :view do
   before do
-    # This will skip the `authenticate_gmails!` before action
-    allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
-  end
-  before do
-    alumnus = assign(:alumnus, Alumnus.create!(uin: "123456789", email: "test@example.com"))
-    experience = Experience.create!(title: "Best Developer", experience_type: "Award")
-    assign(:alumnus_experiences, [
-      AlumnusExperience.create!(
-        alumnus: alumnus, 
-        experience: experience, 
-        date_received: "2021-01-01", 
-        custom_description: "Won award")
-    ])
+    assign(:experience, Experience.create!(title: "Best Developer", experience_type: "Award")) # ✅ Removed `date_interval`
   end
 
   it "renders attributes in <p>" do
     render
-    expect(rendered).to have_text("123456789")
-    expect(rendered).to have_text("test@example.com")
     expect(rendered).to have_text("Best Developer (Award)")
-    expect(rendered).to have_text("2021")
   end
 end
