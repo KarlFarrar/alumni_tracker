@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "AlumnusExperiences", type: :request do
   let(:alumnus) { Alumnus.create!(uin: "123456789", email: "test@example.com") }
-  let(:experience) { Experience.create!(title: "Best Developer", experience_type: "Award") } # ✅ Removed `date_interval`
+  let(:experience) { Experience.create!(title: "Best Developer", experience_type: "Award") }
   let(:alumnus_experience) { AlumnusExperience.create!(alumnus: alumnus, experience: experience, date_received: "2021-01-01", custom_description: "Won award") }
 
   describe "GET /edit" do
