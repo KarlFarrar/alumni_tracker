@@ -17,21 +17,21 @@ class ExperiencesController < ApplicationController
     alumnus = Alumnus.find_by(id: params[:experience][:alumnus_id]) if params[:experience][:alumnus_id].present?
 
     if @experience.save
-      alumnus.experiences << @experience if alumnus  # ✅ Associate via join table
-
+      alumnus.experiences << @experience if alumnus 
       respond_to do |format|
         if alumnus
           format.html { redirect_to alumnus_path(alumnus), notice: "Experience added!" }
         else
           format.html { redirect_to experiences_path, notice: "Experience added!" }
         end
-        format.turbo_stream
+        forma t.turbo_stream
       end
     else
       respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
         format.js { render json: { errors: @experience.errors.full_messages }, status: :unprocessable_entity }
       end
+    end
   end
 
   def edit; end
