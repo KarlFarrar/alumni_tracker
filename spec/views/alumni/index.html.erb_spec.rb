@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe "alumni/index", type: :view do
+  before do
+    # This will skip the `authenticate_gmails!` before action
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
+  end
   before(:each) do
     assign(:alumni, [
       Alumnus.create!(
