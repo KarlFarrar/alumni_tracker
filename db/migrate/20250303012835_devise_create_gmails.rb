@@ -1,8 +1,7 @@
 class DeviseCreateGmails < ActiveRecord::Migration[8.0]
   def change
     create_table :gmails do |t|
-      t.string :email,              null: false, default: ""
-      t.string :full_name
+      t.string :gmail,              null: false, default: ""
       t.string :uid
       t.string :avatar_url
 
