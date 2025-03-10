@@ -90,25 +90,6 @@
     });
   </script>
 
-  <h3>Claim Experiences</h3>
-  <p>Double-click an experience to claim it.</p>
-  
-  <select id="experience_list" size="5">
-    <% Experience.all.each do |experience| %>
-      <option value="<%= experience.id %>"><%= experience.title %></option>
-    <% end %>
-  </select>
-  
-  <ul id="selected_experiences">
-    <% @alumnus.experiences.each do |experience| %>
-      <li data-id="<%= experience.id %>">
-        <%= experience.title %> <a href="#" class="remove_experience">Remove</a>
-      </li>
-    <% end %>
-  </ul>
-  
-  <%= form.hidden_field :experience_ids, id: "experience_ids", value: @alumnus.experience_ids.join(",") %>
-
   <div>
     <%= form.label :biography, style: "display: block" %>
     <%= form.text_field :biography %>
