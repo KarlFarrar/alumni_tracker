@@ -5,3 +5,4 @@ class Experience < ApplicationRecord
   validates :title, presence: true
   validates :experience_type, presence: true
 end
+

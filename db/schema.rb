@@ -27,17 +27,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_03_180650) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "alumnis", force: :cascade do |t|
-    t.integer "uin"
-    t.integer "cohort_year"
-    t.string "team_affiliation"
-    t.string "profession_title"
-    t.boolean "availability"
-    t.string "email"
-    t.string "phone_number"
-    t.string "biography"
+  create_table "alumnus_experiences", force: :cascade do |t|
+    t.bigint "alumnus_id", null: false
+    t.bigint "experience_id", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.date "date_received"
+    t.text "custom_description"
+    t.index ["alumnus_id"], name: "index_alumnus_experiences_on_alumnus_id"
+    t.index ["experience_id"], name: "index_alumnus_experiences_on_experience_id"
   end
 
   create_table "alumnus_experiences", force: :cascade do |t|
@@ -66,6 +64,17 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_03_180650) do
     t.string "experience_type"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+
+  create_table "gmails", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "uid"
+    t.string "avatar_url"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "full_name"
+    t.index ["email"], name: "index_gmails_on_email", unique: true
   end
 
   add_foreign_key "alumnus_experiences", "alumni"

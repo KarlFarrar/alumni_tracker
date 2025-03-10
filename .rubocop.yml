@@ -1,8 +1,94 @@
+inherit_from: .rubocop_todo.yml
+
 # Omakase Ruby styling for Rails
 inherit_gem: { rubocop-rails-omakase: rubocop.yml }
 
-# Overwrite or add rules to create your own house style
-#
-# # Use `[a, [b, c]]` not `[ a, [ b, c ] ]`
-# Layout/SpaceInsideArrayLiteralBrackets:
-#   Enabled: false
+AllCops:
+  Exclude:
+    - 'Gemfile'
+
+Metrics/BlockLength:
+  Exclude:
+    - 'config/**/*'
+    - 'spec/**/*'
+
+Layout/SpaceInsideArrayLiteralBrackets:
+  Exclude:
+    - 'app/models/user.rb'
+    - 'config/initializers/devise.rb'
+    - 'config/routes.rb'
+
+Layout/IndentationWidth:
+  Enabled: true
+  Width: 2
+
+Layout/TrailingWhitespace:
+  Enabled: true
+
+Style/StringLiterals:
+  Exclude:
+    - 'app/controllers/users/omniauth_callbacks_controller.rb'
+    - 'config/initializers/devise.rb'
+    - 'config/initializers/inflections.rb'
+    - 'config/routes.rb'
+
+Style/CommentAnnotation:
+  Enabled: false 
+
+Style/CollectionMethods:
+  Enabled: true
+
+Style/Documentation:
+  Enabled: false 
+
+Style/For:
+  Enabled: true
+
+Style/NegatedIf:
+  Enabled: true
+
+Style/UnlessElse:
+  Enabled: true
+
+Style/NegatedWhile:
+  Enabled: true
+
+
+Naming/VariableName:
+  EnforcedStyle: "snake_case"
+
+Naming/MethodName:
+  EnforcedStyle: "snake_case"
+
+Naming/ClassAndModuleCamelCase:
+  Enabled: true
+
+Naming/PredicateName:
+  Enabled: true
+  ForbiddenPrefixes:
+    - is
+    - does
+    - can
+  NamePrefix:
+    - is
+    - does
+    - can
+
+Naming/ConstantName:
+  EnforcedStyle: "uppercase"
+
+Rails:
+  Enabled: true
+
+Rails/InverseOf:
+  Enabled: true
+
+Rails/EnumHash:
+  Enabled: true
+
+Rails/PluralizationGrammar:
+  Enabled: true
+
+Rails/NotNullColumn:
+  Enabled: true
+

@@ -5,8 +5,6 @@ if ("<%= j @experience.persisted? %>" === "true") {
     newExperience.innerHTML = `
       <strong><%= j @experience.title %> (<%= j @experience.experience_type %>)</strong>  
       <br>
-      <small><%= j @experience.date_interval %></small>
-      <br>
       <p><%= j @experience.description %></p>
       <a href="#" class="remove_experience" data-id="<%= j @experience.id %>">Remove</a>
     `;

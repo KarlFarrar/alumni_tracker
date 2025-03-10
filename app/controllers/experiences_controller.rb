@@ -17,8 +17,7 @@ class ExperiencesController < ApplicationController
     alumnus = Alumnus.find_by(id: params[:experience][:alumnus_id]) if params[:experience][:alumnus_id].present?
 
     if @experience.save
-      alumnus.experiences << @experience if alumnus  # ✅ Associate via join table
-
+      alumnus.experiences << @experience if alumnus 
       respond_to do |format|
         if alumnus
           format.html { redirect_to alumnus_path(alumnus), notice: "Experience added!" }
