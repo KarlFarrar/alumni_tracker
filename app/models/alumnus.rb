@@ -15,6 +15,12 @@ class Alumnus < ApplicationRecord
   
   accepts_nested_attributes_for :experiences, allow_destroy: true
   
+  # Relationship to experience. 
+  has_many :alumnus_experiences, dependent: :destroy
+  has_many :experiences, through: :alumnus_experiences
+  
+  accepts_nested_attributes_for :experiences, allow_destroy: true
+  
   # Ensure UIN is exactly 9 digits
   validates :uin, format: {
     with: /\A\d{9}\z/,

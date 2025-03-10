@@ -1,6 +1,5 @@
 class AlumniController < ApplicationController
   before_action :set_alumnus, only: [:show, :claim_experiences]
-
   skip_before_action :authenticate_gmail!, only: [:new]
 
   # GET /alumni or /alumni.json
@@ -40,6 +39,30 @@ class AlumniController < ApplicationController
     @alumnus.experiences << selected_experiences.reject { |exp| @alumnus.experiences.include?(exp) }
 
     redirect_to @alumnus, notice: "Experiences successfully claimed!"
+  end
+  
+
+  def claim_experiences
+    alumnus = Alumnus.find(params[:id])
+    experience = Experience.find_by(id: params[:experience_id])
+
+    if experience
+      alumnus_experience = AlumnusExperience.create(
+        alumnus: alumnus,
+        experience: experience,
+        date_received: params[:date_received],
+        custom_description: params[:custom_description]
+      )
+
+      respond_to do |format|
+        if alumnus_experience.persisted?
+          format.html { redirect_to alumnus_path(alumnus), notice: "Experience added successfully!" }
+          format.turbo_stream { render turbo_stream: turbo_stream.append("claimed_experiences", partial: "alumnus_experiences/experience", locals: { alumnus_experience: alumnus_experience }) }
+        else
+          format.html { redirect_to alumnus_path(alumnus), alert: "Failed to add experience." }
+        end
+      end
+    end
   end
   
 
@@ -115,7 +138,7 @@ class AlumniController < ApplicationController
     end
 
     # Only allow a list of trusted parameters through.
-    def alumni_params
+    def alumnus_params
       params.require(:alumnus).permit(
         :uin, :email, :cohort_year, :team_affiliation, :profession_title,
         :availability, :phone_number, :biography,

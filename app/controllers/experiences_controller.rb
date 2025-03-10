@@ -24,7 +24,7 @@ class ExperiencesController < ApplicationController
         else
           format.html { redirect_to experiences_path, notice: "Experience added!" }
         end
-        forma t.turbo_stream
+        format.turbo_stream
       end
     else
       respond_to do |format|
