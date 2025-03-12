@@ -1,0 +1,10 @@
+<h2>Edit Profession</h2>
+
+<%= form_with(model: @alumnus_profession, url: alumnus_profession_path(@alumnus_profession), method: :patch) do |f| %>
+  <div>
+    <%= f.label :field, "Field" %>
+    <%= f.text_field :field, required: true %>
+  </div>
+
+  <%= f.submit "Save Changes", class: "btn btn-success" %>
+<% end %>
