@@ -17,10 +17,13 @@ class AlumnusProfessionsController < ApplicationController
   
     # DELETE /alumnus_professions/:id
     def destroy
-      if @alumnus_profession.destroy
-        render json: { success: true }, status: :ok
+      @alumnus_profession = AlumnusProfession.find_by(id: params[:id])
+
+      if @alumnus_profession
+        @alumnus_profession.destroy
+        redirect_to alumnus_path(@alumnus_profession.alumnus), notice: "Profession removed!"
       else
-        render json: { success: false, errors: @alumnus_profession.errors.full_messages }, status: :unprocessable_entity
+        redirect_to alumnus_path(@alumnus_profession.alumnus), alert: "Failed to remove profession!"
       end
     end
   

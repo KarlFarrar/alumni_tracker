@@ -29,6 +29,9 @@ class ProfessionsController < ApplicationController
           profession: @profession,
           field: params[:profession][:field] || "Not Set"
         )
+        redirect_to profession_path(@profession), notice: "Profession created successfully!"
+      else
+        render :new, status: :unprocessable_entity
       end
 
       respond_to do |format|
