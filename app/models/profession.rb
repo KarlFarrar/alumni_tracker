@@ -3,5 +3,5 @@ class Profession < ApplicationRecord
     has_many :alumnus_professions
     has_many :alumni, through: :alumnus_professions
 
-    validates :title, presence: true, uniqueness: true
+    validates :title, presence: true, uniqueness: { case_sensitive: false }
 end
