@@ -4,6 +4,79 @@
 
 <p><strong>Cohort Year:</strong> <%= @alumnus.cohort_year %></p>
 
+<h2>Professions</h2>
+
+<ul id="claimed_professions">
+  <% @alumnus.alumnus_professions.each do |alumnus_profession| %>
+    <li id="profession_<%= alumnus_profession.profession.id %>">
+      <strong><%= alumnus_profession.profession.title %></strong>  
+      <br>
+      <small>Field: <%= alumnus_profession.field || "Not Set" %></small>
+      <br>
+
+      <%= link_to "Edit", edit_alumnus_profession_path(alumnus_profession), class: "btn btn-primary" %>
+      
+      <%= link_to "Remove", remove_profession_alumnus_path(@alumnus, profession_id: alumnus_profession.profession.id),
+                    method: :delete, data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger" %>
+      <br> 
+    </li>
+  <% end %>
+</ul>
+
+<h3>Claim Professions</h3>
+<p>Double-click a profession to claim it. Select "Other" to add a new one.</p>
+
+<select id="profession_list" size="5">
+  <% Profession.all.each do |profession| %>
+    <option value="<%= profession.id %>"><%= profession.title %></option>
+  <% end %>
+  <option value="other">Other (Create New Profession)</option>
+</select>
+
+<%= form_with url: claim_professions_alumnus_path(@alumnus), method: :post, id: "claim_professions_form" do %>
+  <div id="profession_ids_container">
+    <% @alumnus.alumnus_professions.each do |alumnus_profession| %>
+      <input type="hidden" name="profession_ids[]" value="<%= alumnus_profession.profession.id %>">
+    <% end %>
+  </div>
+<% end %>
+
+<div id="profession_modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Add a New Profession</h2>
+
+    <%= form_with model: Profession.new, url: professions_path, method: :post, id: "new_profession_form", remote: true do |f| %>
+      <div>
+        <%= f.label :title, "Profession Title" %>
+        <%= f.text_field :title, required: true %>
+      </div>
+      
+      <input type="hidden" name="profession[alumnus_id]" value="<%= @alumnus.id %>">
+    
+      <%= f.submit "Save Profession", class: "btn btn-primary" %>
+    <% end %>
+  </div>
+</div>
+
+<div id="claim_profession_modal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2>Claim Profession</h2>
+    
+    <%= form_with url: claim_professions_alumnus_path(@alumnus), method: :post, id: "claim_profession_form", data: { turbo: "false" } do |f| %>
+      <input type="hidden" name="profession_id" id="modal_profession_id">
+
+      <div>
+        <%= f.label :field, "Field" %>
+        <%= f.text_field :field, required: true, placeholder: "Enter your field" %>
+      </div>
+
+      <%= f.submit "Claim Profession", class: "btn btn-success" %>
+    <% end %>
+  </div>
+</div>
+
 <h2>Experiences</h2>
 
 <ul id="claimed_experiences">
