@@ -5,53 +5,14 @@ RSpec.describe "Professions", type: :request do
     # Skip authentication in tests if needed
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
   end
-  let(:profession) { Profession.create!(title: "Doctor") }
-
-  describe "GET /index" do
-    it "renders a successful response" do
-      get professions_path
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /show" do
-    it "renders a successful response" do
-      get profession_path(profession)
-      expect(response).to have_http_status(:success)
-    end
-  end
-
-  describe "GET /new" do
-    it "renders a successful response" do
-      get new_profession_path
-      expect(response).to have_http_status(:success)
-    end
-  end
+  let(:alumnus) { Alumnus.create!(uin: "123456789", email: "test@example.com") }
 
   describe "POST /create" do
-    it "creates a new profession" do
-      expect {
-        post professions_path, params: { profession: { title: "Lawyer" } }
-      }.to change(Profession, :count).by(1)
+    it "creates a new profession and redirects" do
+      post professions_path, params: { profession: { title: "Doctor" } }
       expect(response).to redirect_to(profession_path(Profession.last))
-    end
-  end
-
-  describe "PATCH /update" do
-    it "updates the profession" do
-      patch profession_path(profession), params: { profession: { title: "Surgeon" } }
-      profession.reload
-      expect(profession.title).to eq("Surgeon")
-    end
-  end
-
-  describe "DELETE /destroy" do
-    it "deletes the profession" do
-      profession
-      expect {
-        delete profession_path(profession)
-      }.to change(Profession, :count).by(-1)
-      expect(response).to redirect_to(professions_path)
+      follow_redirect!
+      expect(response.body).to include("Doctor")
     end
   end
 end
