@@ -60,7 +60,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_11_172747) do
     t.index ["alumnus_id"], name: "index_alumnus_professions_on_alumnus_id"
     t.index ["profession_id"], name: "index_alumnus_professions_on_profession_id"
   end
-  
+
   create_table "change_logs", force: :cascade do |t|
     t.string "user"
     t.string "action"
@@ -90,7 +90,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_11_172747) do
 
   create_table "professions", force: :cascade do |t|
     t.string "title"
-    
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", primary_key: "uin", id: :serial, force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
