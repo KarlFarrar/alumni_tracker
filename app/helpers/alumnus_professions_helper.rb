@@ -1,0 +1,2 @@
+module AlumnusProfessionsHelper
+end

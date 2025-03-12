@@ -8,22 +8,20 @@ Rails.application.routes.draw do
     get 'gmails/choose_role', to: 'gmails/registrations#choose_role', as: :choose_role_registration
     post 'gmails', to: 'gmails/registrations#create', as: :create_gmail
   end
-
+  
   resources :alumni do
     member do
+      post "claim_experiences"
       delete "remove_experience", to: "alumni#remove_experience"
+      post 'claim_professions'
+      delete 'remove_profession'
     end
-    post "claim_experiences", on: :member
   end
 
-  resources :alumni do
-    member do
-      delete "remove_experience", to: "alumni#remove_experience"
-    end
-    post "claim_experiences", on: :member
-  end
   resources :change_logs, only: [:index]
   resources :experiences
   resources :alumnus_experiences, only: [:edit, :update, :destroy]
   resources :experiences
+  resources :professions
+  resources :alumnus_professions, only: [:edit, :update, :destroy]
 end

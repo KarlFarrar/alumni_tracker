@@ -1,5 +1,5 @@
 class AlumniController < ApplicationController
-  before_action :set_alumnus, only: [:show, :claim_experiences]
+  before_action :set_alumnus, only: [:show, :claim_experiences, :claim_professions, :remove_experience, :remove_profession]
   skip_before_action :authenticate_gmail!, only: [:new]
 
   # GET /alumni or /alumni.json
@@ -10,6 +10,7 @@ class AlumniController < ApplicationController
   # GET /alumni/1 or /alumni/1.json
   def show
     @experiences = Experience.all   # Only show unclaimed experiences
+    @professions = Profession.all
   end
 
   def claim_experiences
@@ -33,37 +34,37 @@ class AlumniController < ApplicationController
         end
       end
     end
-    selected_experience_ids = params[:experience_ids].reject(&:blank?) # Remove blank selections
-    selected_experiences = Experience.where(id: selected_experience_ids)
-
-    @alumnus.experiences << selected_experiences.reject { |exp| @alumnus.experiences.include?(exp) }
-
-    redirect_to @alumnus, notice: "Experiences successfully claimed!"
   end
-  
 
-  def claim_experiences
-    alumnus = Alumnus.find(params[:id])
-    experience = Experience.find_by(id: params[:experience_id])
+  # POST /alumni/:id/claim_professions
+  def claim_professions
+    @alumnus = Alumnus.find(params[:id])
+    profession = Profession.find_by(id: params[:profession_id])
 
-    if experience
-      alumnus_experience = AlumnusExperience.create(
-        alumnus: alumnus,
-        experience: experience,
-        date_received: params[:date_received],
-        custom_description: params[:custom_description]
+    if profession
+      alumnus_profession = AlumnusProfession.create(
+        alumnus: @alumnus,
+        profession: profession,
+        field: params[:field]
       )
 
       respond_to do |format|
-        if alumnus_experience.persisted?
-          format.html { redirect_to alumnus_path(alumnus), notice: "Experience added successfully!" }
-          format.turbo_stream { render turbo_stream: turbo_stream.append("claimed_experiences", partial: "alumnus_experiences/experience", locals: { alumnus_experience: alumnus_experience }) }
+        if alumnus_profession.persisted?
+          format.html { redirect_to @alumnus, notice: "Profession added successfully!" }
+          format.turbo_stream do
+            render turbo_stream: turbo_stream.append(
+              "claimed_professions",
+              partial: "alumnus_professions/profession",
+              locals: { alumnus_profession: alumnus_profession }
+            )
+          end
         else
-          format.html { redirect_to alumnus_path(alumnus), alert: "Failed to add experience." }
+          format.html { redirect_to @alumnus, alert: "Failed to add profession." }
         end
       end
     end
   end
+
   
 
   # GET /alumni/new
@@ -121,6 +122,24 @@ class AlumniController < ApplicationController
     end
   end
 
+  # DELETE /alumni/:id/remove_profession
+  def remove_profession
+    alumnus_profession = @alumnus.alumnus_professions.find_by(profession_id: params[:profession_id])
+
+    if alumnus_profession
+      alumnus_profession.destroy
+
+      respond_to do |format|
+        format.html { redirect_to @alumnus, notice: "Profession removed successfully!" }
+        format.turbo_stream { render turbo_stream: turbo_stream.remove("profession_#{params[:profession_id]}") }
+      end
+    else
+      respond_to do |format|
+        format.html { redirect_to @alumnus, alert: "Failed to remove profession." }
+      end
+    end
+  end
+
   # DELETE /alumni/1 or /alumni/1.json
   def destroy
     @alumnus.destroy!
@@ -140,9 +159,10 @@ class AlumniController < ApplicationController
     # Only allow a list of trusted parameters through.
     def alumnus_params
       params.require(:alumnus).permit(
-        :uin, :email, :cohort_year, :team_affiliation, :profession_title,
-        :availability, :phone_number, :biography,
-        experience_ids: [] # Allow selecting multiple experiences
+        :uin, :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography,
+        experience_ids: [], # Allow selecting multiple experiences
+        profession_ids: [], # Allow selecting multiple professions
+        professions_attributes: [:title]
       )
     end
 end
