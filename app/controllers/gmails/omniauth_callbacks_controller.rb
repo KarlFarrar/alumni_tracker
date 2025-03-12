@@ -7,7 +7,7 @@ class Gmails::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     email = auth.info.email
     gmail = Gmail.find_by(email: email)
 
-    if gmail.present?
+    if gmail.present? && gmail.persisted?
       sign_out_all_scopes
       flash[:success] = t 'devise.omniauth_callbacks.success', kind: 'Google'
       sign_in_and_redirect gmail, event: :authentication
