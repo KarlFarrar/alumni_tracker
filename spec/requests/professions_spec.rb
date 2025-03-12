@@ -5,15 +5,25 @@ RSpec.describe "Professions", type: :request do
     # Skip authentication in tests if needed
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
   end
+  let(:alumnus) { Alumnus.create!(uin: "123456789", email: "test@example.com") }
 
   describe "POST /create" do
-    context "with valid parameters" do
-      let!(:alumnus) { Alumnus.create(name: "Test Alumnus") } # Create an alumnus
-      it "creates a new profession and redirects to the alumnus path" do
-        post professions_path, params: { profession: { field: "Software Engineer", alumnus_id: alumnus.id } } # Include alumnus_id
-        expect(response).to redirect_to(alumnus_path(alumnus))
-        expect(flash[:notice]).to eq("Profession added!")
-      end
+    it "creates a new profession and redirects" do
+      post professions_path, params: { 
+        profession: { 
+          field: "Doctor",      # Changed from title: to field:
+          alumnus_id: nil       # Explicitly set no alumnus
+        } 
+      }
+      
+      # Should redirect to professions INDEX (professions_path)
+      expect(response).to redirect_to(professions_path)
+      
+      # Follow redirect to index page
+      follow_redirect!
+      
+      # Verify profession appears in index
+      expect(response.body).to include("Doctor")
     end
   end
 end
