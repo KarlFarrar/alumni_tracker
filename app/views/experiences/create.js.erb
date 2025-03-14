@@ -1,0 +1,16 @@
+if ("<%= j @experience.persisted? %>" === "true") {
+    document.getElementById("experience_modal").style.display = "none";
+  
+    const newExperience = document.createElement("li");
+    newExperience.innerHTML = `
+      <strong><%= j @experience.title %> (<%= j @experience.experience_type %>)</strong>  
+      <br>
+      <p><%= j @experience.description %></p>
+      <a href="#" class="remove_experience" data-id="<%= j @experience.id %>">Remove</a>
+    `;
+  
+    document.getElementById("claimed_experiences").appendChild(newExperience);
+  } else {
+    alert("Error: <%= j @experience.errors.full_messages.join(', ') %>");
+  }
+  

@@ -13,6 +13,10 @@ require 'rails_helper'
 # sticking to rails and rspec-rails APIs to keep things simple and stable.
 
 RSpec.describe "/alumni", type: :request do
+  before do
+    # This will skip the `authenticate_gmails!` before action
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
+  end
   # This should return the minimal set of attributes required to create a valid
   # Alumnus. As you add validations to Alumnus, be sure to
   # adjust the attributes here as well.

@@ -2,6 +2,18 @@ class Alumnus < ApplicationRecord
   # log all activities.
   include Loggable
 
+  
+  # Relationship to experience. 
+  has_many :alumnus_experiences, dependent: :destroy
+  has_many :experiences, through: :alumnus_experiences
+
+  # Relationship to Profession
+  has_many :alumnus_professions, dependent: :destroy
+  has_many :professions, through: :alumnus_professions
+  
+  accepts_nested_attributes_for :experiences, allow_destroy: true
+  
+  
   # Ensure UIN is exactly 9 digits
   validates :uin, format: {
     with: /\A\d{9}\z/,

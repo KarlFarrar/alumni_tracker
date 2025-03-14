@@ -1,0 +1,17 @@
+<h2>Edit Experience Details</h2>
+
+<%= form_with model: @alumnus_experience, url: alumnus_experience_path(@alumnus_experience), method: :patch do |f| %>
+  <div>
+    <%= f.label :date_received, "Date Received" %>
+    <%= f.date_field :date_received, required: true %>
+  </div>
+
+  <div>
+    <%= f.label :custom_description, "Custom Description" %>
+    <%= f.text_area :custom_description, placeholder: "Describe how you received this award, certificate, etc.", rows: 5 %>
+  </div>
+
+  <%= f.submit "Update Experience", class: "btn btn-success" %>
+<% end %>
+
+<p><%= link_to "Back", alumnus_path(@alumnus_experience.alumnus) %></p>
