@@ -1,0 +1,56 @@
+<div class="alumnus-details">
+<header class="page-header">
+  <h1>Alumnus Details</h1>
+  <div class="header-actions">
+    <%= link_to "Back to Alumni List", admin_alumni_path, class: "btn btn-secondary" %>
+    <%= link_to "Edit", edit_admin_alumnus_path(@alumnus), class: "btn btn-primary" %>
+  </div>
+</header>
+
+<div class="card">
+  <div class="card-header">
+    <h3><%= @alumnus.biography.split("\n").first rescue "Alumnus ##{@alumnus.id}" %></h3>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-md-6">
+        <dl class="row">
+          <dt class="col-sm-4">UIN:</dt>
+          <dd class="col-sm-8"><%= @alumnus.uin %></dd>
+          
+          <dt class="col-sm-4">Cohort Year:</dt>
+          <dd class="col-sm-8"><%= @alumnus.cohort_year %></dd>
+          
+          <dt class="col-sm-4">Team Affiliation:</dt>
+          <dd class="col-sm-8"><%= @alumnus.team_affiliation %></dd>
+          
+          <dt class="col-sm-4">Profession:</dt>
+          <dd class="col-sm-8"><%= @alumnus.profession_title %></dd>
+        </dl>
+      </div>
+      <div class="col-md-6">
+        <dl class="row">
+          <dt class="col-sm-4">Availability:</dt>
+          <dd class="col-sm-8"><%= @alumnus.availability ? "Available" : "Not Available" %></dd>
+          
+          <dt class="col-sm-4">Email:</dt>
+          <dd class="col-sm-8"><%= mail_to @alumnus.email %></dd>
+          
+          <dt class="col-sm-4">Phone:</dt>
+          <dd class="col-sm-8"><%= @alumnus.phone_number %></dd>
+          
+          <dt class="col-sm-4">Created:</dt>
+          <dd class="col-sm-8"><%= @alumnus.created_at.strftime("%B %d, %Y") %></dd>
+        </dl>
+      </div>
+    </div>
+    
+    <div class="mt-4">
+      <h4>Biography</h4>
+      <div class="biography-text">
+        <%= simple_format(@alumnus.biography) %>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
