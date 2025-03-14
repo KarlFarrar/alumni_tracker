@@ -7,13 +7,4 @@
 <h1>You're logged in! Welcome to the Dashboard!</h1>
 <%= link_to "Sign Out", destroy_gmail_session_path %>
 
-<div id="alumni">
-  <% @alumni.each do |alumnus| %>
-    <%= render alumnus %>
-    <p>
-      <%= link_to "Show this alumnus", alumnus %>
-    </p>
-  <% end %>
-</div>
-
 <%= link_to "New alumnus", new_alumnus_path %>

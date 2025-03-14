@@ -67,26 +67,28 @@
     document.addEventListener("turbo:load", function() {
       const phoneInput = document.getElementById("phone_number");
 
-      phoneInput.addEventListener("input", function(e) {
-        let numbers = e.target.value.replace(/\D/g, ""); 
-        
-        if (numbers.length > 10) {
-          numbers = numbers.slice(0, 10);
-        }
+      if (phoneInput) {
+        phoneInput.addEventListener("input", function(e) {
+          let numbers = e.target.value.replace(/\D/g, ""); 
+          
+          if (numbers.length > 10) {
+            numbers = numbers.slice(0, 10);
+          }
 
-        let formattedNumber = "";
-        if (numbers.length > 0) {
-          formattedNumber += `(${numbers.slice(0, 3)}`;
-        }
-        if (numbers.length >= 4) {
-          formattedNumber += `)-${numbers.slice(3, 6)}`;
-        }
-        if (numbers.length >= 7) {
-          formattedNumber += `-${numbers.slice(6, 10)}`;
-        }
+          let formattedNumber = "";
+          if (numbers.length > 0) {
+            formattedNumber += `(${numbers.slice(0, 3)}`;
+          }
+          if (numbers.length >= 4) {
+            formattedNumber += `)-${numbers.slice(3, 6)}`;
+          }
+          if (numbers.length >= 7) {
+            formattedNumber += `-${numbers.slice(6, 10)}`;
+          }
 
-        e.target.value = formattedNumber;
-      });
+          e.target.value = formattedNumber;
+        });
+      }
     });
   </script>
 
