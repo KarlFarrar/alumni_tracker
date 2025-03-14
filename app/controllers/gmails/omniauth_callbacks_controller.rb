@@ -14,6 +14,7 @@ class Gmails::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     else
       session[:uid] = auth.uid
       session[:avatar_url] = auth.info.image
+      session[:email] = auth.info.email
       flash[:alert] = t 'No account found. Please create an account'
       redirect_to choose_role_registration_path
     end

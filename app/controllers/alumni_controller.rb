@@ -70,6 +70,8 @@ class AlumniController < ApplicationController
   # GET /alumni/new
   def new
     @alumnus = Alumnus.new
+    @alumnus.build_user
+    @alumnus.user.build_gmail
   end
 
   # GET /alumni/1/edit
@@ -78,7 +80,20 @@ class AlumniController < ApplicationController
 
   # POST /alumni or /alumni.json
   def create
+    Rails.logger.info "Creating a new ALUMNI"
+
     @alumnus = Alumnus.new(alumnus_params)
+    @alumnus.build_user if @alumnus.user.nil?
+    @alumnus.user.status = "alumni"
+    @alumnus.email = params[:alumnus][:email]
+
+    Rails.logger.info "UID: #{session[:uid]}"
+    Rails.logger.info "Email: #{session[:email]}"
+    Rails.logger.info "avatar_url: #{session[:avatar_url]}"
+
+    @alumnus.user.build_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
+
+    #sign_in_and_redirect @alumnus.user, event: :authentication
 
     respond_to do |format|
       if @alumnus.save
@@ -162,7 +177,9 @@ class AlumniController < ApplicationController
         :uin, :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography,
         experience_ids: [], # Allow selecting multiple experiences
         profession_ids: [], # Allow selecting multiple professions
-        professions_attributes: [:title]
+        professions_attributes: [:title],
+        user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status],
+        gmail_attributes: [:uid, :avatar_url, :email, :uin]
       )
     end
 end

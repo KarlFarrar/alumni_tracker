@@ -12,6 +12,19 @@
   <% end %>
 
   <div class="field">
+    <%= form.fields_for :user do |user_form| %>
+      <%= user_form.label :first_name %>
+      <%= user_form.text_field :first_name %>
+
+      <%= user_form.label :last_name %>
+      <%= user_form.text_field :last_name %>
+
+      <%= user_form.label :middle_initial %>
+      <%= user_form.text_field :middle_initial %>
+    <% end %>
+  </div>
+
+  <div class="field">
     <%= form.label :uin %>
     <%= form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
           maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
