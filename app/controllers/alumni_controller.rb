@@ -80,21 +80,31 @@ class AlumniController < ApplicationController
 
   # POST /alumni or /alumni.json
   def create
-    Rails.logger.info "Creating a new ALUMNI"
+    #Rails.logger.info "Creating a new ALUMNI"
 
-    @alumnus = Alumnus.new(alumnus_params)
-    @alumnus.build_user if @alumnus.user.nil?
-    @alumnus.user.status = "alumni"
-    @alumnus.email = params[:alumnus][:email]
+    #@alumnus = Alumnus.new(alumnus_params)
+    #@alumnus.build_user if @alumnus.user.nil?
+    #@alumnus.user.status = "alumni"
+    #@alumnus.email = params[:alumnus][:email]
 
-    Rails.logger.info "UID: #{session[:uid]}"
-    Rails.logger.info "Email: #{session[:email]}"
-    Rails.logger.info "avatar_url: #{session[:avatar_url]}"
+    #Rails.logger.info "UID: #{session[:uid]}"
+    #Rails.logger.info "Email: #{session[:email]}"
+    #Rails.logger.info "avatar_url: #{session[:avatar_url]}"
 
-    @alumnus.user.build_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
+    #@alumnus.user.build_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
 
     #sign_in_and_redirect @alumnus.user, event: :authentication
 
+ @alumnus = Alumnus.new(alumnus_params)
+  @user = User.find_by(uin: params[:alumnus][:uin])
+  if @user.present?
+    @alumnus.user = @user
+    @gmail = Gmail.from_google(gmail_params)
+    @alumnus.gmail = @gmail
+  else
+    @user = User.create!(uin: params[:alumnus][:uin], first_name: params[:alumnus][:user_attributes][:first_name], last_name: params[:alumnus][:user_attributes][:last_name])
+  end
+  
     respond_to do |format|
       if @alumnus.save
         format.html { redirect_to @alumnus, notice: "Alumnus was successfully created." }
@@ -174,7 +184,7 @@ class AlumniController < ApplicationController
     # Only allow a list of trusted parameters through.
     def alumnus_params
       params.require(:alumnus).permit(
-        :uin, :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography,
+        :uin, :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
         experience_ids: [], # Allow selecting multiple experiences
         profession_ids: [], # Allow selecting multiple professions
         professions_attributes: [:title],
