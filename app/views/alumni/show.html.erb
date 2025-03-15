@@ -1,4 +1,6 @@
 <h1>Alumnus Profile</h1>
+<p><strong>First Name:</strong> <%= @alumnus.user.first_name %></p>
+<p><strong>Last Name:</strong> <%= @alumnus.user.last_name %></p>
 <p><strong>UIN:</strong> <%= @alumnus.uin %></p>
 <p><strong>Email:</strong> <%= @alumnus.email %></p>
 
@@ -140,6 +142,7 @@
   </div>
 </div>
 <p><%= link_to "Back to Alumni List", alumni_path %></p>
+<p><%= link_to "Complete profile", complete_profile_alumnus_path(@alumnus) %></p>
 
 <div id="claim_experience_modal" class="modal">
   <div class="modal-content">

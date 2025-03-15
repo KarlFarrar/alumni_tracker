@@ -1,8 +1,8 @@
 class User < ApplicationRecord
-  has_one :gmail, foreign_key: 'uin', dependent: :destroy
-  has_one :alumnus, foreign_key: 'uin', dependent: :destroy
+  has_one :gmail, primary_key: 'uin', foreign_key: 'uin', dependent: :destroy
+  has_one :alumnus, primary_key: 'uin', foreign_key: 'uin', dependent: :destroy
 
-  accepts_nested_attributes_for :alumnus
+
   accepts_nested_attributes_for :gmail
 
   validates :uin, presence: true, uniqueness: true

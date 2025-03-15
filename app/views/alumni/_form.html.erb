@@ -1,4 +1,4 @@
-<%= form_with(model: alumnus) do |form| %>
+<%= form_with(model: @alumnus) do |form| %>
   <% if alumnus.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(alumnus.errors.count, "error") %> prohibited this alumnus from being saved:</h2>
@@ -21,14 +21,13 @@
 
       <%= user_form.label :middle_initial %>
       <%= user_form.text_field :middle_initial %>
+
+      <%= user_form.label :uin %>
+      <%= user_form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
+          maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
     <% end %>
   </div>
 
-  <div class="field">
-    <%= form.label :uin %>
-    <%= form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
-          maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
-  </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {

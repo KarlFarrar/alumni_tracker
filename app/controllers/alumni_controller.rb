@@ -72,6 +72,7 @@ class AlumniController < ApplicationController
     @alumnus = Alumnus.new
     @alumnus.build_user
     @alumnus.user.build_gmail
+    Rails.logger.info "GOT INTO NEW ACTION"
   end
 
   # GET /alumni/1/edit
@@ -80,40 +81,49 @@ class AlumniController < ApplicationController
 
   # POST /alumni or /alumni.json
   def create
-    #Rails.logger.info "Creating a new ALUMNI"
+    Rails.logger.info "Creating a new ALUMNI"
+    Rails.logger.debug "Params: #{params.inspect}"
 
-    #@alumnus = Alumnus.new(alumnus_params)
-    #@alumnus.build_user if @alumnus.user.nil?
+    @alumnus = Alumnus.new(alumnus_params)
+
+    if @alumnus.valid?
+    Rails.logger.info "Alumnus is valid before save."
+  else
+    Rails.logger.info "Alumnus validation errors: #{@alumnus.errors.full_messages}"
+  end
+    ##@alumnus.build_user(uin: @alumnus.uin) if @alumnus.user.nil?
     #@alumnus.user.status = "alumni"
     #@alumnus.email = params[:alumnus][:email]
 
-    #Rails.logger.info "UID: #{session[:uid]}"
-    #Rails.logger.info "Email: #{session[:email]}"
-    #Rails.logger.info "avatar_url: #{session[:avatar_url]}"
+    #Rails.logger.info "Alumnus UIN: #{@alumnus.uin}"
+    ##Rails.logger.info "User UIN: #{@alumnus.user&.uin}"
+    #Rails.logger.info "User Errors: #{@alumnus.user&.errors.full_messages}"
+
+    Rails.logger.info "UID: #{session[:uid]}"
+    Rails.logger.info "Email: #{session[:email]}"
+    Rails.logger.info "avatar_url: #{session[:avatar_url]}"
+
+    @alumnus.user.status = "alumni"
 
     #@alumnus.user.build_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
 
     #sign_in_and_redirect @alumnus.user, event: :authentication
-
- @alumnus = Alumnus.new(alumnus_params)
-  @user = User.find_by(uin: params[:alumnus][:uin])
-  if @user.present?
-    @alumnus.user = @user
-    @gmail = Gmail.from_google(gmail_params)
-    @alumnus.gmail = @gmail
-  else
-    @user = User.create!(uin: params[:alumnus][:uin], first_name: params[:alumnus][:user_attributes][:first_name], last_name: params[:alumnus][:user_attributes][:last_name])
-  end
   
+  if @alumnus.save
+    # Now, associate Gmail after user is definitely saved
+    @alumnus.user.create_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
+
     respond_to do |format|
-      if @alumnus.save
-        format.html { redirect_to @alumnus, notice: "Alumnus was successfully created." }
-        format.json { render :show, status: :created, location: @alumnus }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @alumnus.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @alumnus, notice: "Alumnus was successfully created." }
+      format.json { render :show, status: :created, location: @alumnus }
     end
+  else
+    Rails.logger.info "Errors: #{@alumnus.errors.full_messages}"
+    respond_to do |format|
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @alumnus.errors, status: :unprocessable_entity }
+    end
+  end
   end
 
   # PATCH/PUT /alumni/1 or /alumni/1.json
@@ -175,6 +185,11 @@ class AlumniController < ApplicationController
     end
   end
 
+  def complete_profile
+    @alumnus = Alumnus.find(params[:id])
+    sign_in_and_redirect @alumnus.user, :event => :authentication , location: alumni_path
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_alumnus
@@ -189,7 +204,6 @@ class AlumniController < ApplicationController
         profession_ids: [], # Allow selecting multiple professions
         professions_attributes: [:title],
         user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status],
-        gmail_attributes: [:uid, :avatar_url, :email, :uin]
       )
     end
 end
