@@ -1,6 +1,6 @@
 class AlumniController < ApplicationController
   before_action :set_alumnus, only: [:show, :claim_experiences, :claim_professions, :remove_experience, :remove_profession]
-  skip_before_action :authenticate_gmail!, only: [:new, :create, :show]
+  skip_before_action :authenticate_gmail!, only: [:new, :create, :show, :complete_profile]
 
   # GET /alumni or /alumni.json
   def index
@@ -86,28 +86,11 @@ class AlumniController < ApplicationController
 
     @alumnus = Alumnus.new(alumnus_params)
 
-    if @alumnus.valid?
-    Rails.logger.info "Alumnus is valid before save."
-  else
-    Rails.logger.info "Alumnus validation errors: #{@alumnus.errors.full_messages}"
-  end
-    ##@alumnus.build_user(uin: @alumnus.uin) if @alumnus.user.nil?
-    #@alumnus.user.status = "alumni"
-    #@alumnus.email = params[:alumnus][:email]
-
-    #Rails.logger.info "Alumnus UIN: #{@alumnus.uin}"
-    ##Rails.logger.info "User UIN: #{@alumnus.user&.uin}"
-    #Rails.logger.info "User Errors: #{@alumnus.user&.errors.full_messages}"
-
     Rails.logger.info "UID: #{session[:uid]}"
     Rails.logger.info "Email: #{session[:email]}"
     Rails.logger.info "avatar_url: #{session[:avatar_url]}"
 
     @alumnus.user.status = "alumni"
-
-    #@alumnus.user.build_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
-
-    #sign_in_and_redirect @alumnus.user, event: :authentication
   
   if @alumnus.save
     # Now, associate Gmail after user is definitely saved
@@ -187,7 +170,7 @@ class AlumniController < ApplicationController
 
   def complete_profile
     @alumnus = Alumnus.find(params[:id])
-    sign_in_and_redirect @alumnus.user, :event => :authentication , location: alumni_path
+    sign_in_and_redirect @alumnus.user.gmail, event: :authentication
   end
 
   private

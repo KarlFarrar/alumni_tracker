@@ -15,7 +15,7 @@ Rails.application.routes.draw do
       delete "remove_experience", to: "alumni#remove_experience"
       post 'claim_professions'
       delete 'remove_profession'
-      get 'complete_profile'
+      get :complete_profile
     end
   end
 
