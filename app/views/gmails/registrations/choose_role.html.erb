@@ -1,7 +1,16 @@
-<h2>Create your Account</h2>
-<p>Please select whether you are a student or an alumni.</p>
-<div class="role-selection">
-  <%= link_to "I'm a Student", new_alumnus_path, class: "btn btn-primary" %>
-  <%= link_to "I'm an Alumni", new_alumnus_path, class: "btn btn-secondary" %>
-  <%= link_to "Create Gmail Account", new_gmail_registration_path, class: "btn btn-primary" %>
+<div class = registrations-choose>
+  <%= image_tag("logo2.png", alt: "Sling health", class: "registrations-logo2") %>
+  <div class = registrations-content>
+    <h2 class = registrations-title1>Create your Account</h2>
+    <p class="registrations-title2">
+      Please select whether you are a 
+      <span class="student-text">student</span> or an 
+      <span class="alumni-text">alumni</span>
+    </p>
+    <div class="role-selection">
+      <%= button_to "I'm a Student", new_alumnus_path, class: "role-btn", method: :get %>
+      <%= button_to "I'm an Alumni", new_alumnus_path, class: "role-btn", method: :get%>
+      <%= button_to "*DEV* Account Create", new_gmail_registration_path, class: "role-btn", method: :get %>
+    </div>
+  </div>
 </div>
