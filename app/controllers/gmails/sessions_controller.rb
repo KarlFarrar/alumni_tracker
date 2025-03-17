@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class Gmails::SessionsController < Devise::SessionsController
+  layout 'gmails'
   def after_sign_out_path_for(_resource_or_scope)
     new_gmail_session_path
   end

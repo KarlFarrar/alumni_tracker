@@ -303,3 +303,71 @@
     }
   }
 }
+
+.gmails-namespace {
+  background: black; 
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  justify-content: center; 
+  align-items: center;
+  box-sizing: border-box;
+
+  .sessions-new {
+    border: 5px solid #FFFFFF;
+    border-radius: 50%;
+    width: 50%;
+    height: 90%;
+    max-width: 100%;
+    max-height: 100%;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center; 
+
+    .sessions-title1, .sessions-title2 {
+      margin: 0;
+      font-weight: bold;
+      font-family: 'Bebas Neue';
+      letter-spacing: 4px;
+    }
+
+    .sessions-title1 {
+      font-size: 12vh;
+      color: #FFFFFF;
+
+    }
+    .sessions-title2 {
+      font-size: 9vh;
+      color: #9555c2;
+    }
+    .session-logo4 {
+      width: 15vw;
+      height: 32vh;
+      object-fit: contain;
+      margin-top: -10vh;
+    }
+
+    .cbtn {
+      margin-top: 2vh;
+      background-color: #FFFFFF; /* Green background */
+      padding: 10px 20px; /* Padding around text */
+      border: none; /* Remove default border */
+      border-radius: 5px; /* Rounded corners */
+      font-size: 1vw; /* Font size */
+      font-weight: bold; /* Bold text */
+      cursor: pointer; /* Change cursor on hover */
+      text-align: center; /* Center the text */
+      display: inline-block; /* Display as inline block */
+      transition: background-color 0.3s ease; /* Smooth background color change */
+
+      &:hover {
+        background: #9555c2;
+        color: #FFFFFF;
+      }
+    }
+  }
+}
