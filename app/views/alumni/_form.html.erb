@@ -22,9 +22,16 @@
       <%= user_form.label :middle_initial %>
       <%= user_form.text_field :middle_initial %>
 
-      <%= user_form.label :uin %>
-      <%= user_form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
-          maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
+      <% if @alumnus.new_record? %>
+        <%= user_form.label :uin %>
+        <%= user_form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
+            maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
+      <% else %>
+        <div>
+        <%= user_form.label :uin %>
+        <%= user_form.text_field :uin, readonly: true, value: @alumnus.user.uin %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 

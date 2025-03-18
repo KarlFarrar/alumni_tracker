@@ -78,7 +78,7 @@ class AlumniController < ApplicationController
 
   # GET /alumni/1/edit
   def edit
-    
+    @alumnus = Alumnus.find(params[:id])
   end
 
   # POST /alumni or /alumni.json
@@ -113,6 +113,8 @@ class AlumniController < ApplicationController
 
   # PATCH/PUT /alumni/1 or /alumni/1.json
   def update
+    @alumnus = Alumnus.find(params[:id])
+    logger.debug "Params: #{params.inspect}"
     respond_to do |format|
       if @alumnus.update(alumnus_params)
         format.html { redirect_to @alumnus, notice: "Alumnus was successfully updated." }
@@ -183,12 +185,28 @@ class AlumniController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def alumnus_params
-      params.require(:alumnus).permit(
-        :uin, :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
-        experience_ids: [], # Allow selecting multiple experiences
-        profession_ids: [], # Allow selecting multiple professions
-        professions_attributes: [:title],
-        user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status],
-      )
+      if params[:id].present?
+    # For update, do not allow `uin` to be modified
+    Rails.logger.info "UPDATE"
+    params[:alumnus][:user_attributes].delete(:uin) if params[:alumnus][:user_attributes]
+    params[:alumnus][:user_attributes].delete(:id) if params[:alumnus][:user_attributes]
+    params.require(:alumnus).permit(
+      :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
+      experience_ids: [],
+      profession_ids: [],
+      professions_attributes: [:title],
+      user_attributes: [:first_name, :last_name, :middle_initial, :status] # Exclude :uin
+    )
+  else
+    # For create, allow `uin`
+    Rails.logger.info "NEW"
+    params.require(:alumnus).permit(
+      :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
+      experience_ids: [],
+      profession_ids: [],
+      professions_attributes: [:title],
+      user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status] # Allow :uin during creation
+    )
+  end
     end
 end
