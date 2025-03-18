@@ -7,7 +7,7 @@ RSpec.describe "AlumnusExperiences", type: :request do
   end
 
   let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: "123456789", email: "test@example.com") }
-  let(:alumnus) { Alumnus.create!(uin: "123456789", email: "test@example.com") }
+  let(:alumnus) { Alumnus.create!(uin: "123456789", email: "test@example.com", user: user) }
   let(:experience) { Experience.create!(title: "Best Developer", experience_type: "Award") }
   let(:alumnus_experience) { 
     AlumnusExperience.create!(
