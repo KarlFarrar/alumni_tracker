@@ -2,6 +2,7 @@
 
 class Gmails::RegistrationsController < Devise::RegistrationsController
    # Override the `new` action to display the registration form
+  layout 'gmails'
   def new
     @gmail = Gmail.new
     Rails.logger.info "I got into the new action"

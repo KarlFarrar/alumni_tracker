@@ -28,6 +28,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_14_210700) do
     t.index ["uin"], name: "index_alumni_on_uin", unique: true
   end
 
+  create_table "alumnis", force: :cascade do |t|
+    t.integer "uin"
+    t.integer "cohort_year"
+    t.string "team_affiliation"
+    t.string "profession_title"
+    t.boolean "availability"
+    t.string "email"
+    t.string "phone_number"
+    t.string "biography"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "alumnus_experiences", force: :cascade do |t|
     t.bigint "alumnus_id", null: false
     t.bigint "experience_id", null: false

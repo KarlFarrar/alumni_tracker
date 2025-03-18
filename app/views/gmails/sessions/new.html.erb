@@ -1,9 +1,10 @@
-<h1>Sling Health TAMU</h1>
-<h2>Alumni Tracker</h2>
+<div class = "sessions-new">
+	<%= image_tag("logo4.png", alt: "Sling health Logo", class: "session-logo4") %>
+	<h1 class = "sessions-title1">Sling Health TAMU</h1>
+	<h2 class = "sessions-title2">Alumni Tracker</h2>
 
-<%= button_to gmail_google_oauth2_omniauth_authorize_path, class: "btn btn-danger", method: :post, data: {turbo: "false"} do %>
+	<%= button_to gmail_google_oauth2_omniauth_authorize_path, class: "cbtn", method: :post, data: {turbo: "false"} do %>
 
-<i class="fab fa-google mobile-text"></i><span class = "mobile-
-font">&nbsp;Sign In</span>
-
-<% end %>
+	<i class="fab fa-google mobile-text"></i><span class = "mobile-font">&nbsp;Sign In</span>
+	<% end %>
+</div>

@@ -1,0 +1,52 @@
+<div class="logs-index">
+  <header class="page-header">
+    <h1>System Logs</h1>
+    <div class="header-actions">
+      <%= link_to "Back to Dashboard", admin_dashboard_path, class: "btn btn-secondary" %>
+    </div>
+  </header>
+
+  <div class="filter-controls mb-4">
+    <div class="input-group">
+      <input type="text" id="logsSearch" class="form-control" placeholder="Search logs...">
+      <button class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Date/Time</th>
+          <th>User</th>
+          <th>Action</th>
+          <th>Record Type</th>
+          <th>Record ID</th>
+          <th>Details</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @logs.each do |log| %>
+          <tr>
+            <td><%= log.created_at.strftime("%Y-%m-%d %H:%M:%S") %></td>
+            <td><%= log.user %></td>
+            <td><%= log.action %></td>
+            <td><%= log.record_type %></td>
+            <td><%= log.record_id %></td>
+            <td><%= log.change_details %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <% if @logs.empty? %>
+    <div class="alert alert-info">
+      No log records found in the database.
+    </div>
+  <% end %>
+
+  <div class="pagination-controls">
+    <!-- Add pagination here if needed -->
+  </div>
+</div>
