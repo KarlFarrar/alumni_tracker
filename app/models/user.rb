@@ -9,4 +9,9 @@ class User < ApplicationRecord
   validates :first_name, presence: true
   validates :last_name, presence: true
   validates :middle_initial, length: { maximum: 1 }, allow_blank: true
+
+  def uin_data
+    uin.presence
+  end
+  
 end

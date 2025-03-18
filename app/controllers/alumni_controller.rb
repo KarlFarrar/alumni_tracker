@@ -5,6 +5,7 @@ class AlumniController < ApplicationController
   # GET /alumni or /alumni.json
   def index
     @alumni = Alumnus.all
+    @current = Alumnus.find_by(uin: current_gmail&.user&.uin_data)
   end
 
   # GET /alumni/1 or /alumni/1.json
@@ -77,6 +78,7 @@ class AlumniController < ApplicationController
 
   # GET /alumni/1/edit
   def edit
+    
   end
 
   # POST /alumni or /alumni.json

@@ -2,7 +2,7 @@
 
 <h1>Editing alumnus</h1>
 
-<%= render "form", alumnus: @alumnus %>
+<%= render "form", alumnus: @alumnus if @alumnus.present? %>
 
 <br>
 
