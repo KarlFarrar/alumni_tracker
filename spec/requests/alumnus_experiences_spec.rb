@@ -17,7 +17,7 @@ RSpec.describe "AlumnusExperiences", type: :request do
     ) 
   }
 
-  describe "GET /edit" do
+  describe "GET /alumnus_experiences/:id/edit" do
     it "returns http success" do
       get edit_alumnus_experience_path(alumnus_experience)
       expect(response).to have_http_status(:success)
