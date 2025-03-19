@@ -16,7 +16,14 @@ class User < ApplicationRecord
     
     # Validations
     validates :first_name, :last_name, presence: true
-    validates :uin, presence: true, uniqueness: true, numericality: { only_integer: true }
+    validates :uin, presence: true, numericality: { only_integer: true }, length: { is: 9 },
+                uniqueness: { case_sensitive: false, if: :uin_changed? }
+
+def uin_changed?
+  # Returns true if the uin field was modified
+  self.uin_changed? && self.new_record?
+end
+    attr_readonly :uin
     
     # Default values are defined in the schema
     # default values: middle_initial default: "", status default: "", isAdmin default: false

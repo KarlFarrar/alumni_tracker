@@ -121,7 +121,7 @@ class AlumniController < ApplicationController
         format.json { render :show, status: :ok, location: @alumnus }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @alumnus.errors, status: :unprocessable_entity }
+        format.json { render json: @alumnus.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -188,14 +188,15 @@ class AlumniController < ApplicationController
       if params[:id].present?
     # For update, do not allow `uin` to be modified
     Rails.logger.info "UPDATE"
-    params[:alumnus][:user_attributes].delete(:uin) if params[:alumnus][:user_attributes]
     params[:alumnus][:user_attributes].delete(:id) if params[:alumnus][:user_attributes]
+    params[:alumnus][:user_attributes][:uin] = @alumnus.user.uin if params[:alumnus][:user_attributes]
+
     params.require(:alumnus).permit(
       :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
       experience_ids: [],
       profession_ids: [],
       professions_attributes: [:title],
-      user_attributes: [:first_name, :last_name, :middle_initial, :status] # Exclude :uin
+      user_attributes: [:first_name, :last_name, :middle_initial, :status, :uin] # Exclude :uin
     )
   else
     # For create, allow `uin`

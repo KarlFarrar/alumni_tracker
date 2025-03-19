@@ -20,10 +20,10 @@ class Alumnus < ApplicationRecord
   
   
   # Ensure UIN is exactly 9 digits
-  validates :uin, format: {
-    with: /\A\d{9}\z/,
-    message: "must be exactly 9 digits"
-  }
+  #validates :uin, format: {
+  #  with: /\A\d{9}\z/,
+  #  message: "must be exactly 9 digits"
+  #}
 
   # Ensure the user provides at least one: phone number OR email
   validate :phone_or_email_present
