@@ -27,7 +27,7 @@ class AlumniController < ApplicationController
 
       respond_to do |format|
         if alumnus_experience.persisted?
-          format.html { redirect_to alumnus_path(alumnus), notice: "Experience added successfully!" }
+          format.html { redirect_to edit_alumnus_path(@alumnus), notice: "Experience claimed successfully!" }
           format.turbo_stream { render turbo_stream: turbo_stream.append("claimed_experiences", partial: "alumnus_experiences/experience", locals: { alumnus_experience: alumnus_experience }) }
         else
           format.html { redirect_to alumnus_path(alumnus), alert: "Failed to add experience." }
@@ -50,7 +50,7 @@ class AlumniController < ApplicationController
 
       respond_to do |format|
         if alumnus_profession.persisted?
-          format.html { redirect_to @alumnus, notice: "Profession added successfully!" }
+          format.html { redirect_to edit_alumnus_path(@alumnus), notice: "Profession claimed successfully!" }
           format.turbo_stream do
             render turbo_stream: turbo_stream.append(
               "claimed_professions",
@@ -74,6 +74,7 @@ class AlumniController < ApplicationController
 
   # GET /alumni/1/edit
   def edit
+    @alumnus = Alumnus.find(params[:id])
   end
 
   # POST /alumni or /alumni.json
