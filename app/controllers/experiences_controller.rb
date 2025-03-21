@@ -20,7 +20,7 @@ class ExperiencesController < ApplicationController
       alumnus.experiences << @experience if alumnus 
       respond_to do |format|
         if alumnus
-          format.html { redirect_to alumnus_path(alumnus), notice: "Experience added!" }
+          format.html { redirect_to edit_alumnus_path(alumnus), notice: "Experience added!" }
         else
           format.html { redirect_to experiences_path, notice: "Experience added!" }
         end

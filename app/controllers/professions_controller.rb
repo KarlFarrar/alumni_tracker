@@ -29,7 +29,7 @@ class ProfessionsController < ApplicationController
           profession: @profession,
           field: params[:profession][:field] || "Not Set"
         )
-        redirect_to alumnus_path(alumnus), notice: "Profession added!"
+        redirect_to edit_alumnus_path(alumnus), notice: "Profession added!"
         return 
       else
         redirect_to professions_path, notice: "Profession created successfully!"
@@ -38,7 +38,7 @@ class ProfessionsController < ApplicationController
 
       respond_to do |format|
         if alumnus
-          format.html { redirect_to alumnus_path(alumnus), notice: "Profession added!" }
+          format.html { redirect_to edit_alumnus_path(alumnus), notice: "Profession added!" }
         else
           format.html { redirect_to professions_path, notice: "Profession added!" }
         end

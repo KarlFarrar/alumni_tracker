@@ -1,8 +1,8 @@
-<h1>My Profile</h1>
-<p><strong>UIN:</strong> <%= @alumnus.uin %></p>
-<p><strong>Email:</strong> <%= @alumnus.email %></p>
+<% content_for :title, "Editing alumnus" %>
 
-<p><strong>Cohort Year:</strong> <%= @alumnus.cohort_year %></p>
+<h1>Editing alumnus</h1>
+
+<%= render "form", alumnus: @alumnus %>
 
 <h2>Professions</h2>
 
@@ -162,6 +162,13 @@
       <%= f.submit "Claim Experience", class: "btn btn-success" %>
     <% end %>
   </div>
+</div>
+
+<br>
+
+<div>
+  <%= link_to "Show this alumnus", @alumnus %> |
+  <%= link_to "Back to alumni", alumni_path %>
 </div>
 
 <style>
