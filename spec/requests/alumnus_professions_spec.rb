@@ -15,7 +15,7 @@ RSpec.describe "AlumnusProfessions", type: :request do
         delete alumnus_profession_path(alumnus_profession)
       }.to change(AlumnusProfession, :count).by(-1)
 
-      expect(response).to redirect_to(alumnus_path(alumnus))
+      expect(response).to redirect_to(edit_alumnus_path(alumnus))
     end
   end
 end
