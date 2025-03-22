@@ -6,7 +6,7 @@ RSpec.describe "alumni/new", type: :view do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
   end
   before(:each) do
-    assign(:user, [User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: "123456789")])
+    assign(:user, [User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456789)])
     assign(:alumnus, Alumnus.new(
       uin: 123456789,
       cohort_year: 2021,
@@ -24,7 +24,7 @@ RSpec.describe "alumni/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", alumni_path, "post" do
-      assert_select "input[name=?]", "user[uin]"
+      assert_select "input[name=?]", "alumnus[uin]"
       assert_select "select[name=?]", "alumnus[cohort_year]"
       assert_select "input[name=?]", "alumnus[team_affiliation]"
       assert_select "input[name=?]", "alumnus[profession_title]"
