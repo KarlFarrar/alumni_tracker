@@ -6,6 +6,7 @@ RSpec.describe "alumni/new", type: :view do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
   end
   before(:each) do
+    let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: "123456789") }
     assign(:alumnus, Alumnus.new(
       uin: 123456789,
       cohort_year: 2021,
@@ -14,7 +15,8 @@ RSpec.describe "alumni/new", type: :view do
       availability: false,
       email: "Email",
       phone_number: "(682)-472-8670",
-      biography: "Biography"
+      biography: "Biography",
+      user: user
     ))
   end
 
