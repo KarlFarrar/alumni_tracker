@@ -188,15 +188,16 @@ class AlumniController < ApplicationController
       if params[:id].present?
     # For update, do not allow `uin` to be modified
     Rails.logger.info "UPDATE"
-    params[:alumnus][:user_attributes].delete(:id) if params[:alumnus][:user_attributes]
-    params[:alumnus][:user_attributes][:uin] = @alumnus.user.uin if params[:alumnus][:user_attributes]
+    #params[:alumnus][:user_attributes].delete(:id) if params[:alumnus][:user_attributes]
+    
+    #params[:alumnus][:user_attributes][:uin] = @alumnus.user.uin if params[:alumnus][:user_attributes]
 
     params.require(:alumnus).permit(
       :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
       experience_ids: [],
       profession_ids: [],
       professions_attributes: [:title],
-      user_attributes: [:first_name, :last_name, :middle_initial, :status, :uin] # Exclude :uin
+      user_attributes: [:id, :first_name, :last_name, :middle_initial, :status] # Exclude :uin
     )
   else
     # For create, allow `uin`

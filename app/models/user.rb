@@ -17,7 +17,7 @@ class User < ApplicationRecord
     # Validations
     validates :first_name, :last_name, presence: true
     validates :uin, presence: true, numericality: { only_integer: true }, length: { is: 9 },
-                uniqueness: { case_sensitive: false, if: :uin_changed? }
+                uniqueness: true
 
 def uin_changed?
   # Returns true if the uin field was modified
