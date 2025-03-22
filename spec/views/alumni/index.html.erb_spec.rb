@@ -5,8 +5,10 @@ RSpec.describe "alumni/index", type: :view do
     # This will skip the `authenticate_gmails!` before action
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
   end
+
+  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456789) }
+
   before(:each) do
-    assign(:user, [User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: "123456789")])
     assign(:alumni, [
       Alumnus.create!(
         uin: 123456789,
