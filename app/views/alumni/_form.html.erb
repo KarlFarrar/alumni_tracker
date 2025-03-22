@@ -27,7 +27,11 @@
           maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
     <% end %>
   </div>
-
+  
+  <div class="field">
+    <%= form.label :uin %>
+    <%= form.text_field :uin %>
+  </div>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
