@@ -26,7 +26,7 @@ RSpec.describe "alumni/new", type: :view do
     render
 
     assert_select "form[action=?][method=?]", alumni_path, "post" do
-      assert_select "input[name=?]", "user[uin]"
+      assert_select "input[name=?]", "alumnus[user][uin]"
       assert_select "select[name=?]", "alumnus[cohort_year]"
       assert_select "input[name=?]", "alumnus[team_affiliation]"
       assert_select "input[name=?]", "alumnus[profession_title]"
