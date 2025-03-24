@@ -6,7 +6,7 @@ class AlumnusExperiencesController < ApplicationController
 
   def update
     if @alumnus_experience.update(alumnus_experience_params)
-      redirect_to alumnus_path(@alumnus_experience.alumnus), notice: "Experience details updated!"
+      redirect_to edit_alumnus_path(@alumnus_experience.alumnus), notice: "Experience details updated!"
     else
       render :edit, status: :unprocessable_entity
     end

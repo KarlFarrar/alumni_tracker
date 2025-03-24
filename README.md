@@ -1,7 +1,7 @@
 # Alumni Tracker
 
 ## Introduction
-This web application is a Ruby on Rails CRUD application that creates, edits, shows, and removes Sligh Health Alumni data.  
+This web application is a Ruby on Rails CRUD application that creates, edits, shows, and removes Sling Health Alumni data.  
 Three primary users consist of:
 - **Admins**
 - **Current members**
@@ -38,19 +38,21 @@ git clone https://github.com/KarlFarrar/alumni_tracker.git
 ```
 
 ## Tests
-An RSpec test suite is available and can be ran using:
-rspec spec/
-You can run all the test cases by running. This will run both the unit and integration tests. rspec .
-Execute Code
-Run the following code in Powershell if using windows or the terminal using Linux/Mac
+- An RSpec test suite is available and can be ran using:
+- rspec spec/
+- You can run all the test cases by running. This will run both the unit and integration tests. rspec .
+- Execute Code
+- Run the following code in Powershell if using windows or the terminal using Linux/Mac
+```bash
 cd alumni_tracker
 docker run --name postgres --network rails-net -e POSTGRES_PASSWORD=password -e POSTGRES_USER=postgres -d postgres:latest
 docker run -it --name rails-app --network rails-net -p 3000:3000 -v ${PWD}:/app rails-dev bash
-**NOTE: ${PWD} should be changed to $(pwd) for Mac users**
-Install the app
+# **NOTE:** ${PWD} should be changed to $(pwd) for Mac user
+# Install the app
 bundle install && rails webpacker:install && rails db:create && db:migrate
 Run the app rails server --binding:0.0.0.0
-The application can be seen using a browser and navigating to http://localhost:3000/
+```
+- The application can be seen using a browser and navigating to http://localhost:3000/
 
 
 

@@ -9,7 +9,7 @@ class AlumnusProfessionsController < ApplicationController
     # PATCH/PUT /alumnus_professions/:id
     def update
       if @alumnus_profession.update(alumnus_profession_params)
-        redirect_to alumnus_path(@alumnus_profession.alumnus), notice: "Profession details updated!"
+        redirect_to edit_alumnus_path(@alumnus_profession.alumnus), notice: "Profession details updated!"
       else
         render :edit, status: :unprocessable_entity
       end
