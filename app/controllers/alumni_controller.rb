@@ -1,10 +1,11 @@
 class AlumniController < ApplicationController
   before_action :set_alumnus, only: [:show, :edit, :update, :destroy, :claim_experiences, :claim_professions, :remove_experience, :remove_profession]
   skip_before_action :authenticate_gmail!, only: [:new]
-
+  
   # GET /alumni or /alumni.json
   def index
     @alumni = Alumnus.all
+    @current = Alumnus.find_by(uin: current_gmail&.user&.uin_data)
   end
 
   # GET /alumni/1 or /alumni/1.json
@@ -70,6 +71,9 @@ class AlumniController < ApplicationController
   # GET /alumni/new
   def new
     @alumnus = Alumnus.new
+    @alumnus.build_user
+    @alumnus.user.build_gmail
+    Rails.logger.info "GOT INTO NEW ACTION"
   end
 
   # GET /alumni/1/edit
@@ -79,17 +83,32 @@ class AlumniController < ApplicationController
 
   # POST /alumni or /alumni.json
   def create
+    Rails.logger.info "Creating a new ALUMNI"
+    Rails.logger.debug "Params: #{params.inspect}"
+
     @alumnus = Alumnus.new(alumnus_params)
 
+    Rails.logger.info "UID: #{session[:uid]}"
+    Rails.logger.info "Email: #{session[:email]}"
+    Rails.logger.info "avatar_url: #{session[:avatar_url]}"
+
+    @alumnus.user.status = "alumni"
+  
+  if @alumnus.save
+    # Now, associate Gmail after user is definitely saved
+    @alumnus.user.create_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
+
     respond_to do |format|
-      if @alumnus.save
-        format.html { redirect_to @alumnus, notice: "Alumnus was successfully created." }
-        format.json { render :show, status: :created, location: @alumnus }
-      else
-        format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @alumnus.errors, status: :unprocessable_entity }
-      end
+      format.html { redirect_to @alumnus, notice: "Alumnus was successfully created." }
+      format.json { render :show, status: :created, location: @alumnus }
     end
+  else
+    Rails.logger.info "Errors: #{@alumnus.errors.full_messages}"
+    respond_to do |format|
+      format.html { render :new, status: :unprocessable_entity }
+      format.json { render json: @alumnus.errors, status: :unprocessable_entity }
+    end
+  end
   end
 
   # PATCH/PUT /alumni/1 or /alumni/1.json
@@ -151,6 +170,11 @@ class AlumniController < ApplicationController
     end
   end
 
+  def complete_profile
+    @alumnus = Alumnus.find(params[:id])
+    sign_in_and_redirect @alumnus.user.gmail, event: :authentication
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_alumnus
@@ -160,10 +184,11 @@ class AlumniController < ApplicationController
     # Only allow a list of trusted parameters through.
     def alumnus_params
       params.require(:alumnus).permit(
-        :uin, :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography,
+        :uin, :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
         experience_ids: [], # Allow selecting multiple experiences
         profession_ids: [], # Allow selecting multiple professions
-        professions_attributes: [:title]
+        professions_attributes: [:title],
+        user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status],
       )
     end
 end
