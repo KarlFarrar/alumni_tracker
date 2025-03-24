@@ -28,7 +28,7 @@ RSpec.describe "Gmails::OmniauthCallbacks", type: :system do
       full_name: 'Test user',
       uid: '123456',
       avatar_url: 'https://example.com/avatar.jpg',
-      user: user
+      user: @user
     )
     end
 
