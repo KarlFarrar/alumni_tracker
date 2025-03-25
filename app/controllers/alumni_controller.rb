@@ -196,23 +196,23 @@ class AlumniController < ApplicationController
     # Only allow a list of trusted parameters through.
     def alumnus_params
       if params[:id].present?
-    Rails.logger.info "UPDATE"
-    params.require(:alumnus).permit(
-      :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
-      experience_ids: [],
-      profession_ids: [],
-      professions_attributes: [:title],
-      user_attributes: [:id, :first_name, :last_name, :middle_initial, :status] # Exclude :uin
-    )
-  else
-    Rails.logger.info "NEW"
-    params.require(:alumnus).permit(
-      :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
-      experience_ids: [],
-      profession_ids: [],
-      professions_attributes: [:title],
-      user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status] # Allow :uin during creation
-    )
-  end
+        Rails.logger.info "UPDATE"
+        params.require(:alumnus).permit(
+          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
+          experience_ids: [],
+          profession_ids: [],
+          professions_attributes: [:title],
+          user_attributes: [:id, :first_name, :last_name, :middle_initial, :status] # Exclude :uin
+        )
+      else
+        Rails.logger.info "NEW"
+        params.require(:alumnus).permit(
+          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
+          experience_ids: [],
+          profession_ids: [],
+          professions_attributes: [:title],
+          user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status] # Allow :uin during creation
+        )
+      end
     end
 end

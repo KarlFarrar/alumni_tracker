@@ -28,6 +28,11 @@ RSpec.describe "/alumni", type: :request do
     skip("Add a hash of attributes invalid for your model")
   }
 
+  assert_select "form" do
+    assert_select "input[name=?]", "alumnus[user_attributes][uin]"
+  end
+
+
   before do
     # This will skip the `authenticate_gmails!` before action
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
