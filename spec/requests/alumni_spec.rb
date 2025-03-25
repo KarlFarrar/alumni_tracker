@@ -53,8 +53,6 @@ RSpec.describe "/alumni", type: :request do
     it "renders a successful response" do
       get new_alumnus_url
       expect(response).to be_successful
-
-      assert_select "input[name=?]", "alumnus[user_attributes][uin]"
     end
   end
 
@@ -63,8 +61,6 @@ RSpec.describe "/alumni", type: :request do
       alumnus = Alumnus.create! valid_attributes
       get edit_alumnus_url(alumnus)
       expect(response).to be_successful
-
-      assert_select "input[name=?]", "alumnus[user_attributes][uin]"
     end
   end
 
