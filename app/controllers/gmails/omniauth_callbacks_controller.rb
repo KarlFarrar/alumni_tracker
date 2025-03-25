@@ -27,6 +27,8 @@ class Gmails::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def after_sign_in_path_for(resource_or_scope)
+    flash[:notice] = "Welcome back, #{resource_or_scope.user.first_name}!" unless session[:welcome_message_shown]
+    session[:welcome_message_shown] = true
     stored_location_for(resource_or_scope) || root_path
   end
 
@@ -43,5 +45,9 @@ class Gmails::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def auth
     @auth ||= request.env['omniauth.auth']
+  end
+
+  def set_welcome_back_message
+    session[:welcome_message_shown] ||= false
   end
 end

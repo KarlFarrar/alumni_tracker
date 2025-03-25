@@ -16,7 +16,9 @@ class User < ApplicationRecord
     
     # Validations
     validates :first_name, :last_name, presence: true
-    validates :uin, presence: true, uniqueness: true, numericality: { only_integer: true }
+    validates :uin, presence: true, numericality: { only_integer: true }, length: { is: 9 },
+                uniqueness: true
+    attr_readonly :uin
     
     # Default values are defined in the schema
     # default values: middle_initial default: "", status default: "", isAdmin default: false

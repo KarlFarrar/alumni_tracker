@@ -1,7 +1,7 @@
 class AlumniController < ApplicationController
-  before_action :set_alumnus, only: [:show, :edit, :update, :destroy, :claim_experiences, :claim_professions, :remove_experience, :remove_profession]
-  skip_before_action :authenticate_gmail!, only: [:new]
-  
+  before_action :set_alumnus, only: [:show, :edit, :update, :claim_experiences, :claim_professions, :remove_experience, :remove_profession]
+  skip_before_action :authenticate_gmail!, only: [:new, :create]
+  before_action :authorize_alumnus!, only: [:show, :edit, :update]
   # GET /alumni or /alumni.json
   def index
     @alumni = Alumnus.all
@@ -97,6 +97,7 @@ class AlumniController < ApplicationController
   if @alumnus.save
     # Now, associate Gmail after user is definitely saved
     @alumnus.user.create_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
+    sign_in(@alumnus.user.gmail)
 
     respond_to do |format|
       format.html { redirect_to @alumnus, notice: "Alumnus was successfully created." }
@@ -113,13 +114,15 @@ class AlumniController < ApplicationController
 
   # PATCH/PUT /alumni/1 or /alumni/1.json
   def update
+    @alumnus = Alumnus.find(params[:id])
+    logger.debug "Params: #{params.inspect}"
     respond_to do |format|
       if @alumnus.update(alumnus_params)
         format.html { redirect_to @alumnus, notice: "Alumnus was successfully updated." }
         format.json { render :show, status: :ok, location: @alumnus }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @alumnus.errors, status: :unprocessable_entity }
+        format.json { render json: @alumnus.errors.full_messages, status: :unprocessable_entity }
       end
     end
   end
@@ -175,6 +178,15 @@ class AlumniController < ApplicationController
     sign_in_and_redirect @alumnus.user.gmail, event: :authentication
   end
 
+  def authorize_alumnus!
+    # Ensure the current user matches the alumnus's user
+    unless current_gmail && @alumnus.user.gmail == current_gmail
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: "You are not authroized to view this page" }
+      end
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_alumnus
@@ -183,12 +195,24 @@ class AlumniController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def alumnus_params
-      params.require(:alumnus).permit(
-        :uin, :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
-        experience_ids: [], # Allow selecting multiple experiences
-        profession_ids: [], # Allow selecting multiple professions
-        professions_attributes: [:title],
-        user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status],
-      )
+      if params[:id].present?
+        Rails.logger.info "UPDATE"
+        params.require(:alumnus).permit(
+          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
+          experience_ids: [],
+          profession_ids: [],
+          professions_attributes: [:title],
+          user_attributes: [:id, :first_name, :last_name, :middle_initial, :status] # Exclude :uin
+        )
+      else
+        Rails.logger.info "NEW"
+        params.require(:alumnus).permit(
+          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
+          experience_ids: [],
+          profession_ids: [],
+          professions_attributes: [:title],
+          user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status] # Allow :uin during creation
+        )
+      end
     end
 end
