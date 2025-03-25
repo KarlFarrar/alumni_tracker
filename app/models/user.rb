@@ -18,11 +18,6 @@ class User < ApplicationRecord
     validates :first_name, :last_name, presence: true
     validates :uin, presence: true, numericality: { only_integer: true }, length: { is: 9 },
                 uniqueness: true
-
-def uin_changed?
-  # Returns true if the uin field was modified
-  self.uin_changed? && self.new_record?
-end
     attr_readonly :uin
     
     # Default values are defined in the schema

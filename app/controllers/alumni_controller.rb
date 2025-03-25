@@ -1,5 +1,5 @@
 class AlumniController < ApplicationController
-  before_action :set_alumnus, only: [:show, :claim_experiences, :claim_professions, :remove_experience, :remove_profession]
+  before_action :set_alumnus, only: [:show, :edit, :update, :claim_experiences, :claim_professions, :remove_experience, :remove_profession]
   skip_before_action :authenticate_gmail!, only: [:new, :create]
   before_action :authorize_alumnus!, only: [:show, :edit, :update]
 
