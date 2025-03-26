@@ -1,8 +1,11 @@
 document.addEventListener("turbo:load", function() {
+  const dropdownButton = document.getElementById("experienceDropdownButton");
+  const dropdownMenu = document.getElementById("experienceDropdown");
   const experienceList = document.getElementById("experience_list");
   const claimedExperiences = document.getElementById("claimed_experiences");
   const experienceIdsContainer = document.getElementById("experience_ids_container");
   const experienceForm = document.getElementById("experience_form");
+  const experienceSelect = document.getElementById("experience_select")
   const experienceModal = document.getElementById("experience_modal");
   const claimModal = document.getElementById("claim_experience_modal");
   const experienceIdInput = document.getElementById("modal_experience_id");
@@ -69,6 +72,36 @@ document.addEventListener("turbo:load", function() {
       experienceForm.submit();
     }
   }
+
+  // Toggle dropdown menu
+  dropdownButton.addEventListener("click", function () {
+    dropdownMenu.classList.toggle("show");
+  });
+
+  // Handle profession selection
+  dropdownMenu.addEventListener("click", function (event) {
+    const selectedItem = event.target.closest(".dropdown-item");
+    if (!selectedItem) return;
+
+    const experienceId = selectedItem.getAttribute("data-value");
+    const experienceTitle = selectedItem.textContent;
+
+    if (professionId === "other") {
+      experienceModal.style.display = "block"; // Open modal for new profession
+    } else {
+      experienceIdInput.value = experienceId; 
+      claimModal.style.display = "block";
+    }
+
+    dropdownMenu.classList.remove("show");
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", function (event) {
+    if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+      dropdownMenu.classList.remove("show");
+    }
+  });
 
   // Logic Behind Pop-Up. 
   if (experienceList && experienceModal) {
