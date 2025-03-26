@@ -170,6 +170,30 @@
 
 <p><%= link_to "Back to Alumni List", alumni_path %></p>
 
+
+<div id="experience_modal" class="modal">
+   <div class="modal-content">
+     <span class="close">&times;</span>
+     <h2>Add a New Experience</h2>
+ 
+     <%= form_with model: Experience.new, url: experiences_path, method: :post, id: "new_experience_form", remote: true do |f| %>
+       <div>
+         <%= f.label :title, "Experience Title" %>
+         <%= f.text_field :title, required: true %>
+       </div>
+     
+       <div>
+         <%= f.label :experience_type, "Experience Type" %>
+         <%= f.text_field :experience_type, required: true %>
+       </div>
+       
+       <input type="hidden" name="experience[alumnus_id]" value="<%= @alumnus.id %>">
+     
+       <%= f.submit "Save Experience" %>
+     <% end %>
+   </div>
+</div>
+
 <div id="claim_experience_modal" class="modal">
   <div class="modal-content">
     <span class="close">&times;</span>
@@ -285,7 +309,7 @@
     box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
     margin-top: 5px;
     padding: 0;
-    list-style: none;
+    list-style-type: none;
     display: none;
     z-index: 10;
   }
