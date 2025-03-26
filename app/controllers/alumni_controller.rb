@@ -17,13 +17,16 @@ class AlumniController < ApplicationController
   def claim_experiences
     alumnus = Alumnus.find(params[:id])
     experience = Experience.find_by(id: params[:experience_id])
+    
+
 
     if experience
       alumnus_experience = AlumnusExperience.create(
         alumnus: alumnus,
         experience: experience,
         date_received: params[:date_received],
-        custom_description: params[:custom_description]
+        custom_description: params[:custom_description],
+        placement: (experience.experience_type.downcase == "competition" ? params[:placement] : nil)
       )
 
       respond_to do |format|

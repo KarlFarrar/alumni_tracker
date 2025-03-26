@@ -6,38 +6,42 @@ document.addEventListener("turbo:load", function() {
   const experienceModal = document.getElementById("experience_modal");
   const claimModal = document.getElementById("claim_experience_modal");
   const experienceIdInput = document.getElementById("modal_experience_id");
+  const experienceTitleInput = document.getElementById("modal_experience_title"); 
+  const placementField = document.getElementById("placement_field"); 
   const closeButtons = document.querySelectorAll(".close");
 
-  // Loop through each close button and add event listener
+  // Close modal logic
   closeButtons.forEach(button => {
-    button.addEventListener("click", function() {
-      const modal = this.closest(".modal"); // Find the closest modal
-      if (modal) {
-        modal.style.display = "none"; 
-      }
+    button.addEventListener("click", function () {
+      const modal = this.closest(".modal");
+      if (modal) modal.style.display = "none";
     });
   });
 
-  if (experienceList && claimedExperiences) {
+  // Handle double-click to claim an experience
+  if (experienceList && claimModal) {
     experienceList.addEventListener("dblclick", function(e) {
       const selectedOption = e.target;
+      if (!selectedOption.value) return; // Ignore empty selections
+
       const experienceId = selectedOption.value;
       const experienceTitle = selectedOption.textContent;
 
-      if (!document.querySelector(`li[data-id='${experienceId}']`)) {
-        const listItem = document.createElement("li");
-        listItem.setAttribute("data-id", experienceId);
-        listItem.innerHTML = `
-          <strong>${experienceTitle}</strong> <br>
-          <a href="#" class="remove_experience" data-id="${experienceId}">Remove</a>
-        `;
+      // Set hidden input values
+      experienceIdInput.value = experienceId;
+      experienceTitleInput.value = experienceTitle;
 
-        claimedExperiences.appendChild(listItem);
-        addHiddenInput(experienceId);
-        submitForm();
+      // Check if selected experience is a "Competition"
+      if (experienceTitle.toLowerCase().includes("competition")) {
+        placementField.style.display = "block"; // Show placement field
+      } else {
+        placementField.style.display = "none"; // Hide placement field
       }
-    });
 
+      claimModal.style.display = "block"; // Open modal
+      e.stopPropagation();
+    });
+    
     claimedExperiences.addEventListener("click", function(e) {
       if (e.target.classList.contains("remove_experience")) {
         e.preventDefault();

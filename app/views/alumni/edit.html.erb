@@ -82,18 +82,26 @@
 <ul id="claimed_experiences">
   <% @alumnus.alumnus_experiences.each do |alumnus_experience| %>
     <li id="experience_<%= alumnus_experience.experience.id %>">
-      <strong><%= alumnus_experience.experience.title %> (<%= alumnus_experience.experience.experience_type %>)</strong>  
+      <strong>
+        <%= alumnus_experience.experience.title %> 
+        (<%= alumnus_experience.experience.experience_type %>)
+      </strong>  
       <br>
       <small>Date Received: <%= alumnus_experience.date_received || "Not Set" %></small>
       <br>
+
+      <% if alumnus_experience.experience.experience_type.downcase == "competition" %>
+        <small><strong>Placement:</strong> <%= alumnus_experience.placement.presence || "Not Set" %></small>
+        <br>
+      <% end %>
+
       <p><%= alumnus_experience.custom_description.presence || "No description provided." %></p>
       <br>
 
       <%= link_to "Edit", edit_alumnus_experience_path(alumnus_experience), class: "btn btn-primary" %>
       
       <%= link_to "Remove", remove_experience_alumnus_path(@alumnus, experience_id: alumnus_experience.experience.id),
-    method: :delete, data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger" %>
-
+        method: :delete, data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger" %>
       <br> 
     </li>
   <% end %>
@@ -148,12 +156,18 @@
     
     <%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post, id: "claim_experience_form", data: { turbo: "false" } do |f| %>
       <input type="hidden" name="experience_id" id="modal_experience_id">
+      <input type="hidden" id="modal_experience_title">
 
       <div>
         <%= f.label :date_received, "Date Received" %>
         <%= f.date_field :date_received, required: true %>
       </div>
 
+      <div id="placement_field" style="display: none;">
+        <%= f.label :placement, "Placement (Only required for Competitions)" %>
+        <%= f.text_field :placement, placeholder: "Enter placement (e.g., 1st Place, Finalist)" %>
+      </div>
+      
       <div>
         <%= f.label :custom_description, "Custom Description" %>
         <%= f.text_area :custom_description, placeholder: "Describe your experience with this award.", rows: 5 %>
