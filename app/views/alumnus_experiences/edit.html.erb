@@ -6,6 +6,16 @@
     <%= f.date_field :date_received, required: true %>
   </div>
 
+  <div style="display: none;">
+    <%= f.label :experience_type, "Experience Type" %>
+    <%= f.text_field :experience_type, id: "experience_type_input", value: @alumnus_experience.experience.experience_type, disabled: true %>
+  </div>
+
+  <div id="placement_field" style="display: none;">
+    <%= f.label :placement, "Placement (Only required for Competitions)" %>
+    <%= f.text_field :placement, placeholder: "Enter placement (e.g., 1st Place, Finalist)" %>
+  </div>
+
   <div>
     <%= f.label :custom_description, "Custom Description" %>
     <%= f.text_area :custom_description, placeholder: "Describe how you received this award, certificate, etc.", rows: 5 %>
@@ -15,3 +25,24 @@
 <% end %>
 
 <p><%= link_to "Back", alumnus_path(@alumnus_experience.alumnus) %></p>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    const placementField = document.getElementById("placement_field");
+    const experienceTypeInput = document.getElementById("experience_type_input");
+
+    function togglePlacementField() {
+      if (experienceTypeInput.value.toLowerCase().includes("competition")) {
+        placementField.style.display = "block";
+      } else {
+        placementField.style.display = "none";
+      }
+    }
+
+    // Run on page load
+    togglePlacementField();
+
+    // Also check every 500ms in case any dynamic change occurs
+    setInterval(togglePlacementField, 500);
+  });
+</script>
