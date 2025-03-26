@@ -1,6 +1,6 @@
 <h2>Edit Experience Details</h2>
 
-<%= form_with model: @alumnus_experience, url: alumnus_experience_path(@alumnus_experience), method: :patch do |f| %>
+<%= form_with model: @alumnus_experience, url: alumnus_experience_path(@alumnus_experience), method: :patch, html: { id: "experience_form" } do |f| %>
   <div>
     <%= f.label :date_received, "Date Received" %>
     <%= f.date_field :date_received, required: true %>
@@ -12,8 +12,9 @@
   </div>
 
   <div id="placement_field" style="display: none;">
-    <%= f.label :placement, "Placement (Only required for Competitions)" %>
-    <%= f.text_field :placement, placeholder: "Enter placement (e.g., 1st Place, Finalist)" %>
+    <%= f.label :placement, "Placement " %>
+    <%= f.text_field :placement, id: "placement_input", placeholder: "Enter placement (e.g., 1st Place, Finalist)" %>
+    <p id="placement_warning" style="color: red; display: none;">Please enter a placement for this competition experience.</p>
   </div>
 
   <div>
@@ -28,14 +29,18 @@
 
 <script>
   document.addEventListener("turbo:load", function() {
+    const form = document.getElementById("experience_form");
     const placementField = document.getElementById("placement_field");
     const experienceTypeInput = document.getElementById("experience_type_input");
+    const placementInput = document.getElementById("placement_input");
+    const placementWarning = document.getElementById("placement_warning");
 
     function togglePlacementField() {
       if (experienceTypeInput.value.toLowerCase().includes("competition")) {
         placementField.style.display = "block";
       } else {
         placementField.style.display = "none";
+        placementInput.value = ""; // Clear the placement input when hidden
       }
     }
 
@@ -44,5 +49,21 @@
 
     // Also check every 500ms in case any dynamic change occurs
     setInterval(togglePlacementField, 500);
+
+    // Add form submission handler
+    form.addEventListener("submit", function(event) {
+      if (placementField.style.display === "block" && placementInput.value.trim() === "") {
+        event.preventDefault(); // Prevent form submission
+        placementWarning.style.display = "block"; // Show warning message
+        placementInput.focus(); // Focus on the placement input
+      } else {
+        placementWarning.style.display = "none"; // Hide warning message if placement is filled
+      }
+    });
+
+    // Hide warning when user starts typing in the placement field
+    placementInput.addEventListener("input", function() {
+      placementWarning.style.display = "none";
+    });
   });
 </script>
