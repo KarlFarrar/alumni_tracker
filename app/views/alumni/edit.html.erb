@@ -27,9 +27,9 @@
 <p>Select a profession to claim it. Select "Other" to add a new one.</p>
 
 <div class="dropdown-container">
-  <!-- Dropdown Button -->
+  <!-- Dropdown Button with Search -->
   <button type="button" id="dropdownButton" class="dropdown-btn">
-    <span id="selectedOption">Select a profession</span>
+    <input type="text" id="searchInput" placeholder="Search professions..." class="dropdown-search">
     <svg id="dropdownArrow" class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
     </svg>
@@ -129,7 +129,7 @@
 <div class="dropdown-container">
   <!-- Dropdown Button -->
   <button type="button" id="experienceDropdownButton" class="dropdown-btn">
-    <span id="selectedExperienceOption">Select an experience</span>
+    <input type="text" id="searchExpInput" placeholder="Search experiences..." class="dropdown-search">
     <svg id="experienceDropdownArrow" class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
       <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
     </svg>
@@ -142,7 +142,7 @@
         <%= experience.title %> - <%= experience.experience_type %>
       </li>
     <% end %>
-    <li class="dropdown-item" data-value="other">Other (Create New Experience)</li>
+    <li class="dropdown-item" data-value="other-exp">Other (Create New Experience)</li>
   </ul>
 
 
