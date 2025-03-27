@@ -10,11 +10,28 @@ document.addEventListener("turbo:load", function () {
   const placementField = document.getElementById("placement_field");
   const closeButtons = document.querySelectorAll(".modal .close");
   const experienceList = document.getElementById("experienceList");
+  const searchInput = document.getElementById("searchExpInput");
+  const dropdownItems = document.querySelectorAll(".dropdown-item");
+  const otherOption = document.querySelector('.dropdown-item[data-value="other-exp"]');
 
   // Toggle dropdown menu
   dropdownButton.addEventListener("click", function (e) {
     e.stopPropagation();
     dropdownMenu.classList.toggle("show");
+  });
+
+  // Search functionality while keeping "Other" always visible
+  searchInput.addEventListener("keyup", function() {
+    let filter = searchInput.value.toLowerCase();
+
+    dropdownItems.forEach(item => {
+      let text = item.textContent.toLowerCase();
+      if (item === otherOption || text.includes(filter)) {
+        item.style.display = ""; // Show matching items & "Other"
+      } else {
+        item.style.display = "none"; // Hide non-matching items
+      }
+    });
   });
 
   // Handle experience selection
@@ -32,7 +49,7 @@ document.addEventListener("turbo:load", function () {
       placementField.style.display = "none";
     }
 
-    if (experienceId === "other") {
+    if (experienceId === "other-exp") {
       experienceModal.style.display = "block";
       experienceList.value = "";
       
