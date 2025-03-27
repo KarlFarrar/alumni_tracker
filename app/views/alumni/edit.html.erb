@@ -24,22 +24,38 @@
 </ul>
 
 <h3>Claim Professions</h3>
-<p>Double-click a profession to claim it. Select "Other" to add a new one.</p>
+<p>Select a profession to claim it. Select "Other" to add a new one.</p>
 
-<select id="profession_list" size="5">
-  <% Profession.all.each do |profession| %>
-    <option value="<%= profession.id %>"><%= profession.title %></option>
-  <% end %>
-  <option value="other">Other (Create New Profession)</option>
-</select>
+<div class="dropdown-container">
+  <!-- Dropdown Button -->
+  <button type="button" id="dropdownButton" class="dropdown-btn">
+    <span id="selectedOption">Select a profession</span>
+    <svg id="dropdownArrow" class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+    </svg>
+  </button>
 
-<%= form_with url: claim_professions_alumnus_path(@alumnus), method: :post, id: "claim_professions_form" do %>
-  <div id="profession_ids_container">
-    <% @alumnus.alumnus_professions.each do |alumnus_profession| %>
-      <input type="hidden" name="profession_ids[]" value="<%= alumnus_profession.profession.id %>">
+  <!-- Dropdown Menu -->
+  <ul id="dropdownMenu" class="dropdown-menu hidden">
+    <% Profession.all.each do |profession| %>
+      <li class="dropdown-item" data-value="<%= profession.id %>"><%= profession.title %></li>
     <% end %>
-  </div>
-<% end %>
+    <li class="dropdown-item" data-value="other">Other (Create New Profession)</li>
+  </ul>
+
+  <!-- Hidden Input for Form Submission -->
+  <input type="hidden" name="profession_id" id="selectedProfession">
+
+  <!-- Form Submission -->
+  <%= form_with url: claim_professions_alumnus_path(@alumnus), method: :post, id: "claim_professions_form" do %>
+    <div id="profession_ids_container">
+      <% @alumnus.alumnus_professions.each do |alumnus_profession| %>
+        <input type="hidden" name="profession_ids[]" value="<%= alumnus_profession.profession.id %>">
+      <% end %>
+    </div>
+  <% end %>
+</div>
+
 
 <div id="profession_modal" class="modal">
   <div class="modal-content">
@@ -108,14 +124,40 @@
 </ul>
 
 <h3>Claim Experiences</h3>
-<p>Double-click an experience to claim it. Select "Other" to add a new one.</p>
+<p>Select an experience to claim it. Select "Other" to add a new one.</p>
 
-<select id="experience_list" size="5">
-  <% Experience.all.each do |experience| %>
-    <option value="<%= experience.id %>"><%= experience.title %> - <%= experience.experience_type %></option>
+<div class="dropdown-container">
+  <!-- Dropdown Button -->
+  <button type="button" id="experienceDropdownButton" class="dropdown-btn">
+    <span id="selectedExperienceOption">Select an experience</span>
+    <svg id="experienceDropdownArrow" class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+      <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+    </svg>
+  </button>
+
+  <!-- Dropdown Menu -->
+  <ul id="experienceDropdown" class="dropdown-menu hidden">
+    <% Experience.all.each do |experience| %>
+      <li class="dropdown-item" data-value="<%= experience.id %>">
+        <%= experience.title %> - <%= experience.experience_type %>
+      </li>
+    <% end %>
+    <li class="dropdown-item" data-value="other">Other (Create New Experience)</li>
+  </ul>
+
+
+  <!-- Hidden Input for Form Submission -->
+  <input type="hidden" name="experience_id" id="selectedExperience">
+
+  <!-- Form Submission -->
+  <%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post, id: "claim_experiences_form" do %>
+    <div id="experience_ids_container">
+      <% @alumnus.alumnus_experiences.each do |alumnus_experience| %>
+        <input type="hidden" name="experience_ids[]" value="<%= alumnus_experience.experience.id %>">
+      <% end %>
+    </div>
   <% end %>
-  <option value="other">Other (Create New Experience)</option>
-</select>
+</div>
 
 <%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post, id: "experience_form" do %>
   <div id="experience_ids_container">
@@ -125,29 +167,31 @@
   </div>
 <% end %>
 
-<div id="experience_modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Add a New Experience</h2>
-
-    <%= form_with model: Experience.new, url: experiences_path, method: :post, id: "new_experience_form", remote: true do |f| %>
-      <div>
-        <%= f.label :title, "Experience Title" %>
-        <%= f.text_field :title, required: true %>
-      </div>
-    
-      <div>
-        <%= f.label :experience_type, "Experience Type" %>
-        <%= f.text_field :experience_type, required: true %>
-      </div>
-      
-      <input type="hidden" name="experience[alumnus_id]" value="<%= @alumnus.id %>">
-    
-      <%= f.submit "Save Experience" %>
-    <% end %>
-  </div>
-</div>
 <p><%= link_to "Back to Alumni List", alumni_path %></p>
+
+
+<div id="experience_modal" class="modal">
+   <div class="modal-content">
+     <span class="close">&times;</span>
+     <h2>Add a New Experience</h2>
+ 
+     <%= form_with model: Experience.new, url: experiences_path, method: :post, id: "new_experience_form", remote: true do |f| %>
+       <div>
+         <%= f.label :title, "Experience Title" %>
+         <%= f.text_field :title, required: true %>
+       </div>
+     
+       <div>
+         <%= f.label :experience_type, "Experience Type" %>
+         <%= f.text_field :experience_type, required: true %>
+       </div>
+       
+       <input type="hidden" name="experience[alumnus_id]" value="<%= @alumnus.id %>">
+     
+       <%= f.submit "Save Experience" %>
+     <% end %>
+   </div>
+</div>
 
 <div id="claim_experience_modal" class="modal">
   <div class="modal-content">
@@ -218,5 +262,71 @@
     color: black;
     text-decoration: none;
     cursor: pointer;
+  }
+
+    
+  .dropdown-container {
+    position: relative;
+    display: inline-block;
+    width: 250px;
+  }
+
+  
+  .dropdown-btn {
+    width: 100%;
+    adding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    abackground: white;
+    color: black;
+    border: none;
+    plign-items: center;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+  }
+
+ 
+  .dropdown-arrow {
+    width: 16px;
+    height: 16px;
+    transition: transform 0.3s ease;
+  }
+
+ 
+  .rotate-180 {
+    transform: rotate(180deg);
+  }
+
+ 
+  .dropdown-menu {
+    position: absolute;
+    width: 100%;
+    background: white;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    margin-top: 5px;
+    padding: 0;
+    list-style-type: none;
+    display: none;
+    z-index: 10;
+  }
+
+  
+  .dropdown-item {
+    padding: 10px;
+    cursor: pointer;
+    transition: background 0.2s ease-in-out;
+  }
+
+  
+  .dropdown-item:hover {
+    background: #f1f1f1;
+  }
+
+  
+  .dropdown-menu.show {
+    display: block;
   }
 </style>
