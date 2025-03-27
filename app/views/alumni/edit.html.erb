@@ -24,7 +24,7 @@
 </ul>
 
 <h3>Claim Professions</h3>
-<p>Double-click a profession to claim it. Select "Other" to add a new one.</p>
+<p>Select a profession to claim it. Select "Other" to add a new one.</p>
 
 <div class="dropdown-container">
   <!-- Dropdown Button -->
@@ -124,7 +124,7 @@
 </ul>
 
 <h3>Claim Experiences</h3>
-<p>Double-click an experience to claim it. Select "Other" to add a new one.</p>
+<p>Select an experience to claim it. Select "Other" to add a new one.</p>
 
 <div class="dropdown-container">
   <!-- Dropdown Button -->
@@ -136,16 +136,15 @@
   </button>
 
   <!-- Dropdown Menu -->
-  <div id="experienceDropdown" class="dropdown-menu hidden">
-    <ul id="experienceList" class="dropdown-list">
-      <% Experience.all.each do |experience| %>
-        <li class="dropdown-item" data-value="<%= experience.id %>">
-          <%= experience.title %> - <%= experience.experience_type %>
-        </li>
-      <% end %>
-      <li class="dropdown-item" data-value="other">Other (Create New Experience)</li>
-    </ul>
-  </div>
+  <ul id="experienceDropdown" class="dropdown-menu hidden">
+    <% Experience.all.each do |experience| %>
+      <li class="dropdown-item" data-value="<%= experience.id %>">
+        <%= experience.title %> - <%= experience.experience_type %>
+      </li>
+    <% end %>
+    <li class="dropdown-item" data-value="other">Other (Create New Experience)</li>
+  </ul>
+
 
   <!-- Hidden Input for Form Submission -->
   <input type="hidden" name="experience_id" id="selectedExperience">
