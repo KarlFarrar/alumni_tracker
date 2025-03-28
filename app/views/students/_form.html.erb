@@ -1,0 +1,114 @@
+<%= form_with(model: student) do |form| %>
+  <% if student.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+
+      <ul>
+        <% student.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.fields_for :user do |user_form| %>
+      <%= user_form.label :first_name %>
+      <%= user_form.text_field :first_name %>
+
+      <%= user_form.label :last_name %>
+      <%= user_form.text_field :last_name %>
+
+      <%= user_form.label :middle_initial %>
+      <%= user_form.text_field :middle_initial %>
+
+      <%= user_form.label :uin %>
+      <%= user_form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
+          maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
+    <% end %>
+  </div>
+
+  <div>
+    <%= form.label :uin, "Confirm UIN", style: "display: block" %>
+    <%= form.text_field :uin %>
+  </div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const uinInput = document.getElementById("uin");
+
+      uinInput.addEventListener("input", function(e) {
+        let numbers = e.target.value.replace(/\D/g, ""); 
+
+        if (numbers.length > 9) {
+          numbers = numbers.slice(0, 9);
+        }
+
+        e.target.value = numbers;
+      });
+    });
+  </script>
+
+  <div>
+    <%= form.label :classification, style: "display: block" %>
+    <%= form.text_field :classification %>
+  </div>
+
+  <div>
+    <%= form.label :major, style: "display: block" %>
+    <%= form.text_field :major %>
+  </div>
+
+  <div>
+    <%= form.label :resumelink, style: "display: block" %>
+    <%= form.text_field :resumelink %>
+  </div>
+
+  <div>
+    <%= form.label :email, style: "display: block" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div>
+    <%= form.label :phone, style: "display: block" %>
+    <%= form.text_field :phone %>
+  </div>
+
+  <script>
+    document.addEventListener("turbo:load", function() {
+      const phoneInput = document.getElementById("phone");
+
+      if (phoneInput) {
+        phoneInput.addEventListener("input", function(e) {
+          let numbers = e.target.value.replace(/\D/g, ""); 
+          
+          if (numbers.length > 10) {
+            numbers = numbers.slice(0, 10);
+          }
+
+          let formattedNumber = "";
+          if (numbers.length > 0) {
+            formattedNumber += `(${numbers.slice(0, 3)}`;
+          }
+          if (numbers.length >= 4) {
+            formattedNumber += `)-${numbers.slice(3, 6)}`;
+          }
+          if (numbers.length >= 7) {
+            formattedNumber += `-${numbers.slice(6, 10)}`;
+          }
+
+          e.target.value = formattedNumber;
+        });
+      }
+    });
+  </script>
+
+  <div>
+    <%= form.label :biography, style: "display: block" %>
+    <%= form.text_field :biography %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

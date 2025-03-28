@@ -1,0 +1,18 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Students" %>
+
+<h1>Students</h1>
+
+<div id="students">
+  <% @students.each do |student| %>
+    <%= render student %>
+    <p>
+      <% if @current == student %>
+        <%= link_to "Show this student", student %>
+      <% end %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "Sign Out", destroy_gmail_session_path %>
