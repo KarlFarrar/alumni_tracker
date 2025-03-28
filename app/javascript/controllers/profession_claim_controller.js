@@ -1,6 +1,8 @@
 document.addEventListener("turbo:load", function () {
   const dropdownButton = document.getElementById("dropdownButton");
   const dropdownMenu = document.getElementById("dropdownMenu");
+  const searchInput = document.getElementById("searchInput");
+  const dropdownItems = document.querySelectorAll(".dropdown-item");
   const professionIdsContainer = document.getElementById("profession_ids_container");
   const professionForm = document.getElementById("claim_professions_form");
   const professionModal = document.getElementById("profession_modal");
@@ -9,6 +11,7 @@ document.addEventListener("turbo:load", function () {
   const claimModal = document.getElementById("claim_profession_modal");
   const modalProfessionId = document.getElementById("modal_profession_id");
   const closeButtons = document.querySelectorAll(".modal .close");
+  const otherOption = document.querySelector('.dropdown-item[data-value="other"]');
 
   if (professionSelect) {
     professionSelect.addEventListener("change", function () {
@@ -20,6 +23,20 @@ document.addEventListener("turbo:load", function () {
       }
     });
   }
+
+  // Search functionality while keeping "Other" always visible
+  searchInput.addEventListener("keyup", function() {
+    let filter = searchInput.value.toLowerCase();
+
+    dropdownItems.forEach(item => {
+      let text = item.textContent.toLowerCase();
+      if (item === otherOption || text.includes(filter)) {
+        item.style.display = ""; // Show matching items & "Other"
+      } else {
+        item.style.display = "none"; // Hide non-matching items
+      }
+    });
+  });
 
   // Close modal when clicking the 'X' button
   closeButtons.forEach(button => {
