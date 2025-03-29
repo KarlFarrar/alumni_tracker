@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_26_155919) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_29_142950) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -107,6 +107,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_155919) do
     t.string "biography"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["uin"], name: "index_students_on_uin", unique: true
   end
 
   create_table "users", primary_key: "uin", id: :serial, force: :cascade do |t|
@@ -125,4 +126,5 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_155919) do
   add_foreign_key "alumnus_professions", "alumni"
   add_foreign_key "alumnus_professions", "professions"
   add_foreign_key "gmails", "users", column: "uin", primary_key: "uin"
+  add_foreign_key "students", "users", column: "uin", primary_key: "uin"
 end

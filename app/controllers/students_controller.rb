@@ -15,6 +15,8 @@ class StudentsController < ApplicationController
   # GET /students/new
   def new
     @student = Student.new
+    @student.build_user
+    @student.user.build_gmail
   end
 
   # GET /students/1/edit
@@ -24,12 +26,20 @@ class StudentsController < ApplicationController
   # POST /students or /students.json
   def create
     @student = Student.new(student_params)
+    @student.user.status = "student"
 
-    respond_to do |format|
-      if @student.save
+    if @student.save
+      # Now, associate Gmail after user is definitely saved
+      @student.user.create_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
+      sign_in(@student.user.gmail)
+
+      respond_to do |format|
         format.html { redirect_to @student, notice: "Student was successfully created." }
-        format.json { render :show, status: :created, location: @student }
-      else
+        format.json { render :show, status: :created, location: @alumnus }
+      end
+    else
+      Rails.logger.info "Errors: #{@student.errors.full_messages}"
+      respond_to do |format|
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @student.errors, status: :unprocessable_entity }
       end
@@ -51,6 +61,7 @@ class StudentsController < ApplicationController
 
   # DELETE /students/1 or /students/1.json
   def destroy
+    #Make it so that user and gmail is also deleted
     @student.destroy!
 
     respond_to do |format|
@@ -67,6 +78,18 @@ class StudentsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def student_params
-      params.expect(student: [ :uin, :classification, :major, :resumelink, :email, :phone, :biography ])
+      if params[:id].present?
+        Rails.logger.info "UPDATE"
+        params.require(:student).permit(
+          :classification, :major, :resumelink, :email, :phone, :biography,
+          user_attributes: [:id, :first_name, :last_name, :middle_initial, :status] # Exclude :uin
+        )
+      else
+        Rails.logger.info "NEW"
+        params.require(:student).permit(
+          :classification, :major, :resumelink, :email, :phone, :biography,
+          user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status] # Allow :uin during creation
+        )
+      end
     end
 end

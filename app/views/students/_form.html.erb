@@ -1,4 +1,4 @@
-<%= form_with(model: student) do |form| %>
+<%= form_with(model: @student) do |form| %>
   <% if student.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
@@ -13,25 +13,33 @@
 
   <div class="field">
     <%= form.fields_for :user do |user_form| %>
-      <%= user_form.label :first_name %>
-      <%= user_form.text_field :first_name %>
+      <%= user_form.label :first_name%>
+      <%= user_form.text_field :first_name, id: "first_name"%>
 
-      <%= user_form.label :last_name %>
-      <%= user_form.text_field :last_name %>
+      <%= user_form.label :last_name%>
+      <%= user_form.text_field :last_name, id: "last_name"%>
 
-      <%= user_form.label :middle_initial %>
-      <%= user_form.text_field :middle_initial %>
+      <%= user_form.label :middle_initial%>
+      <%= user_form.text_field :middle_initial, id: "middle_inital"%>
 
-      <%= user_form.label :uin %>
-      <%= user_form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
-          maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
+      <% if @student.new_record? %>
+        <%= user_form.label :uin %>
+        <%= user_form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
+            maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
+      <% else %>
+        <div>
+          <%= user_form.label :uin %>
+          <%= user_form.text_field :uin, readonly: true, value: @alumnus.user.uin %>
+          <%= user_form.hidden_field :uin, value: @alumnus.user.uin %>
+        </div>
+      <% end %>
     <% end %>
   </div>
 
-  <div>
-    <%= form.label :uin, "Confirm UIN", style: "display: block" %>
-    <%= form.text_field :uin %>
-  </div>
+  <!-- <div>
+    <%# form.label :uin, "Confirm UIN", style: "display: block" %>
+    <%# form.text_field :uin %>
+  </div> -->
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -45,6 +53,62 @@
         }
 
         e.target.value = numbers;
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const firstNameInput = document.getElementById("first_name");
+
+      firstNameInput.addEventListener("blur", function() {
+        let value = firstNameInput.value.trim();  // Remove trailing spaces
+        if (value.length > 0) {
+          // Capitalize the first letter
+          value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        }
+        firstNameInput.value = value;
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const lastNameInput = document.getElementById("last_name");
+
+      lastNameInput.addEventListener("blur", function() {
+        let value = lastNameInput.value.trim();  // Remove trailing spaces
+        if (value.length > 0) {
+          // Capitalize the first letter
+          value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        }
+        lastNameInput.value = value;
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const middleInitialInput = document.getElementById("middle_initial");
+
+      middleInitialInput.addEventListener("input", function(e) {
+        let value = e.target.value;
+
+        // Ensure only 1 character is entered
+        if (value.length > 1) {
+          value = value.slice(0, 1); // Trim to 1 character
+        }
+
+        if (!/^[A-Za-z]*$/.test(value)) {
+        value = value.slice(0, -1);  // Remove non-alphabetic character
+        }
+
+        if (value.length > 0) {
+          // Capitalize the first letter
+          value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        }
+
+        e.target.value = value; // Set the trimmed value
       });
     });
   </script>
