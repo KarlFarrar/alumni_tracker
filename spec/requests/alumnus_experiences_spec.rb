@@ -30,7 +30,7 @@ RSpec.describe "AlumnusExperiences", type: :request do
       patch alumnus_experience_path(alumnus_experience), params: { 
         alumnus_experience: { custom_description: "Updated description" } 
       }
-      expect(response).to redirect_to(alumnus_path(alumnus))
+      expect(response).to redirect_to(edit_alumnus_path(alumnus))
       alumnus_experience.reload
       expect(alumnus_experience.custom_description).to eq("Updated description")
     end

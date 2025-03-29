@@ -1,124 +1,119 @@
-document.addEventListener("turbo:load", function() {
-  const experienceList = document.getElementById("experience_list");
-  const claimedExperiences = document.getElementById("claimed_experiences");
+document.addEventListener("turbo:load", function () {
+  // Experience Elements
+  const dropdownButton = document.getElementById("experienceDropdownButton");
+  const dropdownMenu = document.getElementById("experienceDropdown");
   const experienceIdsContainer = document.getElementById("experience_ids_container");
-  const experienceForm = document.getElementById("experience_form");
+  const experienceForm = document.getElementById("claim_experiences_form");
   const experienceModal = document.getElementById("experience_modal");
   const claimModal = document.getElementById("claim_experience_modal");
-  const experienceIdInput = document.getElementById("modal_experience_id");
-  const closeButtons = document.querySelectorAll(".close");
+  const modalExperienceId = document.getElementById("modal_experience_id");
+  const placementField = document.getElementById("placement_field");
+  const closeButtons = document.querySelectorAll(".modal .close");
+  const experienceList = document.getElementById("experienceList");
+  const searchInput = document.getElementById("searchExpInput");
+  const dropdownItems = document.querySelectorAll(".dropdown-item");
+  const otherOption = document.querySelector('.dropdown-item[data-value="other-exp"]');
 
-  // Loop through each close button and add event listener
-  closeButtons.forEach(button => {
-    button.addEventListener("click", function() {
-      const modal = this.closest(".modal"); // Find the closest modal
-      if (modal) {
-        modal.style.display = "none"; 
+  // Toggle dropdown menu
+  dropdownButton.addEventListener("click", function (e) {
+    e.stopPropagation();
+    dropdownMenu.classList.toggle("show");
+  });
+
+  // Search functionality while keeping "Other" always visible
+  searchInput.addEventListener("keyup", function() {
+    let filter = searchInput.value.toLowerCase();
+
+    dropdownItems.forEach(item => {
+      let text = item.textContent.toLowerCase();
+      if (item === otherOption || text.includes(filter)) {
+        item.style.display = ""; // Show matching items & "Other"
+      } else {
+        item.style.display = "none"; // Hide non-matching items
       }
     });
   });
 
-  if (experienceList && claimedExperiences) {
-    experienceList.addEventListener("dblclick", function(e) {
-      const selectedOption = e.target;
-      const experienceId = selectedOption.value;
-      const experienceTitle = selectedOption.textContent;
+  // Handle experience selection
+  dropdownMenu.addEventListener("click", function (event) {
+    const selectedItem = event.target.closest(".dropdown-item");
+    if (!selectedItem) return;
 
-      if (!document.querySelector(`li[data-id='${experienceId}']`)) {
-        const listItem = document.createElement("li");
-        listItem.setAttribute("data-id", experienceId);
-        listItem.innerHTML = `
-          <strong>${experienceTitle}</strong> <br>
-          <a href="#" class="remove_experience" data-id="${experienceId}">Remove</a>
-        `;
+    const experienceId = selectedItem.getAttribute("data-value");
+    const experienceTitle = selectedItem.textContent.trim();
 
-        claimedExperiences.appendChild(listItem);
-        addHiddenInput(experienceId);
-        submitForm();
-      }
+    // Handle placement field visibility
+    if (experienceTitle.toLowerCase().includes("competition")) {
+      placementField.style.display = "block";
+    } else {
+      placementField.style.display = "none";
+    }
+
+    if (experienceId === "other-exp") {
+      experienceModal.style.display = "block";
+      experienceList.value = "";
+      
+    } else {
+      modalExperienceId.value = experienceId;
+      claimModal.style.display = "block";
+    }
+
+    dropdownMenu.classList.remove("show");
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", function (event) {
+    if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+      dropdownMenu.classList.remove("show");
+    }
+  });
+
+  // Close modals
+  closeButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      this.closest(".modal").style.display = "none";
     });
+  });
 
-    claimedExperiences.addEventListener("click", function(e) {
-      if (e.target.classList.contains("remove_experience")) {
-        e.preventDefault();
-        const experienceId = e.target.getAttribute("data-id");
-        e.target.parentElement.remove();
+  window.addEventListener("click", function (event) {
+    if (event.target.classList.contains("modal")) {
+      event.target.style.display = "none";
+    }
+  });
+
+  // Handle removal of claimed experiences
+  const claimedExperiences = document.getElementById("claimed_experiences");
+  if (claimedExperiences) {
+    claimedExperiences.addEventListener("click", function (event) {
+      if (event.target.classList.contains("remove_experience")) {
+        event.preventDefault();
+        const experienceId = event.target.getAttribute("data-id");
+        event.target.parentElement.remove();
         removeHiddenInput(experienceId);
         submitForm();
       }
     });
+  }
 
-    function addHiddenInput(experienceId) {
-      let input = document.createElement("input");
+  // Hidden input management
+  function addHiddenInput(experienceId) {
+    if (!document.querySelector(`input[value='${experienceId}']`)) {
+      const input = document.createElement("input");
       input.type = "hidden";
       input.name = "experience_ids[]";
       input.value = experienceId;
       experienceIdsContainer.appendChild(input);
     }
+  }
 
-    function removeHiddenInput(experienceId) {
-      const input = experienceIdsContainer.querySelector(`input[value='${experienceId}']`);
-      if (input) input.remove();
-    }
+  function removeHiddenInput(experienceId) {
+    const input = experienceIdsContainer.querySelector(`input[value='${experienceId}']`);
+    if (input) input.remove();
+  }
 
-    function submitForm() {
+  function submitForm() {
+    if (experienceForm) {
       experienceForm.submit();
     }
   }
-
-  // Logic Behind Pop-Up. 
-  if (experienceList && experienceModal) {
-    experienceList.addEventListener("change", function(e) {
-      if (e.target.value === "other") {
-        experienceModal.style.display = "block";
-        experienceList.value = ""; // Reset dropdown selection
-      }
-    });
-
-    window.addEventListener("click", function(event) {
-      if (event.target === experienceModal) {
-        experienceModal.style.display = "none";
-      }
-    });
-  }
-
-  // Experience Details Logic
-  if (experienceList && claimModal) {
-    experienceList.addEventListener("dblclick", function(e) {
-      const selectedOption = e.target;
-      if (selectedOption.value) {
-        experienceIdInput.value = selectedOption.value; // Store experience ID
-        claimModal.style.display = "block"; 
-        e.stopPropagation();
-      }
-    });
-
-    // Prevent immediate form submission
-    claimForm.addEventListener("submit", function(e) {
-      if (!experienceIdInput.value) {
-        e.preventDefault(); // Stop form submission if no experience is selected
-      }
-    });
-
-    // Also close modal if user clicks outside it
-    window.addEventListener("click", function(event) {
-      if (event.target === claimModal) {
-        claimModal.style.display = "none";
-      }
-    });
-  }
-
-  if (claimModal && closeModal) {
-    closeModal.addEventListener("click", function() {
-      claimModal.style.display = "none";
-    });
-
-    // Also close modal if user clicks outside the modal content
-    window.addEventListener("click", function(event) {
-      if (event.target === claimModal) {
-        claimModal.style.display = "none";
-      }
-    });
-  }
-
 });
