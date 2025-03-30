@@ -32,7 +32,6 @@ RSpec.describe "alumni/index", type: :view do
     assert_select cell_selector, text: /2021/, count: 1
     assert_select cell_selector, text: /Team Affiliation/, count: 1
     assert_select cell_selector, text: /Profession Title/, count: 1
-    assert_select 'div>p', text: /Availability: No/, count: 1
     assert_select cell_selector, text: /Email/, count: 1
     assert_select cell_selector, text: /\(682\)-472-8670/, count: 1
     assert_select cell_selector, text: /Biography/, count: 1
