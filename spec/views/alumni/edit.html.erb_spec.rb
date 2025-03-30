@@ -33,7 +33,7 @@ RSpec.describe "alumni/edit", type: :view do
       assert_select "select[name=?]", "alumnus[cohort_year]"
       assert_select "input[name=?]", "alumnus[team_affiliation]"
       assert_select "input[name=?]", "alumnus[profession_title]"
-      assert_select "input[name=?]", "alumnus[availability]"
+      assert_select "select[name=?]", "alumnus[availability]"
       assert_select "input[name=?]", "alumnus[email]"
       assert_select "input[name=?]", "alumnus[phone_number]"
       assert_select "input[name=?]", "alumnus[biography]"
