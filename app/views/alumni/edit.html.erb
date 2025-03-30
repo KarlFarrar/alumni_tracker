@@ -71,7 +71,7 @@
           <input type="hidden" name="profession_id" id="selectedProfession">
 
           <!-- Form Submission -->
-          <%= form_with url: claim_professions_alumnus_path(@alumnus), method: :post, id: "claim_professions_form" do %>
+          <%= form_with url: claim_professions_alumnus_path(@alumnus, anchor: 'professional'), method: :post, id: "claim_professions_form" do %>
             <div id="profession_ids_container">
               <% @alumnus.alumnus_professions.each do |alumnus_profession| %>
                 <input type="hidden" name="profession_ids[]" value="<%= alumnus_profession.profession.id %>">
@@ -106,7 +106,7 @@
           <span class="close">&times;</span>
           <h2>Claim Profession</h2>
 
-          <%= form_with url: claim_professions_alumnus_path(@alumnus), method: :post, id: "claim_profession_form", data: { turbo: "false" } do |f| %>
+          <%= form_with url: claim_professions_alumnus_path(@alumnus, anchor: 'professional'), method: :post, id: "claim_profession_form", data: { turbo: "false" } do |f| %>
             <input type="hidden" name="profession_id" id="modal_profession_id">
 
             <div class="form-group">
@@ -181,7 +181,7 @@
           <input type="hidden" name="experience_id" id="selectedExperience">
 
           <!-- Form Submission -->
-          <%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post, id: "claim_experiences_form" do %>
+          <%= form_with url: claim_experiences_alumnus_path(@alumnus, anchor: 'experience'), method: :post, id: "claim_experiences_form" do %>
             <div id="experience_ids_container">
               <% @alumnus.alumnus_experiences.each do |alumnus_experience| %>
                 <input type="hidden" name="experience_ids[]" value="<%= alumnus_experience.experience.id %>">
@@ -220,7 +220,7 @@
           <span class="close">&times;</span>
           <h2>Claim Experience</h2>
           
-          <%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post, id: "claim_experience_form", data: { turbo: "false" } do |f| %>
+          <%= form_with url: claim_experiences_alumnus_path(@alumnus, anchor: 'experience'), method: :post, id: "claim_experience_form", data: { turbo: "false" } do |f| %>
             <input type="hidden" name="experience_id" id="modal_experience_id">
             <input type="hidden" id="modal_experience_title">
 
