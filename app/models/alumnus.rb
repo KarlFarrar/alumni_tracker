@@ -2,6 +2,11 @@ class Alumnus < ApplicationRecord
   # log all activities.
   include Loggable
 
+  # Belongs to the User 
+  belongs_to :user, foreign_key: 'uin', primary_key: 'uin'
+
+  accepts_nested_attributes_for :user
+
   
   # Relationship to experience. 
   has_many :alumnus_experiences, dependent: :destroy
@@ -15,10 +20,10 @@ class Alumnus < ApplicationRecord
   
   
   # Ensure UIN is exactly 9 digits
-  validates :uin, format: {
-    with: /\A\d{9}\z/,
-    message: "must be exactly 9 digits"
-  }
+  #validates :uin, format: {
+  #  with: /\A\d{9}\z/,
+  #  message: "must be exactly 9 digits"
+  #}
 
   # Ensure the user provides at least one: phone number OR email
   validate :phone_or_email_present

@@ -1,208 +1,264 @@
 <% content_for :title, "Editing alumnus" %>
 
-<h1>Editing alumnus</h1>
+<div class="title-bar">
+  <h1>Editing Profile</h1>
+</div>
 
-<%= render "form", alumnus: @alumnus %>
-
-<h2>Professions</h2>
-
-<ul id="claimed_professions">
-  <% @alumnus.alumnus_professions.each do |alumnus_profession| %>
-    <li id="profession_<%= alumnus_profession.profession.id %>">
-      <strong><%= alumnus_profession.profession.title %></strong>  
-      <br>
-      <small>Field: <%= alumnus_profession.field || "Not Set" %></small>
-      <br>
-
-      <%= link_to "Edit", edit_alumnus_profession_path(alumnus_profession), class: "btn btn-primary" %>
-      
-      <%= link_to "Remove", remove_profession_alumnus_path(@alumnus, profession_id: alumnus_profession.profession.id),
-                    method: :delete, data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger" %>
-      <br> 
-    </li>
-  <% end %>
-</ul>
-
-<h3>Claim Professions</h3>
-<p>Double-click a profession to claim it. Select "Other" to add a new one.</p>
-
-<select id="profession_list" size="5">
-  <% Profession.all.each do |profession| %>
-    <option value="<%= profession.id %>"><%= profession.title %></option>
-  <% end %>
-  <option value="other">Other (Create New Profession)</option>
-</select>
-
-<%= form_with url: claim_professions_alumnus_path(@alumnus), method: :post, id: "claim_professions_form" do %>
-  <div id="profession_ids_container">
-    <% @alumnus.alumnus_professions.each do |alumnus_profession| %>
-      <input type="hidden" name="profession_ids[]" value="<%= alumnus_profession.profession.id %>">
-    <% end %>
+<div class="page-container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="#personal" class="tab-link active" data-tab="personal">Personal Information</a>
+    <a href="#professional" class="tab-link" data-tab="professional">Professional Info</a>
+    <a href="#experience" class="tab-link" data-tab="experience">Experience Info</a>
+    <%= link_to "Show this alumnus", @alumnus %>
+    <%= link_to "Back to alumni", alumni_path %>
+    <div class="sidebar-logo">
+      <%= image_tag("logo4.png", alt: "Sling health Logo", class: "session-logo") %>
+    </div>
   </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Personal Information Section -->
+    <div id="personal" class="tab-content active">
+      <h2>Personal Information</h2>
+      <%= render "form", alumnus: @alumnus %>
+    </div>
+
+    <!-- Professional Info Section -->
+    <div id="professional" class="tab-content">
+      <h2>Professional Info</h2>
+
+      <div class="professional-content">
+        <ul id="claimed_professions" class="claimed-professions-list">
+          <% @alumnus.alumnus_professions.each do |alumnus_profession| %>
+            <li id="profession_<%= alumnus_profession.profession.id %>" class="profession-card">
+              <strong><%= alumnus_profession.profession.title %></strong>
+              <br>
+              <small class="field-info">Field: <%= alumnus_profession.field || "Not Set" %></small>
+              <br>
+              <div class="profession-actions">
+                <%= link_to "Edit", edit_alumnus_profession_path(alumnus_profession), class: "btn btn-primary btn-sm" %>
+                <%= link_to "Remove", remove_profession_alumnus_path(@alumnus, profession_id: alumnus_profession.profession.id),
+                              method: :delete, data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+
+        <!-- Dropdown Container -->
+        <div class="dropdown-container">
+          <h3>Claim Professions</h3>
+          <p>Select a profession to claim it. Select "Other" to add a new one.</p>
+
+          <!-- Dropdown Button with Search -->
+          <button type="button" id="dropdownButton" class="dropdown-btn">
+            <input type="text" id="searchInput" placeholder="Search professions..." class="dropdown-search">
+            <svg id="dropdownArrow" class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <ul id="dropdownMenu" class="dropdown-menu hidden">
+            <% Profession.all.each do |profession| %>
+              <li class="dropdown-item" data-value="<%= profession.id %>"><%= profession.title %></li>
+            <% end %>
+            <li class="dropdown-item" data-value="other">Other (Create New Profession)</li>
+          </ul>
+
+          <!-- Hidden Input for Form Submission -->
+          <input type="hidden" name="profession_id" id="selectedProfession">
+
+          <!-- Form Submission -->
+          <%= form_with url: claim_professions_alumnus_path(@alumnus), method: :post, id: "claim_professions_form" do %>
+            <div id="profession_ids_container">
+              <% @alumnus.alumnus_professions.each do |alumnus_profession| %>
+                <input type="hidden" name="profession_ids[]" value="<%= alumnus_profession.profession.id %>">
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div id="profession_modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Add a New Profession</h2>
+
+          <%= form_with model: Profession.new, url: professions_path, method: :post, id: "new_profession_form", remote: true do |f| %>
+            <div class="form-group">
+              <%= f.label :title, "Profession Title" %>
+              <%= f.text_field :title, required: true, class: "form-control" %>
+            </div>
+
+            <input type="hidden" name="profession[alumnus_id]" value="<%= @alumnus.id %>">
+
+            <%= f.submit "Save Profession", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div id="claim_profession_modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Claim Profession</h2>
+
+          <%= form_with url: claim_professions_alumnus_path(@alumnus), method: :post, id: "claim_profession_form", data: { turbo: "false" } do |f| %>
+            <input type="hidden" name="profession_id" id="modal_profession_id">
+
+            <div class="form-group">
+              <%= f.label :field, "Field" %>
+              <%= f.text_field :field, required: true, placeholder: "Enter your field", class: "form-control" %>
+            </div>
+
+            <%= f.submit "Claim Profession", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Experience Info Section -->
+    <div id="experience" class="tab-content">
+      <h2>Experiences</h2>
+
+      <div class="experience-content">
+        <ul id="claimed_experiences" class="claimed-experiences-list">
+          <% @alumnus.alumnus_experiences.each do |alumnus_experience| %>
+            <li id="experience_<%= alumnus_experience.experience.id %>" class="experience-card">
+              <strong>
+                <%= alumnus_experience.experience.title %> 
+                (<%= alumnus_experience.experience.experience_type %>)
+              </strong>  
+              <br>
+              <small class="date-received">Date Received: <%= alumnus_experience.date_received || "Not Set" %></small>
+              <br>
+
+              <% if alumnus_experience.experience.experience_type.downcase == "competition" %>
+                <small><strong>Placement:</strong> <%= alumnus_experience.placement.presence || "Not Set" %></small>
+                <br>
+              <% end %>
+
+              <p><%= alumnus_experience.custom_description.presence || "No description provided." %></p>
+              <br>
+
+              <div class="experience-actions">
+                <%= link_to "Edit", edit_alumnus_experience_path(alumnus_experience), class: "btn btn-primary btn-sm" %>
+                <%= link_to "Remove", remove_experience_alumnus_path(@alumnus, experience_id: alumnus_experience.experience.id),
+                  method: :delete, data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+
+        <!-- Dropdown Container -->
+        <div class="dropdown-container">
+          <h3>Claim Experiences</h3>
+          <p>Select an experience to claim it. Select "Other" to add a new one.</p>
+
+          <!-- Dropdown Button -->
+          <button type="button" id="experienceDropdownButton" class="dropdown-btn">
+            <input type="text" id="searchExpInput" placeholder="Search experiences..." class="dropdown-search">
+            <svg id="experienceDropdownArrow" class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <ul id="experienceDropdown" class="dropdown-menu hidden">
+            <% Experience.all.each do |experience| %>
+              <li class="dropdown-item" data-value="<%= experience.id %>">
+                <%= experience.title %> - <%= experience.experience_type %>
+              </li>
+            <% end %>
+            <li class="dropdown-item" data-value="other-exp">Other (Create New Experience)</li>
+          </ul>
+
+          <!-- Hidden Input for Form Submission -->
+          <input type="hidden" name="experience_id" id="selectedExperience">
+
+          <!-- Form Submission -->
+          <%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post, id: "claim_experiences_form" do %>
+            <div id="experience_ids_container">
+              <% @alumnus.alumnus_experiences.each do |alumnus_experience| %>
+                <input type="hidden" name="experience_ids[]" value="<%= alumnus_experience.experience.id %>">
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div id="experience_modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Add a New Experience</h2>
+
+          <%= form_with model: Experience.new, url: experiences_path, method: :post, id: "new_experience_form", remote: true do |f| %>
+            <div class="form-group">
+              <%= f.label :title, "Experience Title" %>
+              <%= f.text_field :title, required: true, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :experience_type, "Experience Type" %>
+              <%= f.text_field :experience_type, required: true, class: "form-control" %>
+            </div>
+            
+            <input type="hidden" name="experience[alumnus_id]" value="<%= @alumnus.id %>">
+
+            <%= f.submit "Save Experience", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div id="claim_experience_modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Claim Experience</h2>
+          
+          <%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post, id: "claim_experience_form", data: { turbo: "false" } do |f| %>
+            <input type="hidden" name="experience_id" id="modal_experience_id">
+            <input type="hidden" id="modal_experience_title">
+
+            <div class="form-group">
+              <%= f.label :date_received, "Date Received" %>
+              <%= f.date_field :date_received, required: true, class: "form-control" %>
+            </div>
+
+            <div id="placement_field" class="form-group" style="display: none;">
+              <%= f.label :placement, "Placement " %>
+              <%= f.text_field :placement, placeholder: "Enter placement (e.g., 1st Place, Finalist)", class: "form-control" %>
+            </div>
+            
+            <div class="form-group">
+              <%= f.label :custom_description, "Custom Description" %>
+              <%= f.text_area :custom_description, placeholder: "Describe your experience with this award.", rows: 5, class: "form-control" %>
+            </div>
+
+            <%= f.submit "Claim Experience", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+<%= javascript_tag do %>
+  $(document).ready(function() {
+    $('.tab-link').click(function(e) {
+      e.preventDefault();
+
+      // Remove active class from all tabs and content
+      $('.tab-link').removeClass('active');
+      $('.tab-content').removeClass('active');
+
+      // Add active class to the clicked tab and content
+      $(this).addClass('active');
+      var tabToShow = $(this).data('tab');
+      $('#' + tabToShow).addClass('active');
+    });
+  });
 <% end %>
-
-<div id="profession_modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Add a New Profession</h2>
-
-    <%= form_with model: Profession.new, url: professions_path, method: :post, id: "new_profession_form", remote: true do |f| %>
-      <div>
-        <%= f.label :title, "Profession Title" %>
-        <%= f.text_field :title, required: true %>
-      </div>
-      
-      <input type="hidden" name="profession[alumnus_id]" value="<%= @alumnus.id %>">
-    
-      <%= f.submit "Save Profession", class: "btn btn-primary" %>
-    <% end %>
-  </div>
-</div>
-
-<div id="claim_profession_modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Claim Profession</h2>
-    
-    <%= form_with url: claim_professions_alumnus_path(@alumnus), method: :post, id: "claim_profession_form", data: { turbo: "false" } do |f| %>
-      <input type="hidden" name="profession_id" id="modal_profession_id">
-
-      <div>
-        <%= f.label :field, "Field" %>
-        <%= f.text_field :field, required: true, placeholder: "Enter your field" %>
-      </div>
-
-      <%= f.submit "Claim Profession", class: "btn btn-success" %>
-    <% end %>
-  </div>
-</div>
-
-<h2>Experiences</h2>
-
-<ul id="claimed_experiences">
-  <% @alumnus.alumnus_experiences.each do |alumnus_experience| %>
-    <li id="experience_<%= alumnus_experience.experience.id %>">
-      <strong><%= alumnus_experience.experience.title %> (<%= alumnus_experience.experience.experience_type %>)</strong>  
-      <br>
-      <small>Date Received: <%= alumnus_experience.date_received || "Not Set" %></small>
-      <br>
-      <p><%= alumnus_experience.custom_description.presence || "No description provided." %></p>
-      <br>
-
-      <%= link_to "Edit", edit_alumnus_experience_path(alumnus_experience), class: "btn btn-primary" %>
-      
-      <%= link_to "Remove", remove_experience_alumnus_path(@alumnus, experience_id: alumnus_experience.experience.id),
-    method: :delete, data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger" %>
-
-      <br> 
-    </li>
-  <% end %>
-</ul>
-
-<h3>Claim Experiences</h3>
-<p>Double-click an experience to claim it. Select "Other" to add a new one.</p>
-
-<select id="experience_list" size="5">
-  <% Experience.all.each do |experience| %>
-    <option value="<%= experience.id %>"><%= experience.title %> - <%= experience.experience_type %></option>
-  <% end %>
-  <option value="other">Other (Create New Experience)</option>
-</select>
-
-<%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post, id: "experience_form" do %>
-  <div id="experience_ids_container">
-    <% @alumnus.alumnus_experiences.each do |alumnus_experience| %>
-      <input type="hidden" name="experience_ids[]" value="<%= alumnus_experience.experience.id %>">
-    <% end %>
-  </div>
-<% end %>
-
-<div id="experience_modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Add a New Experience</h2>
-
-    <%= form_with model: Experience.new, url: experiences_path, method: :post, id: "new_experience_form", remote: true do |f| %>
-      <div>
-        <%= f.label :title, "Experience Title" %>
-        <%= f.text_field :title, required: true %>
-      </div>
-    
-      <div>
-        <%= f.label :experience_type, "Experience Type" %>
-        <%= f.text_field :experience_type, required: true %>
-      </div>
-      
-      <input type="hidden" name="experience[alumnus_id]" value="<%= @alumnus.id %>">
-    
-      <%= f.submit "Save Experience" %>
-    <% end %>
-  </div>
-</div>
-<p><%= link_to "Back to Alumni List", alumni_path %></p>
-
-<div id="claim_experience_modal" class="modal">
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <h2>Claim Experience</h2>
-    
-    <%= form_with url: claim_experiences_alumnus_path(@alumnus), method: :post, id: "claim_experience_form", data: { turbo: "false" } do |f| %>
-      <input type="hidden" name="experience_id" id="modal_experience_id">
-
-      <div>
-        <%= f.label :date_received, "Date Received" %>
-        <%= f.date_field :date_received, required: true %>
-      </div>
-
-      <div>
-        <%= f.label :custom_description, "Custom Description" %>
-        <%= f.text_area :custom_description, placeholder: "Describe your experience with this award.", rows: 5 %>
-      </div>
-
-      <%= f.submit "Claim Experience", class: "btn btn-success" %>
-    <% end %>
-  </div>
-</div>
-
-<br>
-
-<div>
-  <%= link_to "Show this alumnus", @alumnus %> |
-  <%= link_to "Back to alumni", alumni_path %>
-</div>
-
-<style>
-  .modal {
-    display: none;
-    position: fixed;
-    z-index: 1;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    overflow: auto;
-    background-color: rgba(0,0,0,0.4);
-  }
-
-  .modal-content {
-    background-color: white;
-    margin: 10% auto;
-    padding: 20px;
-    border: 1px solid #888;
-    width: 50%;
-  }
-
-  .close {
-    color: #aaa;
-    float: right;
-    font-size: 28px;
-    font-weight: bold;
-  }
-
-  .close:hover,
-  .close:focus {
-    color: black;
-    text-decoration: none;
-    cursor: pointer;
-  }
-</style>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_11_172747) do
+ActiveRecord::Schema[8.0].define(version: 2025_03_26_155919) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -25,6 +25,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_11_172747) do
     t.string "biography"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["uin"], name: "index_alumni_on_uin", unique: true
   end
 
   create_table "alumnis", force: :cascade do |t|
@@ -47,6 +48,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_11_172747) do
     t.datetime "updated_at", null: false
     t.date "date_received"
     t.text "custom_description"
+    t.string "placement"
     t.index ["alumnus_id"], name: "index_alumnus_experiences_on_alumnus_id"
     t.index ["experience_id"], name: "index_alumnus_experiences_on_experience_id"
   end
@@ -84,8 +86,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_11_172747) do
     t.string "avatar_url"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "full_name"
+    t.integer "uin", null: false
     t.index ["email"], name: "index_gmails_on_email", unique: true
+    t.index ["uin"], name: "index_gmails_on_uin"
   end
 
   create_table "professions", force: :cascade do |t|
@@ -104,8 +107,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_11_172747) do
     t.datetime "updated_at", null: false
   end
 
+  add_foreign_key "alumni", "users", column: "uin", primary_key: "uin"
   add_foreign_key "alumnus_experiences", "alumni"
   add_foreign_key "alumnus_experiences", "experiences"
   add_foreign_key "alumnus_professions", "alumni"
   add_foreign_key "alumnus_professions", "professions"
+  add_foreign_key "gmails", "users", column: "uin", primary_key: "uin"
 end

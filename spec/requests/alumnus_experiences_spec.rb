@@ -6,7 +6,8 @@ RSpec.describe "AlumnusExperiences", type: :request do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
   end
 
-  let(:alumnus) { Alumnus.create!(uin: "123456789", email: "test@example.com") }
+  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: "123456789") }
+  let(:alumnus) { Alumnus.create!(uin: "123456789", email: "test@example.com", user: user) }
   let(:experience) { Experience.create!(title: "Best Developer", experience_type: "Award") }
   let(:alumnus_experience) { 
     AlumnusExperience.create!(
@@ -17,7 +18,7 @@ RSpec.describe "AlumnusExperiences", type: :request do
     ) 
   }
 
-  describe "GET /edit" do
+  describe "GET /alumnus_experiences/:id/edit" do
     it "returns http success" do
       get edit_alumnus_experience_path(alumnus_experience)
       expect(response).to have_http_status(:success)

@@ -1,123 +1,119 @@
-document.addEventListener("turbo:load", function() {
-  const professionList = document.getElementById("profession_list");
-  const claimedProfessions = document.getElementById("claimed_professions");
+document.addEventListener("turbo:load", function () {
+  const dropdownButton = document.getElementById("dropdownButton");
+  const dropdownMenu = document.getElementById("dropdownMenu");
+  const searchInput = document.getElementById("searchInput");
+  const dropdownItems = document.querySelectorAll(".dropdown-item");
   const professionIdsContainer = document.getElementById("profession_ids_container");
-  const professionForm = document.getElementById("claim_profession_form");
+  const professionForm = document.getElementById("claim_professions_form");
   const professionModal = document.getElementById("profession_modal");
+  const claimedProfessions = document.getElementById("claimed_professions");
+  const professionSelect = document.getElementById("profession_select");
   const claimModal = document.getElementById("claim_profession_modal");
-  const professionIdInput = document.getElementById("modal_profession_id");
-  const closeButtons = document.querySelectorAll(".close");
+  const modalProfessionId = document.getElementById("modal_profession_id");
+  const closeButtons = document.querySelectorAll(".modal .close");
+  const otherOption = document.querySelector('.dropdown-item[data-value="other"]');
 
-  // ✅ Add Logging for Debugging
-  console.log("JavaScript loaded for professions");
+  if (professionSelect) {
+    professionSelect.addEventListener("change", function () {
+      let selectedProfessionId = this.value;
 
-  // ✅ Close modal logic
-  closeButtons.forEach(button => {
-    button.addEventListener("click", function () {
-      const modal = this.closest(".modal");
-      if (modal) modal.style.display = "none";
-    });
-  });
-
-  // ✅ Handle "Other" selection to open modal
-  if (professionList && professionModal) {
-    professionList.addEventListener("change", function(e) {
-      console.log("Profession list change detected"); // ✅ Debugging line
-      if (e.target.value === "other") {
-        professionModal.style.display = "block";
-        professionList.value = ""; // Reset dropdown after opening modal
-      }
-    });
-
-    window.addEventListener("click", function(event) {
-      if (event.target === professionModal) {
-        professionModal.style.display = "none";
+      if (selectedProfessionId) {
+        modalProfessionId.value = selectedProfessionId; // Set hidden input value
+        claimModal.style.display = "block"; // Show the modal
       }
     });
   }
 
-  // ✅ Handle double-click to claim a profession
-  if (professionList && claimedProfessions) {
-    professionList.addEventListener("dblclick", function(e) {
-      console.log("Profession double-clicked"); // ✅ Debugging line
+  // Search functionality while keeping "Other" always visible
+  searchInput.addEventListener("keyup", function() {
+    let filter = searchInput.value.toLowerCase();
 
-      const selectedOption = e.target;
-      const professionId = selectedOption.value;
-      const professionTitle = selectedOption.textContent;
-
-      if (professionId === "other") {
-        professionModal.style.display = "block";
-        professionList.value = "";
-      } else if (!document.querySelector(`li[data-id='${professionId}']`)) {
-        console.log(`Claiming profession with ID: ${professionId}`); // ✅ Debugging line
-
-        // Add to list
-        const listItem = document.createElement("li");
-        listItem.setAttribute("data-id", professionId);
-        listItem.innerHTML = `
-          <strong>${professionTitle}</strong> <br>
-          <a href="#" class="remove_profession" data-id="${professionId}">Remove</a>
-        `;
-        claimedProfessions.appendChild(listItem);
-
-        addHiddenInput(professionId);
-        submitForm(); // ✅ Trigger form submission
+    dropdownItems.forEach(item => {
+      let text = item.textContent.toLowerCase();
+      if (item === otherOption || text.includes(filter)) {
+        item.style.display = ""; // Show matching items & "Other"
+      } else {
+        item.style.display = "none"; // Hide non-matching items
       }
     });
+  });
 
-    // ✅ Remove claimed profession
-    claimedProfessions.addEventListener("click", function(e) {
-      if (e.target.classList.contains("remove_profession")) {
-        e.preventDefault();
-        const professionId = e.target.getAttribute("data-id");
-        e.target.parentElement.remove();
-        removeHiddenInput(professionId);
-        submitForm();
-      }
+  // Close modal when clicking the 'X' button
+  closeButtons.forEach(button => {
+    button.addEventListener("click", function () {
+      this.closest(".modal").style.display = "none";
     });
+  });
 
-    function addHiddenInput(professionId) {
-      console.log(`Adding hidden input for profession: ${professionId}`); // ✅ Debugging line
+  // Close modal when clicking outside the modal
+  window.addEventListener("click", function (event) {
+    if (event.target.classList.contains("modal")) {
+      event.target.style.display = "none";
+    }
+  });
 
+  // Toggle dropdown menu
+  dropdownButton.addEventListener("click", function () {
+    dropdownMenu.classList.toggle("show");
+  });
+
+  // Handle profession selection
+  dropdownMenu.addEventListener("click", function (event) {
+    const selectedItem = event.target.closest(".dropdown-item");
+    if (!selectedItem) return;
+
+    const professionId = selectedItem.getAttribute("data-value");
+    const professionTitle = selectedItem.textContent;
+
+    if (professionId === "other") {
+      professionModal.style.display = "block"; // Open modal for new profession
+    } else {
+      modalProfessionId.value = professionId; 
+      claimModal.style.display = "block";
+    }
+
+    dropdownMenu.classList.remove("show");
+  });
+
+  // Close dropdown when clicking outside
+  document.addEventListener("click", function (event) {
+    if (!dropdownButton.contains(event.target) && !dropdownMenu.contains(event.target)) {
+      dropdownMenu.classList.remove("show");
+    }
+  });
+
+  // Add hidden input for selected profession
+  function addHiddenInput(professionId) {
+    if (!document.querySelector(`input[value='${professionId}']`)) {
       const input = document.createElement("input");
       input.type = "hidden";
       input.name = "profession_ids[]";
       input.value = professionId;
       professionIdsContainer.appendChild(input);
     }
-
-    function removeHiddenInput(professionId) {
-      console.log(`Removing hidden input for profession: ${professionId}`); // ✅ Debugging line
-
-      const input = professionIdsContainer.querySelector(`input[value='${professionId}']`);
-      if (input) input.remove();
-    }
-
-    function submitForm() {
-      console.log("Submitting form"); // ✅ Debugging line
-
-      if (professionForm) {
-        professionForm.submit();
-      }
-    }
   }
 
-  // ✅ Open claim modal for profession details
-  if (professionList && claimModal) {
-    professionList.addEventListener("dblclick", function(e) {
-      const selectedOption = e.target;
-      if (selectedOption.value) {
-        console.log(`Opening claim modal for ID: ${selectedOption.value}`); // ✅ Debugging line
-        professionIdInput.value = selectedOption.value;
-        claimModal.style.display = "block";
-        e.stopPropagation();
-      }
-    });
+  // Remove profession from claimed list
+  claimedProfessions.addEventListener("click", function (event) {
+    if (event.target.classList.contains("remove_profession")) {
+      event.preventDefault();
+      const professionId = event.target.getAttribute("data-id");
+      event.target.parentElement.remove();
+      removeHiddenInput(professionId);
+      submitForm();
+    }
+  });
 
-    window.addEventListener("click", function(event) {
-      if (event.target === claimModal) {
-        claimModal.style.display = "none";
-      }
-    });
+  // Remove hidden input when removing a profession
+  function removeHiddenInput(professionId) {
+    const input = professionIdsContainer.querySelector(`input[value='${professionId}']`);
+    if (input) input.remove();
+  }
+
+  // Auto-submit form
+  function submitForm() {
+    if (professionForm) {
+      professionForm.submit();
+    }
   }
 });

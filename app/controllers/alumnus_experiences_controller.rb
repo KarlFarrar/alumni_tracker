@@ -33,6 +33,6 @@ class AlumnusExperiencesController < ApplicationController
   end
 
   def alumnus_experience_params
-    params.require(:alumnus_experience).permit(:date_received, :custom_description)
+    params.require(:alumnus_experience).permit(:date_received, :custom_description, :placement)
   end
 end

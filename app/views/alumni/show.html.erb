@@ -1,32 +1,54 @@
 <h1>Alumnus Profile</h1>
-
+<p><strong>First Name:</strong> <%= @alumnus.user.first_name %></p>
+<p><strong>Last Name:</strong> <%= @alumnus.user.last_name %></p>
 <p><strong>UIN:</strong> <%= @alumnus.uin %></p>
 <p><strong>Email:</strong> <%= @alumnus.email %></p>
-<p><strong>Phone Number:</strong> <%= @alumnus.phone_number %></p>
+
 <p><strong>Cohort Year:</strong> <%= @alumnus.cohort_year %></p>
 
 <h2>Professions</h2>
-<ul>
+
+<ul id="claimed_professions">
   <% @alumnus.alumnus_professions.each do |alumnus_profession| %>
-    <li>
-      <strong><%= alumnus_profession.profession.title %></strong>
+    <li id="profession_<%= alumnus_profession.profession.id %>">
+      <strong><%= alumnus_profession.profession.title %></strong>  
       <br>
       <small>Field: <%= alumnus_profession.field || "Not Set" %></small>
+      <br>
+      <br> 
     </li>
   <% end %>
 </ul>
 
 <h2>Experiences</h2>
-<ul>
+
+<ul id="claimed_experiences">
   <% @alumnus.alumnus_experiences.each do |alumnus_experience| %>
-    <li>
-      <strong><%= alumnus_experience.experience.title %> (<%= alumnus_experience.experience.experience_type %>)</strong>
+    <li id="experience_<%= alumnus_experience.experience.id %>">
+      <strong>
+        <%= alumnus_experience.experience.title %> 
+        (<%= alumnus_experience.experience.experience_type %>)
+      </strong>  
       <br>
       <small>Date Received: <%= alumnus_experience.date_received || "Not Set" %></small>
       <br>
+
+      <% if alumnus_experience.experience.experience_type.downcase == "competition" %>
+        <small><strong>Placement:</strong> <%= alumnus_experience.placement.presence || "Not Set" %></small>
+        <br>
+      <% end %>
+
       <p><%= alumnus_experience.custom_description.presence || "No description provided." %></p>
+      <br>
+      <br> 
     </li>
   <% end %>
 </ul>
 
-<p><%= link_to "Back to Alumni List", alumni_path %></p>
+
+<% if gmail_signed_in? %>
+  <p><%= link_to "Edit Profile", edit_alumnus_path(@alumnus) %></p>
+  <p><%= link_to "Back to Alumni List", alumni_path %></p>
+<% else %>
+  <p><%= link_to "Complete profile", complete_profile_alumnus_path(@alumnus) %></p>
+<% end %>

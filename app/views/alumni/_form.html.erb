@@ -1,4 +1,4 @@
-<%= form_with(model: alumnus) do |form| %>
+<%= form_with(model: @alumnus) do |form| %>
   <% if alumnus.errors.any? %>
     <div style="color: red">
       <h2><%= pluralize(alumnus.errors.count, "error") %> prohibited this alumnus from being saved:</h2>
@@ -10,12 +10,104 @@
       </ul>
     </div>
   <% end %>
+  <div class="form-grid">      
+    <div class="form-group">      
+      <%= form.fields_for :user do |user_form| %>
+        <%= user_form.label :first_name%>
+        <%= user_form.text_field :first_name, id: "first_name" %>
 
-  <div class="field">
-    <%= form.label :uin %>
-    <%= form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
-          maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
+        <%= user_form.label :last_name %>
+        <%= user_form.text_field :last_name, id: "last_name" %>
+
+        <%= user_form.label :middle_initial %>
+        <%= user_form.text_field :middle_initial, id: "middle_initial" %>
+
+        <% if @alumnus.new_record? %>
+          <%= user_form.label :uin %>
+          <%= user_form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
+              maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
+        <% else %>
+          <div>
+            <%= user_form.label :uin %>
+            <%= user_form.text_field :uin, readonly: true, value: @alumnus.user.uin %>
+            <%= user_form.hidden_field :uin, value: @alumnus.user.uin %>
+          </div>
+        <% end %>
+      <% end %>
+    </div> 
+
+    <div class="form-group">
+      <div> 
+        <%= form.label :cohort_year, "Class Year", style: "display: block" %>
+        <%= form.select :cohort_year, options_for_select((1950..(Date.today.year + 10)).to_a.reverse, selected: 2025) %>
+      </div>
+
+      <div>
+        <%= form.label :phone_number %>
+        <%= form.text_field :phone_number, id: "phone_number", placeholder: "(123)-456-7890", maxlength: 14 %>
+      </div>
+
+      <div>
+        <%= form.label :email, style: "display: block" %>
+        <%= form.text_field :email %>
+      </div>
+
+    </div>
+
+    <div class="form-group">
+      <%= form.label :team_affiliation, style: "display: block" %>
+      <%= form.text_field :team_affiliation %>
+    </div>
+
+    <div class="form-group">
+      <%= form.label :profession_title, style: "display: block" %>
+      <%= form.text_field :profession_title %>
+    </div>
+
+    <div class="form-group full-width">
+      <%= form.label :availability, "Availability", style: "display: block" %>
+      <%= form.select :availability, options_for_select([["Yes", true], ["No", false]], selected: @alumnus.availability), include_blank: true, class: "form-control" %>
+    </div>
+
+    <div class="form-group full-width">
+      <%= form.label :biography, style: "display: block" %>
+      <%= form.text_field :biography %>
+    </div class="form-group">
+
+    <div class="form-group full-width">
+      <%= form.submit %>
+    </div>
+
   </div>
+
+  <script>
+    document.addEventListener("turbo:load", function() {
+      const phoneInput = document.getElementById("phone_number");
+
+      if (phoneInput) {
+        phoneInput.addEventListener("input", function(e) {
+          let numbers = e.target.value.replace(/\D/g, ""); 
+          
+          if (numbers.length > 10) {
+            numbers = numbers.slice(0, 10);
+          }
+
+          let formattedNumber = "";
+          if (numbers.length > 0) {
+            formattedNumber += `(${numbers.slice(0, 3)}`;
+          }
+          if (numbers.length >= 4) {
+            formattedNumber += `)-${numbers.slice(3, 6)}`;
+          }
+          if (numbers.length >= 7) {
+            formattedNumber += `-${numbers.slice(6, 10)}`;
+          }
+
+          e.target.value = formattedNumber;
+        });
+      }
+    });
+  </script>
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -33,69 +125,60 @@
     });
   </script>
 
-  <div>
-    <%= form.label :cohort_year, "Class Year", style: "display: block" %>
-    <%= form.select :cohort_year, options_for_select((1950..(Date.today.year + 10)).to_a.reverse, selected: 2025) %>
-  </div>
-
-  <div>
-    <%= form.label :team_affiliation, style: "display: block" %>
-    <%= form.text_field :team_affiliation %>
-  </div>
-
-  <div>
-    <%= form.label :profession_title, style: "display: block" %>
-    <%= form.text_field :profession_title %>
-  </div>
-
-  <div>
-    <%= form.label :availability, style: "display: block" %>
-    <%= form.checkbox :availability %>
-  </div>
-
-  <div>
-    <%= form.label :email, style: "display: block" %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :phone_number %>
-    <%= form.text_field :phone_number, id: "phone_number", placeholder: "(123)-456-7890", maxlength: 14 %>
-  </div>
-
   <script>
-    document.addEventListener("turbo:load", function() {
-      const phoneInput = document.getElementById("phone_number");
+    document.addEventListener("DOMContentLoaded", function() {
+      const firstNameInput = document.getElementById("first_name");
 
-      phoneInput.addEventListener("input", function(e) {
-        let numbers = e.target.value.replace(/\D/g, ""); 
-        
-        if (numbers.length > 10) {
-          numbers = numbers.slice(0, 10);
+      firstNameInput.addEventListener("blur", function() {
+        let value = firstNameInput.value.trim();  // Remove trailing spaces
+        if (value.length > 0) {
+          // Capitalize the first letter
+          value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
         }
-
-        let formattedNumber = "";
-        if (numbers.length > 0) {
-          formattedNumber += `(${numbers.slice(0, 3)}`;
-        }
-        if (numbers.length >= 4) {
-          formattedNumber += `)-${numbers.slice(3, 6)}`;
-        }
-        if (numbers.length >= 7) {
-          formattedNumber += `-${numbers.slice(6, 10)}`;
-        }
-
-        e.target.value = formattedNumber;
+        firstNameInput.value = value;
       });
     });
   </script>
 
-  <div>
-    <%= form.label :biography, style: "display: block" %>
-    <%= form.text_field :biography %>
-  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const lastNameInput = document.getElementById("last_name");
 
-  <div>
-    <%= form.submit %>
-  </div>
+      lastNameInput.addEventListener("blur", function() {
+        let value = lastNameInput.value.trim();  // Remove trailing spaces
+        if (value.length > 0) {
+          // Capitalize the first letter
+          value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        }
+        lastNameInput.value = value;
+      });
+    });
+  </script>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const middleInitialInput = document.getElementById("middle_initial");
+
+      middleInitialInput.addEventListener("input", function(e) {
+        let value = e.target.value;
+
+        // Ensure only 1 character is entered
+        if (value.length > 1) {
+          value = value.slice(0, 1); // Trim to 1 character
+        }
+
+        if (!/^[A-Za-z]*$/.test(value)) {
+        value = value.slice(0, -1);  // Remove non-alphabetic character
+        }
+
+        if (value.length > 0) {
+          // Capitalize the first letter
+          value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        }
+
+        e.target.value = value; // Set the trimmed value
+      });
+    });
+  </script>
 <% end %>
+
