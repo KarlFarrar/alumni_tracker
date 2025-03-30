@@ -1,0 +1,73 @@
+<!-- app/views/admin/professions/index.html.erb -->
+<div class="professions-index">
+  <header class="page-header">
+    <h1>Profession Management</h1>
+    <div class="header-actions">
+      <%= link_to "Back to Dashboard", admin_dashboard_path, class: "btn btn-secondary" %>
+    </div>
+  </header>
+
+  <!-- Add new profession form section -->
+  <div class="card mb-4">
+    <div class="card-header">
+      <h3>Create New Profession</h3>
+    </div>
+    <div class="card-body">
+      <%= form_with(model: [:admin, Profession.new], local: true, class: "row g-3") do |form| %>
+        <div class="col-md-6">
+          <%= form.label :title, class: "form-label" %>
+          <%= form.text_field :title, class: "form-control", required: true %>
+        </div>
+        
+        <%= form.hidden_field :created_at, value: Time.now %>
+        <%= form.hidden_field :updated_at, value: Time.now %>
+        
+        <div class="col-12 mt-3">
+          <%= form.submit "Create Profession", class: "btn btn-success" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="filter-controls mb-4">
+    <div class="input-group">
+      <input type="text" id="professionSearch" class="form-control" placeholder="Search professions...">
+      <button class="btn btn-outline-secondary" type="button">Search</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Title</th>
+          <th>Created At</th>
+          <th>Updated At</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @professions.each do |profession| %>
+          <tr>
+            <td><%= profession.title %></td>
+            <td><%= profession.created_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            <td><%= profession.updated_at.strftime('%Y-%m-%d %H:%M:%S') %></td>
+            <td class="actions">
+              <%= button_to "Delete", 
+                 admin_profession_path(profession), 
+                 method: :delete, 
+                 form: { data: { turbo_confirm: "Are you sure you want to delete this profession?" } },
+                 class: "btn btn-sm btn-danger" %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+
+  <% if @professions.empty? %>
+    <div class="alert alert-info">
+      No profession records found in the database.
+    </div>
+  <% end %>
+</div>
