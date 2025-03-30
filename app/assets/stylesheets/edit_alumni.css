@@ -67,6 +67,18 @@
     background-color: #575757;
   }
   
+  .sidebar-logo {
+    position: absolute;
+    bottom: 7rem; /* Space from the bottom */
+    left: 1rem; /* Space from the left */
+    width: 80%; /* Adjust as needed */
+  }
+
+  .sidebar-logo img {
+        width: 100%; /* Make the logo responsive */
+        height: auto;
+        display: block;
+   }
   /* Main Content Styling */
   .main-content {
     margin-left: 15rem; 
