@@ -25,7 +25,7 @@
   <%= f.submit "Update Experience", class: "btn btn-success" %>
 <% end %>
 
-<p><%= link_to "Back", alumnus_path(@alumnus_experience.alumnus) %></p>
+<p><%= link_to "Back", edit_alumnus_path(@alumnus_experience.alumnus) %></p>
 
 <script>
   document.addEventListener("turbo:load", function() {
