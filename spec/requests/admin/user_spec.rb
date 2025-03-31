@@ -5,7 +5,7 @@ RSpec.describe "Admin::Users", type: :request do
     before do
         # This will skip the `authenticate_gmails!` before action
         allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
-      end
+    end
     let(:admin) {
         User.create!(
         uin: "111222333",
@@ -23,10 +23,6 @@ RSpec.describe "Admin::Users", type: :request do
         isAdmin: false
         )
     }
-
-    before do
-        sign_in admin
-    end
 
     describe "POST /admin/users/:id/give_admin" do
         context "when the user exists and is not an admin" do
