@@ -8,7 +8,7 @@ RSpec.describe "Admin::Users", type: :request do
     end
     let(:admin) {
         User.create!(
-        uin: "111222333",
+        uin: 111222333,
         first_name: "Admin",
         last_name: "1",
         isAdmin: true,
@@ -17,7 +17,7 @@ RSpec.describe "Admin::Users", type: :request do
 
     let(:user) {
         User.create!(
-        uin: "000111222",
+        uin: 333222111,
         first_name: "User",
         last_name: "1",
         isAdmin: false
