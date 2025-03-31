@@ -201,7 +201,7 @@ class AlumniController < ApplicationController
       if params[:id].present?
         Rails.logger.info "UPDATE"
         params.require(:alumnus).permit(
-          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
+          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :LinkedIn, :profession_title,
           experience_ids: [],
           profession_ids: [],
           professions_attributes: [:title],
@@ -210,7 +210,7 @@ class AlumniController < ApplicationController
       else
         Rails.logger.info "NEW"
         params.require(:alumnus).permit(
-          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
+          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :LinkedIn, :profession_title,
           experience_ids: [],
           profession_ids: [],
           professions_attributes: [:title],
