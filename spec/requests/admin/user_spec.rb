@@ -10,7 +10,8 @@ RSpec.describe "Admin::Users", type: :request do
         User.create!(
         uin: 111222333,
         first_name: "Admin",
-        last_name: "1",
+        last_name: "Test",
+        status: "student",
         isAdmin: true,
         )
     }
@@ -19,7 +20,8 @@ RSpec.describe "Admin::Users", type: :request do
         User.create!(
         uin: 333222111,
         first_name: "User",
-        last_name: "1",
+        last_name: "Testee",
+        status: "student",
         isAdmin: false
         )
     }
@@ -33,6 +35,7 @@ RSpec.describe "Admin::Users", type: :request do
                 follow_redirect!
 
                 expect(response.body).to include("#{user.first_name} was given admin privileges.")
+                puts user.reload.inspect
                 expect(user.reload.isAdmin).to be true
             end
         end
