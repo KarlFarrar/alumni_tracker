@@ -34,8 +34,7 @@ RSpec.describe "Admin::Users", type: :request do
                 expect(response).to redirect_to(admin_users_path)
                 follow_redirect!
 
-                expect(response.body).to include("#{user.first_name} was given admin privileges.")
-                puts user.reload.inspect
+                expect(flash[:notice]).to eq("#{user.first_name} was given admin privileges.")
                 expect(user.reload.isAdmin).to be true
             end
         end
