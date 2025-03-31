@@ -13,7 +13,7 @@
       <img src="./assets/0.13.1/loading.gif" alt="loading"/>
     </div>
     <div id="wrapper" class="hide">
-      <div class="timestamp">Generated <abbr class="timeago" title="2025-03-31T18:24:17+00:00">2025-03-31T18:24:17+00:00</abbr></div>
+      <div class="timestamp">Generated <abbr class="timeago" title="2025-03-31T18:51:05+00:00">2025-03-31T18:51:05+00:00</abbr></div>
       <ul class="group_tabs"></ul>
 
       <div id="content">
@@ -22,7 +22,7 @@
     <span class="group_name">All Files</span>
     (<span class="covered_percent">
       <span class="yellow">
-  87.62%
+  87.5%
 </span>
 
      </span>
@@ -42,11 +42,11 @@
   </div>
 
   <div class="t-line-summary">
-    <b>105</b> relevant lines,
-    <span class="green"><b>92</b> lines covered</span> and
+    <b>104</b> relevant lines,
+    <span class="green"><b>91</b> lines covered</span> and
     <span class="red"><b>13</b> lines missed. </span>
     (<span class="yellow">
-  87.62%
+  87.5%
 </span>
 )
   </div>
@@ -280,12 +280,12 @@
         
           <tr class="t-file">
             <td class="strong t-file__name"><a href="#dd0a463ec60972c485c2b83dfb5e8a33fdb20cfc" class="src_link" title="spec/requests/admin/user_spec.rb">spec/requests/admin/user_spec.rb</a></td>
-            <td class="red strong cell--number t-file__coverage">57.89 %</td>
-            <td class="cell--number">46</td>
-            <td class="cell--number">19</td>
-            <td class="cell--number">11</td>
+            <td class="red strong cell--number t-file__coverage">55.56 %</td>
+            <td class="cell--number">44</td>
+            <td class="cell--number">18</td>
+            <td class="cell--number">10</td>
             <td class="cell--number">8</td>
-            <td class="cell--number">0.58</td>
+            <td class="cell--number">0.56</td>
             
           </tr>
         
@@ -6902,7 +6902,7 @@
     <h3>spec/requests/admin/user_spec.rb</h3>
     <h4>
       <span class="red">
-  57.89%
+  55.56%
 </span>
 
       lines covered
@@ -6911,8 +6911,8 @@
     
 
     <div class="t-line-summary">
-      <b>19</b> relevant lines.
-      <span class="green"><b>11</b> lines covered</span> and
+      <b>18</b> relevant lines.
+      <span class="green"><b>10</b> lines covered</span> and
       <span class="red"><b>8</b> lines missed.</span>
     </div>
 
@@ -6958,19 +6958,7 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="4">
-            
-              <span class="hits">1</span>
-            
-
-            
-
-            <code class="ruby">  include Devise::Test::IntegrationHelpers  # 👈 Make Devise helpers available</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="5">
+          <li class="never" data-hits="" data-linenumber="4">
             
 
             
@@ -6980,14 +6968,24 @@
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="6">
+          <li class="covered" data-hits="1" data-linenumber="5">
             
               <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  before do</code>
+            <code class="ruby">    before do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="6">
+            
+
+            
+
+            <code class="ruby">        # This will skip the `authenticate_gmails!` before action</code>
           </li>
         </div>
       
@@ -6999,7 +6997,7 @@
 
             
 
-            <code class="ruby">    allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)</code>
+            <code class="ruby">        allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)</code>
           </li>
         </div>
       
@@ -7009,39 +7007,39 @@
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">      end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="9">
-            
-
-            
-
-            <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="covered" data-hits="1" data-linenumber="10">
+          <li class="covered" data-hits="1" data-linenumber="9">
             
               <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  let(:admin) {</code>
+            <code class="ruby">    let(:admin) {</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="11">
+          <li class="missed" data-hits="0" data-linenumber="10">
             
 
             
 
-            <code class="ruby">    User.create!(</code>
+            <code class="ruby">        User.create!(</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="11">
+            
+
+            
+
+            <code class="ruby">        uin: &quot;111222333&quot;,</code>
           </li>
         </div>
       
@@ -7051,7 +7049,7 @@
 
             
 
-            <code class="ruby">      email: &quot;admin@example.com&quot;,</code>
+            <code class="ruby">        first_name: &quot;Admin&quot;,</code>
           </li>
         </div>
       
@@ -7061,7 +7059,7 @@
 
             
 
-            <code class="ruby">      password: &quot;password&quot;,</code>
+            <code class="ruby">        last_name: &quot;1&quot;,</code>
           </li>
         </div>
       
@@ -7071,7 +7069,7 @@
 
             
 
-            <code class="ruby">      password_confirmation: &quot;password&quot;,</code>
+            <code class="ruby">        isAdmin: true,</code>
           </li>
         </div>
       
@@ -7081,7 +7079,7 @@
 
             
 
-            <code class="ruby">      isAdmin: true</code>
+            <code class="ruby">        )</code>
           </li>
         </div>
       
@@ -7091,7 +7089,7 @@
 
             
 
-            <code class="ruby">    )</code>
+            <code class="ruby">    }</code>
           </li>
         </div>
       
@@ -7101,39 +7099,39 @@
 
             
 
-            <code class="ruby">  }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="18">
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="19">
+          <li class="covered" data-hits="1" data-linenumber="18">
             
               <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  let(:user) {</code>
+            <code class="ruby">    let(:user) {</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="20">
+          <li class="missed" data-hits="0" data-linenumber="19">
             
 
             
 
-            <code class="ruby">    User.create!(</code>
+            <code class="ruby">        User.create!(</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="20">
+            
+
+            
+
+            <code class="ruby">        uin: &quot;000111222&quot;,</code>
           </li>
         </div>
       
@@ -7143,7 +7141,7 @@
 
             
 
-            <code class="ruby">      email: &quot;user@example.com&quot;,</code>
+            <code class="ruby">        first_name: &quot;User&quot;,</code>
           </li>
         </div>
       
@@ -7153,7 +7151,7 @@
 
             
 
-            <code class="ruby">      password: &quot;password&quot;,</code>
+            <code class="ruby">        last_name: &quot;1&quot;,</code>
           </li>
         </div>
       
@@ -7163,7 +7161,7 @@
 
             
 
-            <code class="ruby">      password_confirmation: &quot;password&quot;,</code>
+            <code class="ruby">        isAdmin: false</code>
           </li>
         </div>
       
@@ -7173,7 +7171,7 @@
 
             
 
-            <code class="ruby">      first_name: &quot;Test&quot;,</code>
+            <code class="ruby">        )</code>
           </li>
         </div>
       
@@ -7183,7 +7181,7 @@
 
             
 
-            <code class="ruby">      isAdmin: false</code>
+            <code class="ruby">    }</code>
           </li>
         </div>
       
@@ -7193,69 +7191,73 @@
 
             
 
-            <code class="ruby">    )</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="27">
-            
-
-            
-
-            <code class="ruby">  }</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="28">
-            
-
-            
-
             <code class="ruby"></code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="29">
+          <li class="covered" data-hits="1" data-linenumber="27">
             
               <span class="hits">1</span>
             
 
             
 
-            <code class="ruby">  before do</code>
+            <code class="ruby">    before do</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="30">
+          <li class="missed" data-hits="0" data-linenumber="28">
             
 
             
 
-            <code class="ruby">    sign_in admin  # 👈 Sign in the admin before each request</code>
+            <code class="ruby">        sign_in admin</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="31">
+          <li class="never" data-hits="" data-linenumber="29">
             
 
             
 
-            <code class="ruby">  end</code>
+            <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="32">
+          <li class="never" data-hits="" data-linenumber="30">
             
 
             
 
             <code class="ruby"></code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="31">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">    describe &quot;POST /admin/users/:id/give_admin&quot; do</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="covered" data-hits="1" data-linenumber="32">
+            
+              <span class="hits">1</span>
+            
+
+            
+
+            <code class="ruby">        context &quot;when the user exists and is not an admin&quot; do</code>
           </li>
         </div>
       
@@ -7267,31 +7269,27 @@
 
             
 
-            <code class="ruby">  describe &quot;POST /admin/users/:id/give_admin&quot; do</code>
+            <code class="ruby">            it &quot;grants admin privileges to the user&quot; do</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="34">
-            
-              <span class="hits">1</span>
+          <li class="missed" data-hits="0" data-linenumber="34">
             
 
             
 
-            <code class="ruby">    context &quot;when the user exists and is not an admin&quot; do</code>
+            <code class="ruby">                post give_admin_admin_user_path(user)</code>
           </li>
         </div>
       
         <div>
-          <li class="covered" data-hits="1" data-linenumber="35">
-            
-              <span class="hits">1</span>
+          <li class="never" data-hits="" data-linenumber="35">
             
 
             
 
-            <code class="ruby">      it &quot;grants admin privileges to the user&quot; do</code>
+            <code class="ruby"></code>
           </li>
         </div>
       
@@ -7301,27 +7299,27 @@
 
             
 
-            <code class="ruby">        post give_admin_admin_user_path(user)</code>
+            <code class="ruby">                expect(response).to redirect_to(admin_users_path)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="37">
+          <li class="missed" data-hits="0" data-linenumber="37">
+            
+
+            
+
+            <code class="ruby">                follow_redirect!</code>
+          </li>
+        </div>
+      
+        <div>
+          <li class="never" data-hits="" data-linenumber="38">
             
 
             
 
             <code class="ruby"></code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="missed" data-hits="0" data-linenumber="38">
-            
-
-            
-
-            <code class="ruby">        expect(response).to redirect_to(admin_users_path)</code>
           </li>
         </div>
       
@@ -7331,37 +7329,37 @@
 
             
 
-            <code class="ruby">        follow_redirect!</code>
+            <code class="ruby">                expect(response.body).to include(&quot;#{user.first_name} was given admin privileges.&quot;)</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="40">
+          <li class="missed" data-hits="0" data-linenumber="40">
             
 
             
 
-            <code class="ruby"></code>
+            <code class="ruby">                expect(user.reload.isAdmin).to be true</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="41">
+          <li class="never" data-hits="" data-linenumber="41">
             
 
             
 
-            <code class="ruby">        expect(response.body).to include(&quot;#{user.first_name} was given admin privileges.&quot;)</code>
+            <code class="ruby">            end</code>
           </li>
         </div>
       
         <div>
-          <li class="missed" data-hits="0" data-linenumber="42">
+          <li class="never" data-hits="" data-linenumber="42">
             
 
             
 
-            <code class="ruby">        expect(user.reload.isAdmin).to be true</code>
+            <code class="ruby">        end</code>
           </li>
         </div>
       
@@ -7371,32 +7369,12 @@
 
             
 
-            <code class="ruby">      end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="44">
-            
-
-            
-
             <code class="ruby">    end</code>
           </li>
         </div>
       
         <div>
-          <li class="never" data-hits="" data-linenumber="45">
-            
-
-            
-
-            <code class="ruby">  end</code>
-          </li>
-        </div>
-      
-        <div>
-          <li class="never" data-hits="" data-linenumber="46">
+          <li class="never" data-hits="" data-linenumber="44">
             
 
             
