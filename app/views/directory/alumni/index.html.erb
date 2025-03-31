@@ -1,119 +1,122 @@
-<div class="directory">
-  <div class="alumni-directory">
-    <header class="page-header">
-      <h1>Alumni Directory</h1>
-    </header>
+<%= render 'layouts/navbar' %>
+<div class = "dirContainer">
+  <div class="directory">
+    <div class="alumni-directory">
+      <header class="page-header">
+        <h1>Alumni Directory</h1>
+      </header>
 
-    <div class="filter-section mb-4">
-      <div class="card">
-        <div class="card-header">
-          <h3>Filter Options</h3>
-        </div>
-        <div class="card-body">
-          <%= form_with url: directory_alumni_path, method: :get, local: true, class: "filter-form" do |f| %>
-            <div class="row">
-              <div class="col-md-4 mb-3">
-                <div class="form-check">
-                  <%= f.label :available, "Show only available alumni", class: "form-check-label" %>
-                  <%= f.check_box :available, { checked: params[:available] == "1", class: "form-check-input" }, "1", nil %>
-                </div>
-              </div>
-              
-              <div class="col-md-4 mb-3">
-                <%= f.label :cohort_year, "Cohort Year", class: "form-label" %>
-                <%= f.select :cohort_year, 
-                  options_for_select(Alumnus.distinct.pluck(:cohort_year).sort.map{|year| [year, year]}, params[:cohort_year]), 
-                  { include_blank: "All Years" }, 
-                  { class: "form-select" } 
-                %>
-              </div>
-              
-              <div class="col-md-4 mb-3">
-                <%= f.label :profession_id, "Profession", class: "form-label" %>
-                <%= f.select :profession_id, 
-                  options_for_select(Profession.all.map{|p| [p.title, p.id]}, params[:profession_id]), 
-                  { include_blank: "All Professions" }, 
-                  { class: "form-select" } 
-                %>
-              </div>
-
-              <div class="col-md-4 mb-3">
-              <%= f.label :experience_id, "Experience", class: "form-label" %>
-              <%= f.select :experience_id, 
-                options_for_select(Experience.all.map{|e| [e.title, e.id]}, params[:experience_id]), 
-                { include_blank: "All Experiences" }, 
-                { class: "form-select" } 
-              %>
-            </div>
-            </div>
-            
-           
-
-            <div class="mt-2">
-              <%= f.submit "Apply Filters", class: "btn btn-primary" %>
-              <% if params[:available].present? || params[:cohort_year].present? || 
-                params[:profession_id].present? || params[:experience_id].present? || 
-                params[:search].present? %>
-                <%= link_to "Clear Filters", directory_alumni_path, class: "btn btn-outline-secondary ms-2" %>
-              <% end %>
-            </div>
-
-            <div class="search-area">
-            <div class="search-label">Search by name:</div>
-            <div class="search-container">
-              <%= f.text_field :search, value: params[:search], class: "form-control", placeholder: "Enter first or last name" %>
-              <button type="submit" class="search-button">
-                Search
-              </button>
-            </div>
+      <div class="filter-section mb-4">
+        <div class="card">
+          <div class="card-header">
+            <h3>Filter Options</h3>
           </div>
+          <div class="card-body">
+            <%= form_with url: directory_alumni_path, method: :get, local: true, class: "filter-form" do |f| %>
+              <div class="row">
+                <div class="col-md-4 mb-3">
+                  <div class="form-check">
+                    <%= f.label :available, "Show only available alumni", class: "form-check-label" %>
+                    <%= f.check_box :available, { checked: params[:available] == "1", class: "form-check-input" }, "1", nil %>
+                  </div>
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                  <%= f.label :cohort_year, "Cohort Year", class: "form-label" %>
+                  <%= f.select :cohort_year, 
+                    options_for_select(Alumnus.distinct.pluck(:cohort_year).sort.map{|year| [year, year]}, params[:cohort_year]), 
+                    { include_blank: "All Years" }, 
+                    { class: "form-select" } 
+                  %>
+                </div>
+                
+                <div class="col-md-4 mb-3">
+                  <%= f.label :profession_id, "Profession", class: "form-label" %>
+                  <%= f.select :profession_id, 
+                    options_for_select(Profession.all.map{|p| [p.title, p.id]}, params[:profession_id]), 
+                    { include_blank: "All Professions" }, 
+                    { class: "form-select" } 
+                  %>
+                </div>
 
-          <% end %>
+                <div class="col-md-4 mb-3">
+                <%= f.label :experience_id, "Experience", class: "form-label" %>
+                <%= f.select :experience_id, 
+                  options_for_select(Experience.all.map{|e| [e.title, e.id]}, params[:experience_id]), 
+                  { include_blank: "All Experiences" }, 
+                  { class: "form-select" } 
+                %>
+              </div>
+              </div>
+              
+             
+
+              <div class="mt-2">
+                <%= f.submit "Apply Filters", class: "btn btn-primary" %>
+                <% if params[:available].present? || params[:cohort_year].present? || 
+                  params[:profession_id].present? || params[:experience_id].present? || 
+                  params[:search].present? %>
+                  <%= link_to "Clear Filters", directory_alumni_path, class: "btn btn-outline-secondary ms-2" %>
+                <% end %>
+              </div>
+
+              <div class="search-area">
+              <div class="search-label">Search by name:</div>
+              <div class="search-container">
+                <%= f.text_field :search, value: params[:search], class: "form-control", placeholder: "Enter first or last name" %>
+                <button type="submit" class="search-button">
+                  Search
+                </button>
+              </div>
+            </div>
+
+            <% end %>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="alumni-list">
-      <div class="table-responsive">
-        <table class="table table-striped table-hover">
-          <thead>
-            <tr>
-              <th>First Name</th>
-              <th>Last Name</th>
-              <th>Profession</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @alumni.each do |alumnus| %>
+      <div class="alumni-list">
+        <div class="table-responsive">
+          <table class="table table-striped table-hover">
+            <thead>
               <tr>
-                <td><%= alumnus.user&.first_name || "N/A" %></td>
-                <td><%= alumnus.user&.last_name || "N/A" %></td>
-                <td>
-                  <% 
-                    profession_title = "N/A"
-                    alumnus_profession = AlumnusProfession.where(alumnus_id: alumnus.id).first
-                    if alumnus_profession
-                      profession = Profession.find_by(id: alumnus_profession.profession_id)
-                      profession_title = profession ? profession.title : "N/A"
-                    end
-                  %>
-                  <%= profession_title %>
-                </td>
-                <td>
-                  <%= link_to "View Profile", directory_alumnus_path(alumnus), class: "btn btn-sm btn-outline-primary" %>
-                </td>
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Profession</th>
+                <th>Actions</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <% @alumni.each do |alumnus| %>
+                <tr>
+                  <td><%= alumnus.user&.first_name || "N/A" %></td>
+                  <td><%= alumnus.user&.last_name || "N/A" %></td>
+                  <td>
+                    <% 
+                      profession_title = "N/A"
+                      alumnus_profession = AlumnusProfession.where(alumnus_id: alumnus.id).first
+                      if alumnus_profession
+                        profession = Profession.find_by(id: alumnus_profession.profession_id)
+                        profession_title = profession ? profession.title : "N/A"
+                      end
+                    %>
+                    <%= profession_title %>
+                  </td>
+                  <td>
+                    <%= link_to "View Profile", directory_alumnus_path(alumnus), class: "btn btn-sm btn-outline-primary" %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
-    </div>
 
-    <% if @alumni.empty? %>
-      <div class="alert alert-info">
-        No alumni found matching your criteria.
-      </div>
-    <% end %>
+      <% if @alumni.empty? %>
+        <div class="alert alert-info">
+          No alumni found matching your criteria.
+        </div>
+      <% end %>
+    </div>
   </div>
 </div>

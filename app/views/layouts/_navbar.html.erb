@@ -1,0 +1,22 @@
+<nav class="navbar">
+  <%= image_tag("logo2.png", alt: "Sling health", class: "navbar-logo") %>
+  <div class = "navbar-content">
+    <%= button_to "Alumni Directory", root_path, class: "navbar-btn", method: :get %>
+    <% if current_gmail&.user&.isAdmin%>
+      <%= button_to "Admin View", admin_dashboard_path, class: "navbar-btn", method: :get %>
+    <% end %>
+    <%= button_to "Admin View", admin_dashboard_path, class: "navbar-btn", method: :get %>
+    <button id ="navbar-profile" class = "navbar-profile">
+      <%= image_tag(current_gmail.avatar_url, alt: "Profile", class: "profile-img") %>
+    </button>
+
+    <div id="profile-dropdown" class="profile-dropdown hidden">
+        <% if current_gmail&.user&.status == "alumni" %>
+          <%= button_to "View Profile", alumnus_path(current_gmail&.user&.alumnus), class: "dropdown-btn", method: :get %>
+        <% elsif current_gmail&.user&.status == "student" %>
+          <%= button_to "View Profile", student_path(current_gmail&.user&.student), class: "dropdown-btn", method: :get %>
+        <% end %>
+        <%= button_to "logout", destroy_gmail_session_path, class: "dropdown-btn", method: :get %>
+    </div>
+  </div>
+</nav>

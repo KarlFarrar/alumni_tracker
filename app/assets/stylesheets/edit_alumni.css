@@ -17,13 +17,13 @@
   }
   
  /* General Page Styling */
- body {
+  /*.title-bar body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding-top: 4rem;
     padding-left: 15rem;
     background-color: #f4f4f4;
-  }
+  }*/
 
   
   .container {
