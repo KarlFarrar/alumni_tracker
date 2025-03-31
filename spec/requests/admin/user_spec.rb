@@ -4,10 +4,6 @@ RSpec.describe "Admin::Users", type: :request do
   let(:admin) { create(:user, isAdmin: true) } # Assuming Devise + FactoryBot
   let(:user) { create(:user, isAdmin: false) }
 
-  before do
-    sign_in admin
-  end
-
   describe "POST /admin/users/:id/give_admin" do
     context "when the user exists and is not an admin" do
       it "grants admin privileges to the user" do
