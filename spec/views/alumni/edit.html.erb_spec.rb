@@ -16,7 +16,7 @@ RSpec.describe "alumni/edit", type: :view do
       availability: false,
       email: "MyString",
       phone_number: "(682)-472-8670",
-      biography: "MyString",
+      LinkedIn: "MyString",
       user: user
     )
   }
