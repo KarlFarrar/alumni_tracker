@@ -46,9 +46,9 @@
     </div>
     
     <div class="mt-4">
-      <h4>Biography</h4>
+      <h4>LinkedIn</h4>
       <div class="biography-text">
-        <%= simple_format(@alumnus.biography) %>
+        <%= link_to @alumnus.LinkedIn, @alumnus.LinkedIn, target: "_blank", rel: "noopener" %>
       </div>
     </div>
   </div>
