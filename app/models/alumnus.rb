@@ -3,7 +3,7 @@ class Alumnus < ApplicationRecord
   include Loggable
 
   # Belongs to the User 
-  belongs_to :user, foreign_key: 'uin', primary_key: 'uin'
+  belongs_to :user, foreign_key: 'uin', primary_key: 'uin', dependent: :destroy
 
   accepts_nested_attributes_for :user
 

@@ -1,72 +1,17 @@
 {
   "RSpec": {
     "coverage": {
-      "/app/alumni_tracker/spec/helpers/alumni_helper_spec.rb": {
+      "/app/spec/requests/admin/user_spec.rb": {
         "lines": [
           1,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          0,
-          0,
-          null
-        ]
-      },
-      "/app/alumni_tracker/spec/rails_helper.rb": {
-        "lines": [
-          null,
           1,
-          1,
-          1,
-          null,
-          1,
-          null,
-          null,
-          null,
-          1,
-          1,
-          1,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
           null,
           1,
           null,
           1,
           null,
-          0,
-          null,
-          0,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          1,
           0,
           null,
           null,
@@ -75,30 +20,27 @@
           null,
           null,
           null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
-          null,
+          1,
           0,
           null,
           null,
           null,
+          null,
+          null,
+          null,
+          null,
+          1,
           0,
           null,
           null,
+          1,
+          1,
+          1,
+          0,
+          null,
           0,
           0,
+          null,
           0,
           0,
           null,
@@ -107,7 +49,94 @@
           null
         ]
       },
-      "/app/alumni_tracker/config/environment.rb": {
+      "/app/spec/rails_helper.rb": {
+        "lines": [
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          0,
+          null,
+          1,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          null,
+          1,
+          null,
+          null,
+          1,
+          1,
+          1,
+          1,
+          null,
+          null,
+          null,
+          null
+        ]
+      },
+      "/app/config/environment.rb": {
         "lines": [
           null,
           1,
@@ -116,7 +145,7 @@
           1
         ]
       },
-      "/app/alumni_tracker/config/application.rb": {
+      "/app/config/application.rb": {
         "lines": [
           1,
           null,
@@ -147,7 +176,7 @@
           null
         ]
       },
-      "/app/alumni_tracker/config/boot.rb": {
+      "/app/config/boot.rb": {
         "lines": [
           1,
           null,
@@ -155,7 +184,7 @@
           1
         ]
       },
-      "/app/alumni_tracker/config/environments/test.rb": {
+      "/app/config/environments/test.rb": {
         "lines": [
           null,
           null,
@@ -213,18 +242,20 @@
           null
         ]
       },
-      "/app/alumni_tracker/config/initializers/assets.rb": {
+      "/app/config/initializers/assets.rb": {
         "lines": [
           null,
           null,
           null,
+          1,
+          1,
           1,
           null,
           null,
           null
         ]
       },
-      "/app/alumni_tracker/config/initializers/content_security_policy.rb": {
+      "/app/config/initializers/content_security_policy.rb": {
         "lines": [
           null,
           null,
@@ -253,7 +284,7 @@
           null
         ]
       },
-      "/app/alumni_tracker/config/initializers/devise.rb": {
+      "/app/config/initializers/devise.rb": {
         "lines": [
           null,
           null,
@@ -571,7 +602,7 @@
           null
         ]
       },
-      "/app/alumni_tracker/config/initializers/filter_parameter_logging.rb": {
+      "/app/config/initializers/filter_parameter_logging.rb": {
         "lines": [
           null,
           null,
@@ -583,7 +614,7 @@
           null
         ]
       },
-      "/app/alumni_tracker/config/initializers/inflections.rb": {
+      "/app/config/initializers/inflections.rb": {
         "lines": [
           null,
           null,
@@ -606,49 +637,79 @@
           null
         ]
       },
-      "/app/alumni_tracker/app/helpers/alumni_helper.rb": {
+      "/app/app/helpers/admin/dashboard_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/app/alumni_tracker/app/helpers/alumnus_experiences_helper.rb": {
+      "/app/app/helpers/alumni_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/app/alumni_tracker/app/helpers/alumnus_professions_helper.rb": {
+      "/app/app/helpers/alumnus_experiences_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/app/alumni_tracker/app/helpers/application_helper.rb": {
+      "/app/app/helpers/alumnus_professions_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/app/alumni_tracker/app/helpers/change_logs_helper.rb": {
+      "/app/app/helpers/application_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/app/alumni_tracker/app/helpers/experiences_helper.rb": {
+      "/app/app/helpers/change_logs_helper.rb": {
         "lines": [
           1,
           null
         ]
       },
-      "/app/alumni_tracker/app/helpers/professions_helper.rb": {
+      "/app/app/helpers/experiences_helper.rb": {
         "lines": [
           1,
+          null
+        ]
+      },
+      "/app/app/helpers/professions_helper.rb": {
+        "lines": [
+          1,
+          null
+        ]
+      },
+      "/app/app/controllers/application_controller.rb": {
+        "lines": [
+          1,
+          null,
+          1,
+          1,
+          1,
+          null,
+          1,
+          null,
+          1,
+          0,
+          0,
+          0,
+          null,
+          null,
+          1,
+          null,
+          1,
+          0,
+          null,
           null
         ]
       }
     },
-    "timestamp": 1742250700
+    "timestamp": 1743447064
   }
 }

@@ -19,9 +19,8 @@
  /* General Page Styling */
  body {
     font-family: Arial, sans-serif;
-    margin: 0;
-    padding-top: 4rem;
-    padding-left: 15rem;
+    position: relative;
+    height: 100vh;
     background-color: #f4f4f4;
   }
 
@@ -75,15 +74,17 @@
   }
 
   .sidebar-logo img {
-        width: 100%; /* Make the logo responsive */
-        height: auto;
-        display: block;
-   }
+    width: 100%; /* Make the logo responsive */
+    height: auto;
+    display: block;
+  }
+  
   /* Main Content Styling */
   .main-content {
-    margin-left: 15rem; 
-    padding: 1.25rem; 
-    max-width: 80rem; /* Limit width on large screens */
+    margin-left: 30rem;
+    margin-top: 4rem;  /* Increased margin-top */
+    padding-top: 1.25rem;  /* Remove this, if needed */
+    min-height: calc(100vh - 10rem);  /* Adjust height, if needed */
   }
   
   /* Tab Content Styling */

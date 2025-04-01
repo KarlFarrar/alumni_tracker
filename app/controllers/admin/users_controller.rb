@@ -40,6 +40,15 @@ class Admin::UsersController < ApplicationController
       @user.destroy
       redirect_to admin_users_path, notice: 'User was successfully deleted.'
     end
+
+    def give_admin
+      @user = User.find(params[:id])
+      if @user.update(isAdmin: true)
+        redirect_to admin_users_path, notice: "#{@user.first_name} was given admin privileges."
+      else
+        redirect_to admin_users_path, alert: "Failed to update user."
+      end
+    end
     
     private
     
