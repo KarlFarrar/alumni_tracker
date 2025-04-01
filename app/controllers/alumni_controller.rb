@@ -97,22 +97,22 @@ class AlumniController < ApplicationController
 
     @alumnus.user.status = "alumni"
   
-  if @alumnus.save
-    # Now, associate Gmail after user is definitely saved
-    @alumnus.user.create_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
-    sign_in(@alumnus.user.gmail)
+    if @alumnus.save
+      # Now, associate Gmail after user is definitely saved
+      @alumnus.user.create_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
+      sign_in(@alumnus.user.gmail)
 
-    respond_to do |format|
-      format.html { redirect_to @alumnus, notice: "Alumnus was successfully created." }
-      format.json { render :show, status: :created, location: @alumnus }
+      respond_to do |format|
+        format.html { redirect_to @alumnus, notice: "Alumnus was successfully created." }
+        format.json { render :show, status: :created, location: @alumnus }
+      end
+    else
+      Rails.logger.info "Errors: #{@alumnus.errors.full_messages}"
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @alumnus.errors, status: :unprocessable_entity }
+      end
     end
-  else
-    Rails.logger.info "Errors: #{@alumnus.errors.full_messages}"
-    respond_to do |format|
-      format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: @alumnus.errors, status: :unprocessable_entity }
-    end
-  end
   end
 
   # PATCH/PUT /alumni/1 or /alumni/1.json

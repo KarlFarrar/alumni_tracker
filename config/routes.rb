@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :students
   root 'alumni#index'
   devise_for :gmails, controllers: { registrations: 'gmails/registrations', omniauth_callbacks:'gmails/omniauth_callbacks' }
   devise_scope :gmail do
