@@ -39,7 +39,7 @@
     <div class="form-group">
       <div> 
         <%= form.label :cohort_year, "Class Year", style: "display: block" %>
-        <%= form.select :cohort_year, options_for_select((1950..(Date.today.year + 10)).to_a.reverse, selected: 2025) %>
+        <%= form.select :cohort_year, options_for_select((1950..(Date.today.year + 10)).to_a.reverse, selected: @selected_year) %>
       </div>
 
       <div>
