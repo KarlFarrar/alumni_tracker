@@ -18,7 +18,7 @@ RSpec.describe "alumni/index", type: :view do
         availability: false,
         email: "Email",
         phone_number: "(682)-472-8670",
-        biography: "Biography",
+        LinkedIn: "LinkedIn",
         user: user
       )
     ])
@@ -32,9 +32,8 @@ RSpec.describe "alumni/index", type: :view do
     assert_select cell_selector, text: /2021/, count: 1
     assert_select cell_selector, text: /Team Affiliation/, count: 1
     assert_select cell_selector, text: /Profession Title/, count: 1
-    assert_select cell_selector, text: /false/, count: 1
     assert_select cell_selector, text: /Email/, count: 1
     assert_select cell_selector, text: /\(682\)-472-8670/, count: 1
-    assert_select cell_selector, text: /Biography/, count: 1
+    assert_select cell_selector, text: /LinkedIn/, count: 1
   end
 end

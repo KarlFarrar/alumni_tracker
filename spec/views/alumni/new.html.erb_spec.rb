@@ -17,7 +17,7 @@ RSpec.describe "alumni/new", type: :view do
       availability: false,
       email: "Email",
       phone_number: "(682)-472-8670",
-      biography: "Biography",
+      LinkedIn: "LinkedIn",
       user: user
     ))
   end
@@ -30,10 +30,10 @@ RSpec.describe "alumni/new", type: :view do
       assert_select "select[name=?]", "alumnus[cohort_year]"
       assert_select "input[name=?]", "alumnus[team_affiliation]"
       assert_select "input[name=?]", "alumnus[profession_title]"
-      assert_select "input[name=?]", "alumnus[availability]"
+      assert_select "select[name=?]", "alumnus[availability]"
       assert_select "input[name=?]", "alumnus[email]"
       assert_select "input[name=?]", "alumnus[phone_number]"
-      assert_select "input[name=?]", "alumnus[biography]"
+      assert_select "input[name=?]", "alumnus[LinkedIn]"
     end
   end
 end

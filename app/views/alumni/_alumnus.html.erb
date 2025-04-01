@@ -35,8 +35,13 @@
   </p>
 
   <p>
-    <strong>Biography:</strong>
-    <%= alumnus.biography %>
-  </p>
+  <strong>LinkedIn:</strong>
+  <% if alumnus.LinkedIn.present? %>
+    <%= link_to alumnus.LinkedIn, alumnus.LinkedIn, target: "_blank", rel: "noopener" %>
+  <% else %>
+    N/A
+  <% end %>
+</p>
+
 
 </div>

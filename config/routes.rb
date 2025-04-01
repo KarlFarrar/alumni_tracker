@@ -8,6 +8,11 @@ Rails.application.routes.draw do
     get 'gmails/choose_role', to: 'gmails/registrations#choose_role', as: :choose_role_registration
     post 'gmails', to: 'gmails/registrations#create', as: :create_gmail
   end
+
+  namespace :directory do
+    resources :alumni, only: [:index, :show]
+  end
+  
   
   resources :alumni do
     member do
@@ -21,11 +26,16 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :alumni
-    resources :users
-    get 'dashboard', to: 'dashboard#index'  # This creates /admin/dashboard
+    resources :users do
+      post :give_admin, on: :member
+    end
+    resources :experiences
+    resources :professions, only: [:index, :create, :destroy]
+    get 'dashboard', to: 'dashboard#index'
     get 'dashboard/:id', to: 'dashboard#show', as: 'dashboard_show'
     get 'logs', to: 'logs#index', as: 'logs'
   end
+  
   resources :alumni
   resources :change_logs, only: [:index]
   resources :experiences
