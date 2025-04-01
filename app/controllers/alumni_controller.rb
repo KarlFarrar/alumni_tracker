@@ -82,6 +82,7 @@ class AlumniController < ApplicationController
   # GET /alumni/1/edit
   def edit
     @alumnus = Alumnus.find(params[:id])
+    @selected_year = @alumnus.cohort_year || 2025 
   end
 
   # POST /alumni or /alumni.json
