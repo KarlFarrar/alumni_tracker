@@ -1,25 +1,21 @@
 require 'rails_helper'
 
 RSpec.describe "students/index", type: :view do
+
+  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456789) }
+
+
   before(:each) do
     assign(:students, [
       Student.create!(
-        uin: 2,
+        uin: 123456789,
         classification: "Classification",
         major: "Major",
         resumelink: "Resumelink",
         email: "Email",
         phone: "Phone",
-        biography: "Biography"
-      ),
-      Student.create!(
-        uin: 2,
-        classification: "Classification",
-        major: "Major",
-        resumelink: "Resumelink",
-        email: "Email",
-        phone: "Phone",
-        biography: "Biography"
+        biography: "Biography",
+        user: user
       )
     ])
   end

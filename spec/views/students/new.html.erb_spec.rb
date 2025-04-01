@@ -1,15 +1,19 @@
 require 'rails_helper'
 
 RSpec.describe "students/new", type: :view do
+
+  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456789) }
+
   before(:each) do
     assign(:student, Student.new(
-      uin: 1,
+      uin: 123456789,
       classification: "MyString",
       major: "MyString",
       resumelink: "MyString",
       email: "MyString",
       phone: "MyString",
-      biography: "MyString"
+      biography: "MyString",
+      user: user
     ))
   end
 
