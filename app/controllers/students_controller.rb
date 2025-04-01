@@ -6,10 +6,12 @@ class StudentsController < ApplicationController
   # GET /students or /students.json
   def index
     @students = Student.all
+    @current = Student.find_by(uin: current_gmail&.user&.uin_data)
   end
 
   # GET /students/1 or /students/1.json
   def show
+    @current = Student.find_by(uin: current_gmail&.user&.uin_data)
   end
 
   # GET /students/new

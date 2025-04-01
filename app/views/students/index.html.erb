@@ -8,9 +8,7 @@
   <% @students.each do |student| %>
     <%= render student %>
     <p>
-      <% if @current == student %>
-        <%= link_to "Show this student", student %>
-      <% end %>
+      <%= link_to "Show this student", student %>
     </p>
   <% end %>
 </div>
