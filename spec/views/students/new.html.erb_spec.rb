@@ -22,7 +22,7 @@ RSpec.describe "students/new", type: :view do
 
     assert_select "form[action=?][method=?]", students_path, "post" do
 
-      assert_select "input[name=?]", "student[uin]"
+      assert_select "input[name=?]", "student[user_attributes][uin]"
 
       assert_select "input[name=?]", "student[classification]"
 
