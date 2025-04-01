@@ -5,7 +5,6 @@
     <% if current_gmail&.user&.isAdmin%>
       <%= button_to "Admin View", admin_dashboard_path, class: "navbar-btn", method: :get %>
     <% end %>
-    <%= button_to "Admin View", admin_dashboard_path, class: "navbar-btn", method: :get %>
     <button id ="navbar-profile" class = "navbar-profile">
       <%= image_tag(current_gmail.avatar_url, alt: "Profile", class: "profile-img") %>
     </button>

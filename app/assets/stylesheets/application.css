@@ -655,7 +655,6 @@
 
     &:hover {
       background: #9555c2;
-      color: #000000;
     }
   }
 
@@ -689,22 +688,25 @@
     width: 200px;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    align-items: stretch;
     color: black;
   }
 
   .dropdown-btn {
-    width: 100%;
-    height: auto;
-    padding: 10px;
-    text-decoration: none;
-    color: black;
-    display: block;
+    display: block;  /* Makes it take up the full width */
+    width: 100%;     /* Ensures it stretches across the container */
+    text-align: left; /* Aligns text to the left like a typical dropdown */
+    padding: 10px;   /* Adds some padding for better spacing */
+    background: none; /* Removes default button styling */
+    border: none;     /* Removes default button border */
+    cursor: pointer;  /* Ensures it looks clickable */
+    text-align: center;
+    transition: background-color 0.3s ease; /* Smooth background color change */
   }
 
   .dropdown-btn:hover {
-    background-color: black;
+      background-color: #9555c2;
+      color: #FFFFFF;
   }
 
   .hidden {
