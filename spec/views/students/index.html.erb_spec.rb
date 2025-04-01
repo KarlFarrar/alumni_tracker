@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe "students/index", type: :view do
 
   let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456789) }
+  let(:user2) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456788) }
 
 
   before(:each) do
@@ -16,6 +17,16 @@ RSpec.describe "students/index", type: :view do
         phone: "Phone",
         biography: "Biography",
         user: user
+      ),
+      Student.create!(
+        uin: 123456788,
+        classification: "Classification",
+        major: "Major",
+        resumelink: "Resumelink",
+        email: "Email",
+        phone: "Phone",
+        biography: "Biography",
+        user: user2
       )
     ])
   end

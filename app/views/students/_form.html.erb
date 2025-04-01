@@ -29,8 +29,8 @@
       <% else %>
         <div>
           <%= user_form.label :uin %>
-          <%= user_form.text_field :uin, readonly: true, value: @alumnus.user.uin %>
-          <%= user_form.hidden_field :uin, value: @alumnus.user.uin %>
+          <%= user_form.text_field :uin, readonly: true, value: @alumnus.uin %>
+          <%= user_form.hidden_field :uin, value: @alumnus.uin %>
         </div>
       <% end %>
     <% end %>
