@@ -14,7 +14,7 @@ RSpec.describe "students/index", type: :view do
         major: "Major",
         resumelink: "Resumelink",
         email: "Email",
-        phone: "Phone",
+        phone: "(123)-123-1234",
         biography: "Biography",
         user: user
       ),

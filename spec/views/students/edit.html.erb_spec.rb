@@ -9,7 +9,7 @@ RSpec.describe "students/edit", type: :view do
       major: "MyString",
       resumelink: "MyString",
       email: "MyString",
-      phone: "MyString",
+      phone: "(123)-123-1234",
       biography: "MyString",
       user: user
     )
