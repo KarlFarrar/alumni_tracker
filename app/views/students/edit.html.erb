@@ -1,0 +1,166 @@
+<% content_for :title, "Editing student" %>
+
+<div class="title-bar">
+  <h1>Editing Profile</h1>
+</div>
+
+<div class="page-container">
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <a href="#personal" class="tab-link active" data-tab="personal">Personal Information</a>
+    <a href="#experience" class="tab-link" data-tab="experience">Experience Info</a>
+    <%= link_to "Show this student", @student %>
+    <%= link_to "Back to students", students_path %>
+    <div class="sidebar-logo">
+      <%= image_tag("logo4.png", alt: "Sling health Logo", class: "session-logo") %>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="main-content">
+    <!-- Personal Information Section -->
+    <div id="personal" class="tab-content active">
+      <h2>Personal Information</h2>
+      <%= render "form", student: @student %>
+    </div>
+
+    <!-- Experience Info Section -->
+    <div id="experience" class="tab-content">
+      <h2>Experiences</h2>
+
+      <div class="experience-content">
+        <ul id="claimed_experiences" class="claimed-experiences-list">
+          <% @student.student_experiences.each do |student_experience| %>
+            <li id="experience_<%= student_experience.experience.id %>" class="experience-card">
+              <strong>
+                <%= student_experience.experience.title %> 
+                (<%= student_experience.experience.experience_type %>)
+              </strong>  
+              <br>
+              <small class="date-received">Date Received: <%= student_experience.date_received || "Not Set" %></small>
+              <br>
+
+              <% if student_experience.experience.experience_type.downcase == "competition" %>
+                <small><strong>Placement:</strong> <%= student_experience.placement.presence || "Not Set" %></small>
+                <br>
+              <% end %>
+
+              <p><%= student_experience.custom_description.presence || "No description provided." %></p>              <br>
+
+              <div class="experience-actions">
+                <%= link_to "Edit", edit_student_experience_path(student_experience), class: "btn btn-primary btn-sm" %>
+                <%= link_to "Remove", remove_experiences_student_path(@student, experience_id: student_experience.experience.id),
+                  method: :delete, data: { turbo_method: :delete, confirm: "Are you sure?" }, class: "btn btn-danger btn-sm" %>
+              </div>
+            </li>
+          <% end %>
+        </ul>
+
+        <!-- Dropdown Container -->
+        <div class="dropdown-container">
+          <h3>Claim Experiences</h3>
+          <p>Select an experience to claim it. Select "Other" to add a new one.</p>
+
+          <!-- Dropdown Button -->
+          <button type="button" id="experienceDropdownButton" class="dropdown-btn">
+            <input type="text" id="searchExpInput" placeholder="Search experiences..." class="dropdown-search">
+            <svg id="experienceDropdownArrow" class="dropdown-arrow" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor">
+              <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 011.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+            </svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <ul id="experienceDropdown" class="dropdown-menu hidden">
+            <% Experience.all.each do |experience| %>
+              <li class="dropdown-item" data-value="<%= experience.id %>">
+                <%= experience.title %> - <%= experience.experience_type %>
+              </li>
+            <% end %>
+            <li class="dropdown-item" data-value="other-exp">Other (Create New Experience)</li>
+          </ul>
+
+          <!-- Hidden Input for Form Submission -->
+          <input type="hidden" name="experience_id" id="selectedExperience">
+
+          <!-- Form Submission -->
+          <%= form_with url: claim_experiences_student_path(@student, anchor: 'experience'), method: :post, id: "claim_experiences_form" do %>
+            <div id="experience_ids_container">
+              <% @student.student_experiences.each do |student_experience| %>
+                <input type="hidden" name="experience_ids[]" value="<%= student_experience.experience.id %>">
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <!-- Modal -->
+      <div id="experience_modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Add a New Experience</h2>
+
+          <%= form_with model: Experience.new, url: experiences_path, method: :post, id: "new_experience_form", remote: true do |f| %>
+            <div class="form-group">
+              <%= f.label :title, "Experience Title" %>
+              <%= f.text_field :title, required: true, class: "form-control" %>
+            </div>
+
+            <div class="form-group">
+              <%= f.label :experience_type, "Experience Type" %>
+              <%= f.text_field :experience_type, required: true, class: "form-control" %>
+            </div>
+            
+            <input type="hidden" name="experience[student_id]" value="<%= @student.id %>">
+
+            <%= f.submit "Save Experience", class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+
+      <div id="claim_experience_modal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <h2>Claim Experience</h2>
+          
+          <%= form_with url: claim_experiences_student_path(@student, anchor: 'experience'), method: :post, id: "claim_experience_form", data: { turbo: "false" } do |f| %>
+            <input type="hidden" name="experience_id" id="modal_experience_id">
+            <input type="hidden" id="modal_experience_title">
+
+            <div class="form-group">
+              <%= f.label :date_received, "Date Received" %>
+              <%= f.date_field :date_received, required: true, class: "form-control" %>
+            </div>
+
+            <div id="placement_field" class="form-group" style="display: none;">
+              <%= f.label :placement, "Placement " %>
+              <%= f.text_field :placement, placeholder: "Enter placement (e.g., 1st Place, Finalist)", class: "form-control" %>
+            </div>
+            
+            <div class="form-group">
+              <%= f.label :custom_description, "Custom Description" %>
+              <%= f.text_area :custom_description, placeholder: "Describe your experience with this award.", rows: 5, class: "form-control" %>
+            </div>
+
+            <%= f.submit "Claim Experience", class: "btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+
+<%= javascript_tag do %>
+  $(document).ready(function() {
+    $('.tab-link').click(function(e) {
+      e.preventDefault();
+
+      // Remove active class from all tabs and content
+      $('.tab-link').removeClass('active');
+      $('.tab-content').removeClass('active');
+
+      // Add active class to the clicked tab and content
+      $(this).addClass('active');
+      var tabToShow = $(this).data('tab');
+      $('#' + tabToShow).addClass('active');
+    });
+  });
+<% end %>

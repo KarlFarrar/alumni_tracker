@@ -1,0 +1,53 @@
+<div id="<%= dom_id student %>">
+  <p>
+    <strong>First Name:</strong>
+    <%= student.user.first_name %>
+  </p>
+  <p>
+    <strong>Last Name:</strong>
+    <%= student.user.last_name %>
+  </p>
+  <p>
+    <strong>Middle Initial:</strong>
+    <%= student.user.middle_initial %>
+  </p>
+  <p>
+    <strong>Uin:</strong>
+    <%= student.uin %>
+  </p>
+
+  <p>
+    <strong>Classification:</strong>
+    <%= student.classification %>
+  </p>
+
+  <p>
+    <strong>Major:</strong>
+    <%= student.major %>
+  </p>
+
+  <p>
+    <strong>Resumelink:</strong>
+    <% if student.resumelink.present? %>
+      <%= link_to student.resumelink, student.resumelink, target: "_blank", rel: "noopener" %>
+    <% else %>
+      N/A
+    <% end %>
+  </p>
+
+  <p>
+    <strong>Email:</strong>
+    <%= student.email %>
+  </p>
+
+  <p>
+    <strong>Phone:</strong>
+    <%= student.phone %>
+  </p>
+
+  <p>
+    <strong>Biography:</strong>
+    <%= student.biography %>
+  </p>
+
+</div>

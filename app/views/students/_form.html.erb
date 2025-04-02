@@ -1,10 +1,10 @@
-<%= form_with(model: @alumnus) do |form| %>
-  <% if alumnus.errors.any? %>
+<%= form_with(model: @student) do |form| %>
+  <% if student.errors.any? %>
     <div style="color: red">
-      <h2><%= pluralize(alumnus.errors.count, "error") %> prohibited this alumnus from being saved:</h2>
+      <h2><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
 
       <ul>
-        <% alumnus.errors.each do |error| %>
+        <% student.errors.each do |error| %>
           <li><%= error.full_message %></li>
         <% end %>
       </ul>
@@ -14,37 +14,47 @@
     <div class="form-group">      
       <%= form.fields_for :user do |user_form| %>
         <%= user_form.label :first_name%>
-        <%= user_form.text_field :first_name, id: "first_name" %>
+        <%= user_form.text_field :first_name, id: "first_name"%>
 
-        <%= user_form.label :last_name %>
-        <%= user_form.text_field :last_name, id: "last_name" %>
+        <%= user_form.label :last_name%>
+        <%= user_form.text_field :last_name, id: "last_name"%>
 
-        <%= user_form.label :middle_initial %>
-        <%= user_form.text_field :middle_initial, id: "middle_initial" %>
+        <%= user_form.label :middle_initial%>
+        <%= user_form.text_field :middle_initial, id: "middle_inital"%>
 
-        <% if @alumnus.new_record? %>
+        <% if @student.new_record? %>
           <%= user_form.label :uin %>
           <%= user_form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
               maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
         <% else %>
           <div>
             <%= user_form.label :uin %>
-            <%= user_form.text_field :uin, readonly: true, value: @alumnus.user.uin %>
-            <%= user_form.hidden_field :uin, value: @alumnus.user.uin %>
+            <%= user_form.text_field :uin, readonly: true, value: @student.user.uin %>
+            <%= user_form.hidden_field :uin, value: @student.user.uin %>
           </div>
         <% end %>
       <% end %>
-    </div> 
+    </div>
 
-    <div class="form-group">
-      <div> 
-        <%= form.label :cohort_year, "Class Year", style: "display: block" %>
-        <%= form.select :cohort_year, options_for_select((1950..(Date.today.year + 10)).to_a.reverse, selected: @selected_year) %>
+    <!-- <div>
+      <%# form.label :uin, "Confirm UIN", style: "display: block" %>
+      <%# form.text_field :uin %>
+    </div> -->
+
+    <div class="form-group">      
+      <div>
+        <%= form.label :classification, style: "display: block" %>
+        <%= form.text_field :classification %>
       </div>
 
       <div>
-        <%= form.label :phone_number %>
-        <%= form.text_field :phone_number, id: "phone_number", placeholder: "(123)-456-7890", maxlength: 14 %>
+        <%= form.label :major, style: "display: block" %>
+        <%= form.text_field :major %>
+      </div>
+
+      <div>
+        <%= form.label :resumelink, style: "display: block" %>
+        <%= form.text_field :resumelink %>
       </div>
 
       <div>
@@ -52,62 +62,12 @@
         <%= form.text_field :email %>
       </div>
 
-    </div>
-
-    <div class="form-group">
-      <%= form.label :team_affiliation, style: "display: block" %>
-      <%= form.text_field :team_affiliation %>
-    </div>
-
-    <div class="form-group">
-      <%= form.label :profession_title, style: "display: block" %>
-      <%= form.text_field :profession_title %>
-    </div>
-
-    <div class="form-group full-width">
-      <%= form.label :availability, "Availability", style: "display: block" %>
-      <%= form.select :availability, options_for_select([["Yes", true], ["No", false]], selected: @alumnus.availability), include_blank: true, class: "form-control" %>
-    </div>
-
-    <div class="form-group full-width">
-      <%= form.label :LinkedIn, style: "display: block" %>
-      <%= form.text_field :LinkedIn %>
-    </div class="form-group">
-
-    <div class="form-group full-width">
-      <%= form.submit %>
-    </div>
-
-  </div>
-
-  <script>
-    document.addEventListener("turbo:load", function() {
-      const phoneInput = document.getElementById("phone_number");
-
-      if (phoneInput) {
-        phoneInput.addEventListener("input", function(e) {
-          let numbers = e.target.value.replace(/\D/g, ""); 
-          
-          if (numbers.length > 10) {
-            numbers = numbers.slice(0, 10);
-          }
-
-          let formattedNumber = "";
-          if (numbers.length > 0) {
-            formattedNumber += `(${numbers.slice(0, 3)}`;
-          }
-          if (numbers.length >= 4) {
-            formattedNumber += `)-${numbers.slice(3, 6)}`;
-          }
-          if (numbers.length >= 7) {
-            formattedNumber += `-${numbers.slice(6, 10)}`;
-          }
-
-          e.target.value = formattedNumber;
-        });
-      }
-    });
-  </script>
+      <div>
+        <%= form.label :phone %>
+        <%= form.text_field :phone, id: "phone", placeholder: "(123)-456-7890", maxlength: 14, value: @student.phone %>
+      </div>
+    </div> 
+  </div> 
 
   <script>
     document.addEventListener("DOMContentLoaded", function() {
@@ -179,6 +139,43 @@
         e.target.value = value; // Set the trimmed value
       });
     });
-  </script>
-<% end %>
+  </script>  
+  
+  <script>
+    document.addEventListener("turbo:load", function() {
+        const phoneInput = document.getElementById("phone");
 
+        if (phoneInput) {
+          phoneInput.addEventListener("input", function(e) {
+            let numbers = e.target.value.replace(/\D/g, ""); 
+            
+            if (numbers.length > 10) {
+              numbers = numbers.slice(0, 10);
+            }
+
+            let formattedNumber = "";
+            if (numbers.length > 0) {
+              formattedNumber += `(${numbers.slice(0, 3)}`;
+            }
+            if (numbers.length >= 4) {
+              formattedNumber += `)-${numbers.slice(3, 6)}`;
+            }
+            if (numbers.length >= 7) {
+              formattedNumber += `-${numbers.slice(6, 10)}`;
+            }
+
+            e.target.value = formattedNumber;
+          });
+        }
+      });
+    </script>
+
+  <div>
+    <%= form.label :biography, style: "display: block" %>
+    <%= form.text_field :biography %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

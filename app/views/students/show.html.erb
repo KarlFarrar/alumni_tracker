@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render @student %>
+
+<div>
+  <% if @current == @student %>
+  <%= link_to "Edit this student", edit_student_path(@student) %> |
+  <% end %>
+  <%= link_to "Back to students", students_path %>
+
+  <% if @current == @student %>
+  <%= button_to "Destroy this student", @student, method: :delete %>
+  <% end %>
+</div>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_03_26_155919) do
+ActiveRecord::Schema[8.0].define(version: 2025_04_02_025852) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pg_catalog.plpgsql"
 
@@ -22,7 +22,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_155919) do
     t.boolean "availability"
     t.string "email"
     t.string "phone_number"
-    t.string "biography"
+    t.string "LinkedIn"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["uin"], name: "index_alumni_on_uin", unique: true
@@ -97,6 +97,31 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_155919) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "student_experiences", force: :cascade do |t|
+    t.date "date_received"
+    t.text "custom_description"
+    t.string "placement"
+    t.bigint "student_id", null: false
+    t.bigint "experience_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["experience_id"], name: "index_student_experiences_on_experience_id"
+    t.index ["student_id"], name: "index_student_experiences_on_student_id"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.integer "uin"
+    t.string "classification"
+    t.string "major"
+    t.string "resumelink"
+    t.string "email"
+    t.string "phone"
+    t.string "biography"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["uin"], name: "index_students_on_uin", unique: true
+  end
+
   create_table "users", primary_key: "uin", id: :serial, force: :cascade do |t|
     t.string "first_name", null: false
     t.string "last_name", null: false
@@ -113,4 +138,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_03_26_155919) do
   add_foreign_key "alumnus_professions", "alumni"
   add_foreign_key "alumnus_professions", "professions"
   add_foreign_key "gmails", "users", column: "uin", primary_key: "uin"
+  add_foreign_key "student_experiences", "experiences"
+  add_foreign_key "student_experiences", "students"
+  add_foreign_key "students", "users", column: "uin", primary_key: "uin"
 end

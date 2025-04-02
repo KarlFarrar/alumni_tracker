@@ -82,6 +82,7 @@ class AlumniController < ApplicationController
   # GET /alumni/1/edit
   def edit
     @alumnus = Alumnus.find(params[:id])
+    @selected_year = @alumnus.cohort_year || 2025 
   end
 
   # POST /alumni or /alumni.json
@@ -97,22 +98,22 @@ class AlumniController < ApplicationController
 
     @alumnus.user.status = "alumni"
   
-  if @alumnus.save
-    # Now, associate Gmail after user is definitely saved
-    @alumnus.user.create_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
-    sign_in(@alumnus.user.gmail)
+    if @alumnus.save
+      # Now, associate Gmail after user is definitely saved
+      @alumnus.user.create_gmail(email: session[:email], uid: session[:uid], avatar_url: session[:avatar_url])
+      sign_in(@alumnus.user.gmail)
 
-    respond_to do |format|
-      format.html { redirect_to root_path, notice: "Account creation successful! Welcome to the Sling Health Alumni Search Directory!" }
-      format.json { render :show, status: :created, location: @alumnus }
+      respond_to do |format|
+        format.html { redirect_to root_path, notice: "Account creation successful! Welcome to the Sling Health Alumni Search Directory!" }
+        format.json { render :show, status: :created, location: @alumnus }
+      end
+    else
+      Rails.logger.info "Errors: #{@alumnus.errors.full_messages}"
+      respond_to do |format|
+        format.html { render :new, status: :unprocessable_entity }
+        format.json { render json: @alumnus.errors, status: :unprocessable_entity }
+      end
     end
-  else
-    Rails.logger.info "Errors: #{@alumnus.errors.full_messages}"
-    respond_to do |format|
-      format.html { render :new, status: :unprocessable_entity }
-      format.json { render json: @alumnus.errors, status: :unprocessable_entity }
-    end
-  end
   end
 
   # PATCH/PUT /alumni/1 or /alumni/1.json
@@ -201,7 +202,7 @@ class AlumniController < ApplicationController
       if params[:id].present?
         Rails.logger.info "UPDATE"
         params.require(:alumnus).permit(
-          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
+          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :LinkedIn, :profession_title,
           experience_ids: [],
           profession_ids: [],
           professions_attributes: [:title],
@@ -210,7 +211,7 @@ class AlumniController < ApplicationController
       else
         Rails.logger.info "NEW"
         params.require(:alumnus).permit(
-          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :biography, :profession_title,
+          :email, :cohort_year, :team_affiliation, :availability, :phone_number, :LinkedIn, :profession_title,
           experience_ids: [],
           profession_ids: [],
           professions_attributes: [:title],
