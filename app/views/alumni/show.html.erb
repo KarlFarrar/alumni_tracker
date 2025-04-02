@@ -1,3 +1,5 @@
+<%= render 'layouts/navbar' %>
+<%= render 'layouts/flash' %>
 <h1>Alumnus Profile</h1>
 <p><strong>First Name:</strong> <%= @alumnus.user.first_name %></p>
 <p><strong>Last Name:</strong> <%= @alumnus.user.last_name %></p>
@@ -44,11 +46,4 @@
     </li>
   <% end %>
 </ul>
-
-
-<% if gmail_signed_in? %>
-  <p><%= link_to "Edit Profile", edit_alumnus_path(@alumnus) %></p>
-  <p><%= link_to "Back to Alumni List", alumni_path %></p>
-<% else %>
-  <p><%= link_to "Complete profile", complete_profile_alumnus_path(@alumnus) %></p>
-<% end %>
+<p><%= link_to "Edit Profile", edit_alumnus_path(@alumnus) %></p>
