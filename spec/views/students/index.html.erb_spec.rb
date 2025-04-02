@@ -39,7 +39,7 @@ RSpec.describe "students/index", type: :view do
     assert_select cell_selector, text: Regexp.new("Major".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Resumelink".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Email".to_s), count: 2
-    assert_select cell_selector, text: Regexp.new("1231231234".to_s), count: 2
+    assert_select 'div>p', text: /\(\d{3}\)-\d{3}-\d{4}/, count: 2
     assert_select cell_selector, text: Regexp.new("Biography".to_s), count: 2
   end
 end
