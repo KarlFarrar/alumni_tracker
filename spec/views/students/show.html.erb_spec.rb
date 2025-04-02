@@ -25,7 +25,7 @@ RSpec.describe "students/show", type: :view do
     expect(rendered).to match(/Major/)
     expect(rendered).to match(/Resumelink/)
     expect(rendered).to match(/Email/)
-    expect(rendered).to match(/1231231234/)
+    expect(rendered).to match(/\(123\)-123-1234/)
     expect(rendered).to match(/Biography/)
   end
 end
