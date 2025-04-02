@@ -14,13 +14,20 @@ class ExperiencesController < ApplicationController
   def create
     Rails.logger.debug "PARAMS RECEIVED: #{params.inspect}"
     @experience = Experience.new(experience_params)
-    alumnus = Alumnus.find_by(id: params[:experience][:alumnus_id]) if params[:experience][:alumnus_id].present?
+    
+    # used by both alumnus and students 
+    owner = if params[:experience][:alumnus_id].present?
+      Alumnus.find_by(id: params[:experience][:alumnus_id])
+    elsif params[:experience][:student_id].present?
+      Student.find_by(id: params[:experience][:student_id])
+    end
+    
 
     if @experience.save
-      alumnus.experiences << @experience if alumnus 
+      owner.experiences << @experience if owner
       respond_to do |format|
-        if alumnus
-          format.html { redirect_to edit_alumnus_path(alumnus), notice: "Experience added!" }
+        if owner
+          format.html { redirect_to edit_polymorphic_path(owner), notice: "Experience added!" }
         else
           format.html { redirect_to experiences_path, notice: "Experience added!" }
         end

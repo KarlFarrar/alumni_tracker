@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :students
   root 'alumni#index'
   devise_for :gmails, controllers: { registrations: 'gmails/registrations', omniauth_callbacks:'gmails/omniauth_callbacks' }
   devise_scope :gmail do
@@ -24,6 +23,13 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :students do
+    member do 
+      post "claim_experiences"
+      delete "remove_experiences", to: "students#remove_experience"
+    end
+  end
+
   namespace :admin do
     resources :alumni
     resources :users do
@@ -36,6 +42,7 @@ Rails.application.routes.draw do
     get 'logs', to: 'logs#index', as: 'logs'
   end
   
+  resources :students
   resources :alumni
   resources :change_logs, only: [:index]
   resources :experiences
@@ -43,4 +50,5 @@ Rails.application.routes.draw do
   resources :experiences
   resources :professions
   resources :alumnus_professions, only: [:edit, :update, :destroy]
+  resources :student_experiences, only: [:edit, :update, :destroy]
 end
