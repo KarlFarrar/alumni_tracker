@@ -23,15 +23,26 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :students do
+    member do 
+      post "claim_experiences"
+      delete "remove_experiences", to: "students#remove_experience"
+    end
+  end
+
   namespace :admin do
     resources :alumni
-    resources :users
+    resources :users do
+      post :give_admin, on: :member
+    end
     resources :experiences
     resources :professions, only: [:index, :create, :destroy]
-    get 'dashboard', to: 'dashboard#index'  # This creates /admin/dashboard
+    get 'dashboard', to: 'dashboard#index'
     get 'dashboard/:id', to: 'dashboard#show', as: 'dashboard_show'
     get 'logs', to: 'logs#index', as: 'logs'
   end
+  
+  resources :students
   resources :alumni
   resources :change_logs, only: [:index]
   resources :experiences
@@ -39,4 +50,5 @@ Rails.application.routes.draw do
   resources :experiences
   resources :professions
   resources :alumnus_professions, only: [:edit, :update, :destroy]
+  resources :student_experiences, only: [:edit, :update, :destroy]
 end
