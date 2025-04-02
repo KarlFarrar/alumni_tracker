@@ -659,19 +659,19 @@
   }
 
   .profile-img, .navbar-profile {
-    width: 3.5vw;  /* Adjust the size as needed */
-    height: auto;
-    border-radius: 50%;  /* Makes it a circle */
+    width: 40px;  
+    height: 40px;
+    border-radius: 50%; 
     margin-right: 15px;
   }
 
   .profile-img {
-    object-fit: cover; /* Ensures the image scales properly */
-    border: 2px solid #ccc; /* Optional: Adds a border */
+    object-fit: cover; 
+    border: 2px solid #ccc;
   }
 
   .navbar-profile {
-    all: unset;  /* Removes all default button styles */
+    all: unset; 
     display: flex;
     align-items: center;
     justify-content: center;
@@ -693,15 +693,15 @@
   }
 
   .dropdown-btn {
-    display: block;  /* Makes it take up the full width */
-    width: 100%;     /* Ensures it stretches across the container */
-    text-align: left; /* Aligns text to the left like a typical dropdown */
-    padding: 10px;   /* Adds some padding for better spacing */
-    background: none; /* Removes default button styling */
-    border: none;     /* Removes default button border */
-    cursor: pointer;  /* Ensures it looks clickable */
+    display: block;  
+    width: 100%;     
+    text-align: left; 
+    padding: 10px;   
+    background: none; 
+    border: none;     
+    cursor: pointer;  
     text-align: center;
-    transition: background-color 0.3s ease; /* Smooth background color change */
+    transition: background-color 0.3s ease; 
   }
 
   .dropdown-btn:hover {

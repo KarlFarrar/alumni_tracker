@@ -103,7 +103,7 @@ class AlumniController < ApplicationController
     sign_in(@alumnus.user.gmail)
 
     respond_to do |format|
-      format.html { redirect_to @alumnus, notice: "Alumnus was successfully created." }
+      format.html { redirect_to root_path, notice: "Alumnus Account was successfully created." }
       format.json { render :show, status: :created, location: @alumnus }
     end
   else
