@@ -34,7 +34,7 @@ RSpec.describe "students/index", type: :view do
   it "renders a list of students" do
     render
     cell_selector = 'div>p'
-    assert_select cell_selector, text: Regexp.new(2.to_s), count: 2
+    assert_select cell_selector, text: Regexp.new(2.to_s), count: 4
     assert_select cell_selector, text: Regexp.new("Classification".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Major".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Resumelink".to_s), count: 2
