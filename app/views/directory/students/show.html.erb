@@ -38,11 +38,21 @@
             <div class="row mb-3">
               <div class="col-md-3 text-muted">Resume:</div>
               <div class="col-md-9">
-              <% if @student.resumelink.present? && @student.resumelink.start_with?('http://', 'https://') %>
-    <%= link_to "View Resume", @student.resumelink, target: "_blank", rel: "noopener noreferrer" %>
-  <% else %>
-    <span class="text-muted">No valid resume link available</span>
-  <% end %></div>
+                <% 
+                  begin
+                    uri = URI.parse(@student.resumelink)
+                    is_valid = uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
+                  rescue URI::InvalidURIError
+                    is_valid = false
+                  end
+                %>
+                
+                <% if is_valid %>
+                  <%= link_to "View Resume", @student.resumelink, target: "_blank", rel: "noopener noreferrer" %>
+                <% else %>
+                  <span class="text-muted">No valid resume link available</span>
+                <% end %>
+              </div>
             </div>
           <% end %>
         </div>
