@@ -37,7 +37,12 @@
           <% if @student.resumelink.present? %>
             <div class="row mb-3">
               <div class="col-md-3 text-muted">Resume:</div>
-              <div class="col-md-9"><%= link_to "View Resume", @student.resumelink, target: "_blank" %></div>
+              <div class="col-md-9">
+              <% if @student.resumelink.present? && @student.resumelink.start_with?('http://', 'https://') %>
+    <%= link_to "View Resume", @student.resumelink, target: "_blank", rel: "noopener noreferrer" %>
+  <% else %>
+    <span class="text-muted">No valid resume link available</span>
+  <% end %></div>
             </div>
           <% end %>
         </div>
