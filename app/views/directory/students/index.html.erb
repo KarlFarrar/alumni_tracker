@@ -1,0 +1,101 @@
+<!-- app/views/directory/students/index.html.erb -->
+<div class="directory">
+  <div class="student-directory">
+    <header class="page-header">
+      <h1>Student Directory</h1>
+    </header>
+
+    <div class="filter-section mb-4">
+      <div class="card">
+        <div class="card-header">
+          <h3>Filter Options</h3>
+        </div>
+        <div class="card-body">
+          <%= form_with url: directory_students_path, method: :get, local: true, class: "filter-form" do |f| %>
+            <div class="row">
+              <div class="col-md-4 mb-3">
+                <%= f.label :classification, "Classification", class: "form-label" %>
+                <%= f.select :classification, 
+                  options_for_select(Student.distinct.pluck(:classification).sort.map{|c| [c, c]}, params[:classification]), 
+                  { include_blank: "All Classifications" }, 
+                  { class: "form-select" } 
+                %>
+              </div>
+              
+              <div class="col-md-4 mb-3">
+                <%= f.label :major, "Major", class: "form-label" %>
+                <%= f.select :major, 
+                  options_for_select(Student.distinct.pluck(:major).sort.map{|m| [m, m]}, params[:major]), 
+                  { include_blank: "All Majors" }, 
+                  { class: "form-select" } 
+                %>
+              </div>
+              
+              <div class="col-md-4 mb-3">
+                <%= f.label :experience_id, "Experience", class: "form-label" %>
+                <%= f.select :experience_id, 
+                  options_for_select(Experience.all.map{|e| [e.title, e.id]}, params[:experience_id]), 
+                  { include_blank: "All Experiences" }, 
+                  { class: "form-select" } 
+                %>
+              </div>
+            </div>
+            
+            <div class="mt-2">
+              <%= f.submit "Apply Filters", class: "btn btn-primary" %>
+              <% if params[:classification].present? || params[:major].present? || 
+                params[:experience_id].present? || params[:search].present? %>
+                <%= link_to "Clear Filters", directory_students_path, class: "btn btn-outline-secondary ms-2" %>
+              <% end %>
+            </div>
+
+            <div class="search-area">
+              <div class="search-label">Search by name:</div>
+              <div class="search-container">
+                <%= f.text_field :search, value: params[:search], class: "form-control", placeholder: "Enter first or last name" %>
+                <button type="submit" class="search-button">
+                  Search
+                </button>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+    <div class="student-list">
+      <div class="table-responsive">
+        <table class="table table-striped table-hover">
+          <thead>
+            <tr>
+              <th>First Name</th>
+              <th>Last Name</th>
+              <th>Classification</th>
+              <th>Major</th>
+              <th>Actions</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @students.each do |student| %>
+              <tr>
+                <td><%= student.user&.first_name || "N/A" %></td>
+                <td><%= student.user&.last_name || "N/A" %></td>
+                <td><%= student.classification || "N/A" %></td>
+                <td><%= student.major || "N/A" %></td>
+                <td>
+                  <%= link_to "View Profile", directory_student_path(student), class: "btn btn-sm btn-outline-primary" %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <% if @students.empty? %>
+      <div class="alert alert-info">
+        No students found matching your criteria.
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :directory do
     resources :alumni, only: [:index, :show]
+    resources :students, only: [:index, :show]
   end
   
   
