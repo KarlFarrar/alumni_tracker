@@ -1,9 +1,20 @@
 # app/controllers/admin/experiences_controller.rb
 class Admin::ExperiencesController < ApplicationController
     layout 'admin'
+    #before_action :authenticate_admin!
     
     def index
       @experiences = Experience.all.order(created_at: :desc)
+    end
+    
+    def create
+      @experience = Experience.new(experience_params)
+      
+      if @experience.save
+        redirect_to admin_experiences_path, notice: 'Experience was successfully created.'
+      else
+        redirect_to admin_experiences_path, alert: 'Failed to create experience.'
+      end
     end
     
     def show
@@ -34,14 +45,12 @@ class Admin::ExperiencesController < ApplicationController
     def experience_params
       params.require(:experience).permit(:title, :experience_type)
     end
-
-    def create
-        @experience = Experience.new(experience_params)
-        
-        if @experience.save
-          redirect_to admin_experiences_path, notice: 'Experience was successfully created.'
-        else
-          redirect_to admin_experiences_path, alert: 'Failed to create experience.'
-        end
-      end
+    
+    # def authenticate_admin!
+    #   # Check if user is logged in and is an admin
+    #   unless current_gmail&.user.isAdmin
+    #     flash[:alert] S= "You must be an admin to access this page."
+    #     redirect_to root_path
+    #   end
+    # end
   end

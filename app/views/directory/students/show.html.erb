@@ -1,0 +1,105 @@
+<!-- app/views/directory/students/show.html.erb -->
+<div class="student-profile">
+  <header class="page-header mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1>Student Profile</h1>
+      <div class="header-actions">
+        <%= link_to "Back to Directory", directory_students_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </header>
+
+  <div class="row">
+    <div class="col-md-8">
+      <div class="card mb-4">
+        <div class="card-header">
+          <h2>Profile Information</h2>
+        </div>
+        <div class="card-body">
+          <div class="row mb-3">
+            <div class="col-md-3 text-muted">Classification:</div>
+            <div class="col-md-9"><%= @student.classification %></div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-3 text-muted">Major:</div>
+            <div class="col-md-9"><%= @student.major.present? ? @student.major : "Not specified" %></div>
+          </div>
+          <div class="row mb-3">
+            <div class="col-md-3 text-muted">Email:</div>
+            <div class="col-md-9"><%= mail_to @student.email %></div>
+          </div>
+          <% if @student.phone.present? %>
+            <div class="row mb-3">
+              <div class="col-md-3 text-muted">Phone Number:</div>
+              <div class="col-md-9"><%= @student.phone %></div>
+            </div>
+          <% end %>
+          <% if @student.resumelink.present? %>
+            <div class="row mb-3">
+              <div class="col-md-3 text-muted">Resume:</div>
+              <div class="col-md-9">
+                <% 
+                  begin
+                    uri = URI.parse(@student.resumelink)
+                    is_valid = uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
+                  rescue URI::InvalidURIError
+                    is_valid = false
+                  end
+                %>
+                
+                <% if is_valid %>
+                  <%= link_to "View Resume", @student.resumelink, target: "_blank", rel: "noopener noreferrer" %>
+                <% else %>
+                  <span class="text-muted">No valid resume link available</span>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </div>
+      </div>
+
+      <% if @student.biography.present? %>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3>Biography</h3>
+          </div>
+          <div class="card-body">
+            <%= simple_format @student.biography %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+
+    <div class="col-md-4">
+      <% if @student.student_experiences.present? %>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3>Experiences</h3>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <% @student.student_experiences.includes(:experience).each do |student_experience| %>
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <strong><%= student_experience.experience.title %></strong>
+                      <% if student_experience.experience.experience_type.present? %>
+                        <span class="badge bg-info text-dark ms-2"><%= student_experience.experience.experience_type %></span>
+                      <% end %>
+                    </div>
+                    <% if student_experience.date_received.present? %>
+                      <small class="text-muted"><%= student_experience.date_received.strftime("%b %Y") %></small>
+                    <% end %>
+                  </div>
+                  <% if student_experience.custom_description.present? %>
+                    <p class="text-muted mt-1 small"><%= student_experience.custom_description %></p>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

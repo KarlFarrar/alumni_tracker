@@ -10,6 +10,7 @@ Rails.application.routes.draw do
 
   namespace :directory do
     resources :alumni, only: [:index, :show]
+    resources :students, only: [:index, :show]
   end
   
   
@@ -29,6 +30,8 @@ Rails.application.routes.draw do
       delete "remove_experiences", to: "students#remove_experience"
     end
   end
+
+  get 'directory/students', to: 'students#index', as: 'student_directory'
 
   namespace :admin do
     resources :alumni
