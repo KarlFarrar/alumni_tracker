@@ -58,13 +58,13 @@
         </div>
       </div>
 
-      <% if @student.biography.present? %>
+      <% if @student.linkedin.present? %>
         <div class="card mb-4">
           <div class="card-header">
-            <h3>Biography</h3>
+            <h3>LinkedIn</h3>
           </div>
           <div class="card-body">
-            <%= simple_format @student.biography %>
+            <%= simple_format @student.linkedin %>
           </div>
         </div>
       <% end %>

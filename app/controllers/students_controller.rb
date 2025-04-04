@@ -130,14 +130,14 @@ class StudentsController < ApplicationController
       if params[:id].present?
         Rails.logger.info "UPDATE"
         params.require(:student).permit(
-          :classification, :major, :resumelink, :email, :phone, :biography,
+          :classification, :major, :resumelink, :email, :phone, :linkedin,
           experience_ids: [], 
           user_attributes: [:id, :first_name, :last_name, :middle_initial, :status] # Exclude :uin
         )
       else
         Rails.logger.info "NEW"
         params.require(:student).permit(
-          :classification, :major, :resumelink, :email, :phone, :biography,
+          :classification, :major, :resumelink, :email, :phone, :linkedin,
           experience_ids: [], 
           user_attributes: [:first_name, :last_name, :middle_initial, :uin, :status] # Allow :uin during creation
         )
