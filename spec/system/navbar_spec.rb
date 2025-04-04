@@ -39,6 +39,10 @@ RSpec.describe "Navbar", type: :system do
 	      user: user
 	    )
 	  }
+	   let(:gmail) {
+    	Gmail.create!(email: "test@example.com", user: user, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g")
+  		}
+  
   	it "should show the Admin Access button" do 
 
 		  visit root_path
