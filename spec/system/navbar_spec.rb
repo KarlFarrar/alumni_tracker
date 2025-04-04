@@ -1,6 +1,12 @@
 require 'rails_helper'
 
 RSpec.describe "Navbar", type: :system do
+	let(:user) { User.create!(first_name: "Is", last_name: "Admin", uin: 555555555, isAdmin: true) }
+	let(:gmail) { Gmail.create!(email: "test@example.com", user: user, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g") }
+	let(:user2) { User.create!(first_name: "Non", last_name: "Admin", uin: 555555556, isAdmin: false) }
+	let(:gmail2) { Gmail.create!(email: "test@example.com", user: user2, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g") }
+
+
   before do
     driven_by(:rack_test)
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
@@ -19,27 +25,7 @@ RSpec.describe "Navbar", type: :system do
   end
 
   context "When a user IS AN Admin" do 
-	let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456734, isAdmin: true) }
-	  let(:alumnus) {
-	    Alumnus.create!(
-	      uin: 123456734,
-	      cohort_year: 2024,
-	      team_affiliation: "MyString",
-	      profession_title: "MyString",
-	      availability: false,
-	      email: "MyString",
-	      phone_number: "(682)-472-8670",
-	      LinkedIn: "MyString",
-	      user: user
-	    )
-	  }
-	   let(:gmail) {
-    	Gmail.create!(email: "test@example.com", user: user, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g")
-  		}
-
-  	before do
-	  allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail)
-	end
+	allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail)
 
   	it "should show the Admin Access button" do 
 
@@ -59,28 +45,8 @@ RSpec.describe "Navbar", type: :system do
   end
 
   context "When a user IS AN Admin" do 
-  	it "should show the Admin Access button" do 
-  		  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456734, isAdmin: false) }
-		  let(:alumnus) {
-		    Alumnus.create!(
-		      uin: 123456734,
-		      cohort_year: 2024,
-		      team_affiliation: "MyString",
-		      profession_title: "MyString",
-		      availability: false,
-		      email: "MyString",
-		      phone_number: "(682)-472-8670",
-		      LinkedIn: "MyString",
-		      user: user
-		    )
-		  }
-		  let(:gmail) {
-	    	Gmail.create!(email: "test@example.com", user: user, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g")
-	  	  }
-
-	  	  before do
-			  allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail)
-		  end
+	allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail2)
+	it "should show the Admin Access button" do 
 
 		  visit root_path
 
