@@ -25,7 +25,9 @@ RSpec.describe "Navbar", type: :system do
   end
 
   context "When a user IS AN Admin" do 
-	allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail)
+	before do
+      allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail)
+    end
 
   	it "should show the Admin Access button" do 
 
@@ -45,7 +47,9 @@ RSpec.describe "Navbar", type: :system do
   end
 
   context "When a user IS AN Admin" do 
-	allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail2)
+	before do
+      allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail2)
+    end
 	it "should show the Admin Access button" do 
 
 		  visit root_path
