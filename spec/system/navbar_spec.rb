@@ -1,33 +1,48 @@
 require 'rails_helper'
 
 RSpec.describe "Navbar", type: :system do
-	let(:user) { User.create!(first_name: "Is", last_name: "Admin", uin: 555555555, isAdmin: true) }
-	let(:gmail) { Gmail.create!(email: "test@example.com", user: user, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g") }
-	let(:user2) { User.create!(first_name: "Non", last_name: "Admin", uin: 555555556, isAdmin: false) }
-	let(:gmail2) { Gmail.create!(email: "test@example.com", user: user2, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g") }
+	#let(:user) { User.create!(first_name: "Is", last_name: "Admin", uin: 555555555, isAdmin: true) }
+	#let(:gmail) { Gmail.create!(email: "test@example.com", user: user, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g") }
+	#let(:user2) { User.create!(first_name: "Non", last_name: "Admin", uin: 555555556, isAdmin: false) }
+	#let(:gmail2) { Gmail.create!(email: "test@example.com", user: user2, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g") }
 
 
   before do
     driven_by(:rack_test)
-    allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
-  end
-
-  it "redirects to the alumni directory when navbar button is clicked" do
-    visit root_path
-    click_link "Alumni Directory"
-    expect(page).to have_current_path(root_path)
-  end
-
-  it "redirects to the student directory when navbar button is clicked" do
-    visit root_path
-    click_link "Student Directory"
-    expect(page).to have_current_path(student_directory_path)
+    #allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
+    OmniAuth.config.test_mode = true
   end
 
   context "When a user IS AN Admin" do 
+  	let(:user) { User.create!(first_name: "Is", last_name: "Admin", uin: 555555555, isAdmin: true) }
+    let(:gmail) { Gmail.create!(email: "test@example.com", user: user, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g") }
 	before do
-      allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail)
+      OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+      provider: 'google_oauth2',
+      uid: '123456',
+      info: {
+        email: 'testuser@example.com',
+        name: 'Test user',
+        image: 'https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g'
+      },
+      credentials: {
+        token: 'mock_token',
+        expires_at: Time.now + 1.week
+      }
+    })
     end
+
+    it "redirects to the alumni directory when navbar button is clicked" do
+	    visit root_path
+	    click_link "Alumni Directory"
+	    expect(page).to have_current_path(root_path)
+	end
+
+	it "redirects to the student directory when navbar button is clicked" do
+	    visit root_path
+	    click_link "Student Directory"
+	    expect(page).to have_current_path(student_directory_path)
+	end
 
   	it "should show the Admin Access button" do 
 
@@ -47,9 +62,24 @@ RSpec.describe "Navbar", type: :system do
   end
 
   context "When a user IS AN Admin" do 
+  	let(:user) { User.create!(first_name: "Non", last_name: "Admin", uin: 555555556, isAdmin: false) }
+    let(:gmail) { Gmail.create!(email: "test@example.com", user: user, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g") }
 	before do
-      allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail2)
+      OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new({
+      provider: 'google_oauth2',
+      uid: '123457',
+      info: {
+        email: 'testuser@example.com',
+        name: 'Test user',
+        image: 'https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g'
+      },
+      credentials: {
+        token: 'mock_token',
+        expires_at: Time.now + 1.week
+      }
+    })
     end
+
 	it "should show the Admin Access button" do 
 
 		  visit root_path
