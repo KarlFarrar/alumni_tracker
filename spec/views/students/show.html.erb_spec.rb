@@ -13,7 +13,7 @@ RSpec.describe "students/show", type: :view do
       resumelink: "Resumelink",
       email: "Email",
       phone: "(123)-123-1234",
-      biography: "Biography",
+      linkedin: "LinkedIn",
       user: user
     ))
   end
@@ -26,6 +26,6 @@ RSpec.describe "students/show", type: :view do
     expect(rendered).to match(/Resumelink/)
     expect(rendered).to match(/Email/)
     expect(rendered).to match(/\(123\)-123-1234/)
-    expect(rendered).to match(/Biography/)
+    expect(rendered).to match(/LinkedIn/)
   end
 end
