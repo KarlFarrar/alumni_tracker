@@ -8,19 +8,13 @@ RSpec.describe "Navbar", type: :system do
 
   it "redirects to the alumni directory when navbar button is clicked" do
     visit root_path
-
-    # Simulate clicking the navbar link (adjust the text/id to match your actual link)
     click_link "Alumni Directory"
-
     expect(page).to have_current_path(root_path)
   end
 
   it "redirects to the student directory when navbar button is clicked" do
     visit root_path
-
-    # Simulate clicking the navbar link (adjust the text/id to match your actual link)
     click_link "Student Directory"
-
     expect(page).to have_current_path(student_directory_path)
   end
 
@@ -42,7 +36,11 @@ RSpec.describe "Navbar", type: :system do
 	   let(:gmail) {
     	Gmail.create!(email: "test@example.com", user: user, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g")
   		}
-  
+
+  	before do
+	  allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail)
+	end
+
   	it "should show the Admin Access button" do 
 
 		  visit root_path
@@ -76,6 +74,13 @@ RSpec.describe "Navbar", type: :system do
 		      user: user
 		    )
 		  }
+		  let(:gmail) {
+	    	Gmail.create!(email: "test@example.com", user: user, avatar_url: "https://lh3.googleusercontent.com/a/ACg8ocKmuBbupm_fHr6Cj2dthGIeHVbsXLa1jyMDZofvOSmIsN-X2g")
+	  	  }
+
+	  	  before do
+			  allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(gmail)
+		  end
 
 		  visit root_path
 
