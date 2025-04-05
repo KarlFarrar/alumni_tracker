@@ -34,6 +34,8 @@ RSpec.describe "Navbar", type: :system do
 
     it "redirects to the alumni directory when navbar button is clicked" do
 	    visit root_path
+
+	    puts page.body
 	    click_button "Alumni Directory"
 	    expect(page).to have_current_path(root_path)
 	end
