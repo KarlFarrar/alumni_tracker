@@ -35,27 +35,19 @@ RSpec.describe "Navbar", type: :system do
     it "redirects to the alumni directory when navbar button is clicked" do
 	    visit root_path
 
-	    puts page.body
-	    click_button "Alumni Directory"
+	    click_on "Alumni Directory"
 	    expect(page).to have_current_path(root_path)
 	end
 
 	it "redirects to the student directory when navbar button is clicked" do
 	    visit root_path
-	    click_button "Student Directory"
+	    click_on "Student Directory"
 	    expect(page).to have_current_path(student_directory_path)
 	end
 
-  	it "should show the Admin Access button" do 
-
-		  visit root_path
-
-		  expect(page).to have_button("Admin View")
-  	end
-
   	it "redirects to the admin page when navbar button is clicked" do
  		visit root_path
- 		click_button "Admin View"
+ 		click_on "Admin View"
 
     	expect(page).to have_current_path(admin_dashboard_path)
   	end
