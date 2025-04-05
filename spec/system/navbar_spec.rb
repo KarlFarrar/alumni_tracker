@@ -11,6 +11,7 @@ RSpec.describe "Navbar", type: :system do
     driven_by(:rack_test)
     #allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
     OmniAuth.config.test_mode = true
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
   end
 
   context "When a user IS AN Admin" do 
