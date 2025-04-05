@@ -1533,15 +1533,17 @@
   .navbar-btn {
     background-color: #000000; /* Green background */
     width: 100%;
-    height: 50%;
+    height: 40%;
     color: #FFFFFF;
     border: solid 1px white;
     padding: 10px 20px; /* Padding around text */
-    font-size: 85%; /* Font size */
+    font-size: 17px; /* Font size */
     cursor: pointer; /* Change cursor on hover */
-    text-align: center; /* Center the text */
-    display: inline-block; /* Display as inline block */
+    display: flex; /* Display as inline block */
+    align-items: center; /* Center the text */
+    justify-content: center;
     transition: background-color 0.3s ease; /* Smooth background color change */
+    text-decoration: none;
 
     &:hover {
       background: #9555c2;

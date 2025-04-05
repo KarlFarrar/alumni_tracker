@@ -1,8 +1,8 @@
 <nav class="navbar">
   <%= image_tag("logo2.png", alt: "Sling health", class: "navbar-logo") %>
   <div class = "navbar-content">
-    <%= button_to "Student Directory", student_directory_path, class: "navbar-btn", method: :get %>
-    <%= button_to "Alumni Directory", root_path, class: "navbar-btn", method: :get %>
+    <%= link_to "Student Directory", student_directory_path, class: "navbar-btn" %>
+    <%= link_to "Alumni Directory", root_path, class: "navbar-btn" %>
     <% if current_gmail&.user&.isAdmin%>
       <%= button_to "Admin View", admin_dashboard_path, class: "navbar-btn", method: :get %>
     <% end %>
