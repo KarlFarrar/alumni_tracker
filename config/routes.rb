@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  root 'alumni#index'
+  root 'directory/alumni#index'
   devise_for :gmails, controllers: { registrations: 'gmails/registrations', omniauth_callbacks:'gmails/omniauth_callbacks' }
   devise_scope :gmail do
     get 'gmails/sign_in', to: 'gmails/sessions#new', as: :new_gmail_session
@@ -31,6 +31,8 @@ Rails.application.routes.draw do
     end
   end
 
+  get 'directory/students', to: 'students#index', as: 'student_directory'
+
   namespace :admin do
     resources :alumni
     resources :users do
@@ -38,7 +40,7 @@ Rails.application.routes.draw do
     end
     resources :experiences
     resources :professions, only: [:index, :create, :destroy]
-    get 'dashboard', to: 'dashboard#index'
+    get 'dashboard', to: 'dashboard#index', as: 'dashboard'  # This creates /admin/dashboard
     get 'dashboard/:id', to: 'dashboard#show', as: 'dashboard_show'
     get 'logs', to: 'logs#index', as: 'logs'
   end

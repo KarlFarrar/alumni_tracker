@@ -104,7 +104,7 @@ class AlumniController < ApplicationController
       sign_in(@alumnus.user.gmail)
 
       respond_to do |format|
-        format.html { redirect_to @alumnus, notice: "Alumnus was successfully created." }
+        format.html { redirect_to root_path, notice: "Account creation successful! Welcome to the Sling Health Alumni Search Directory!" }
         format.json { render :show, status: :created, location: @alumnus }
       end
     else
@@ -184,9 +184,9 @@ class AlumniController < ApplicationController
 
   def authorize_alumnus!
     # Ensure the current user matches the alumnus's user
-    unless current_gmail && @alumnus.user.gmail == current_gmail
+    unless current_gmail && (@alumnus.user.gmail == current_gmail || current_gmail.user.isAdmin)
       respond_to do |format|
-        format.html { redirect_to root_path, notice: "You are not authroized to view this page" }
+        format.html { redirect_to root_path, alert: "You are not authroized to view this page" }
       end
     end
   end
