@@ -1,7 +1,7 @@
-<div class="alumni-profile">
+<div class="alumni-profile alumni-view">
   <header class="page-header mb-4">
     <div class="d-flex justify-content-between align-items-center">
-      <h1>Alumni Profile</h1>
+      <h1><%= @alumnus.user.present? ? "#{@alumnus.user.first_name} #{@alumnus.user.last_name}" : "Alumni Profile" %></h1>
       <div class="header-actions">
         <%= link_to "Back to Directory", directory_alumni_path, class: "btn btn-secondary" %>
       </div>
@@ -9,44 +9,66 @@
   </header>
 
   <div class="row">
-    <div class="col-md-8">
+    <!-- Main column - contains both profile info and LinkedIn -->
+    <div class="col-md-12">
+      <!-- Profile Information Card -->
       <div class="card mb-4">
-        <div class="card-header d-flex justify-content-between align-items-center">
+        <div class="card-header">
           <h2>Profile Information</h2>
-          <% if @alumnus.availability %>
-            <span class="badge bg-success">Available</span>
-          <% else %>
-            <span class="badge bg-secondary">Unavailable</span>
-          <% end %>
         </div>
         <div class="card-body">
-          <div class="row mb-3">
-            <div class="col-md-3 text-muted">Cohort Year:</div>
-            <div class="col-md-9"><%= @alumnus.cohort_year %></div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-3 text-muted">Team Affiliation:</div>
-            <div class="col-md-9"><%= @alumnus.team_affiliation.present? ? @alumnus.team_affiliation : "Not specified" %></div>
-          </div>
-          <div class="row mb-3">
-            <div class="col-md-3 text-muted">Profession:</div>
-            <div class="col-md-9"><%= @alumnus.profession_title.present? ? @alumnus.profession_title : "Not specified" %></div>
-          </div>
-          <% if @alumnus.availability %>
-            <div class="row mb-3">
-              <div class="col-md-3 text-muted">Contact Email:</div>
-              <div class="col-md-9"><%= mail_to @alumnus.email %></div>
+          <!-- Name row -->
+          <div class="profile-info-row">
+            <div class="profile-info-label">Name:</div>
+            <div class="profile-info-value">
+              <%= @alumnus.user.present? ? "#{@alumnus.user.first_name} #{@alumnus.user.last_name}" : "Name not available" %>
             </div>
+          </div>
+          
+          <div class="profile-info-row">
+            <div class="profile-info-label">Cohort Year:</div>
+            <div class="profile-info-value"><%= @alumnus.cohort_year %></div>
+          </div>
+          
+          <div class="profile-info-row">
+            <div class="profile-info-label">Team Affiliation:</div>
+            <div class="profile-info-value"><%= @alumnus.team_affiliation.present? ? @alumnus.team_affiliation : "Not specified" %></div>
+          </div>
+          
+          <div class="profile-info-row">
+            <div class="profile-info-label">Profession:</div>
+            <div class="profile-info-value"><%= @alumnus.profession_title.present? ? @alumnus.profession_title : "Not specified" %></div>
+          </div>
+          
+          <!-- Availability row (moved from header) -->
+          <div class="profile-info-row">
+            <div class="profile-info-label">Availability:</div>
+            <div class="profile-info-value">
+              <% if @alumnus.availability %>
+                <span class="badge bg-success">Available</span>
+              <% else %>
+                <span class="badge bg-secondary">Unavailable</span>
+              <% end %>
+            </div>
+          </div>
+          
+          <% if @alumnus.availability %>
+            <div class="profile-info-row">
+              <div class="profile-info-label">Contact Email:</div>
+              <div class="profile-info-value"><%= mail_to @alumnus.email %></div>
+            </div>
+            
             <% if @alumnus.phone_number.present? %>
-              <div class="row mb-3">
-                <div class="col-md-3 text-muted">Phone Number:</div>
-                <div class="col-md-9"><%= @alumnus.phone_number %></div>
+              <div class="profile-info-row">
+                <div class="profile-info-label">Phone Number:</div>
+                <div class="profile-info-value"><%= @alumnus.phone_number %></div>
               </div>
             <% end %>
           <% end %>
         </div>
       </div>
 
+      <!-- LinkedIn Card - Now below profile info -->
       <% if @alumnus.LinkedIn.present? %>
         <div class="card mb-4">
           <div class="card-header">
@@ -57,39 +79,37 @@
           </div>
         </div>
       <% end %>
-    </div>
-
-    <div class="col-md-4">
-      <% if @alumnus.alumnus_experiences.present? %>
-        <div class="card mb-4">
-          <div class="card-header">
-            <h3>Experiences</h3>
-          </div>
-          <div class="card-body">
-            <ul class="list-group list-group-flush">
-              <% @alumnus.alumnus_experiences.includes(:experience).each do |alumnus_experience| %>
-                <li class="list-group-item">
-                  <div class="d-flex justify-content-between">
-                    <div>
-                      <strong><%= alumnus_experience.experience.title %></strong>
-                      <% if alumnus_experience.experience.experience_type.present? %>
-                        <span class="badge bg-info text-dark ms-2"><%= alumnus_experience.experience.experience_type %></span>
-                      <% end %>
-                    </div>
-                    <% if alumnus_experience.date_received.present? %>
-                      <small class="text-muted"><%= alumnus_experience.date_received.strftime("%b %Y") %></small>
+      
+      <!-- Experiences Card -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h3>Experiences</h3>
+        </div>
+        <div class="card-body">
+          <ul class="list-group list-group-flush">
+            <% @alumnus.alumnus_experiences.includes(:experience).each do |alumnus_experience| %>
+              <li class="list-group-item">
+                <div class="d-flex justify-content-between">
+                  <div>
+                    <strong><%= alumnus_experience.experience.title %></strong>
+                    <% if alumnus_experience.experience.experience_type.present? %>
+                      <span class="badge bg-info text-dark ms-2"><%= alumnus_experience.experience.experience_type %></span>
                     <% end %>
                   </div>
-                  <% if alumnus_experience.custom_description.present? %>
-                    <p class="text-muted mt-1 small"><%= alumnus_experience.custom_description %></p>
+                  <% if alumnus_experience.date_received.present? %>
+                    <small class="text-muted"><%= alumnus_experience.date_received.strftime("%b %Y") %></small>
                   <% end %>
-                </li>
-              <% end %>
-            </ul>
-          </div>
+                </div>
+                <% if alumnus_experience.custom_description.present? %>
+                  <p class="text-muted mt-1 small"><%= alumnus_experience.custom_description %></p>
+                <% end %>
+              </li>
+            <% end %>
+          </ul>
         </div>
-      <% end %>
-
+      </div>
+      
+      <!-- Areas of Expertise Card -->
       <% if @alumnus.alumnus_professions.present? %>
         <div class="card">
           <div class="card-header">

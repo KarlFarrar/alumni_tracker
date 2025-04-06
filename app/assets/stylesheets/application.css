@@ -1492,6 +1492,198 @@
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
       }
     }
+
+    .alumni-view {
+      width: 90%;
+      margin: 0 auto;
+      background-color: #f5f0fa; /* Light purple background color */
+      padding: 30px;
+      border-radius: 10px;
+      
+      .page-header {
+        margin-bottom: 30px;
+        border-bottom: 3px solid #9555c2;
+        padding-bottom: 15px;
+        
+        h1 {
+          font-size: 2.5rem;
+          color: #333;
+          margin-bottom: 10px;
+        }
+        
+        .header-actions {
+          margin-top: 15px;
+          
+          .btn-secondary {
+            background-color: #9555c2;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 6px;
+            text-decoration: none;
+            display: inline-block;
+            transition: all 0.3s ease;
+            
+            &:hover {
+              background-color: #7b44a1;
+              transform: translateY(-2px);
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+      }
+      
+      /* Make the layout vertical instead of horizontal */
+      .row {
+        flex-direction: column;
+        margin-bottom: 20px;
+      }
+      
+      /* Adjust column widths for vertical layout */
+      .col-md-8, .col-md-4 {
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+      }
+      
+      .card {
+        border: none;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+        overflow: hidden;
+        margin-bottom: 25px;
+        background-color: white;
+        
+        .card-header {
+          background-color: #9555c2;
+          padding: 15px 20px;
+          border-bottom: none;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          
+          h2, h3 {
+            color: white;
+            margin: 0;
+            font-size: 1.5rem;
+            font-weight: 600;
+          }
+          
+          .badge {
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-weight: 500;
+            font-size: 0.8rem;
+            
+            &.bg-success {
+              background-color: #28a745;
+            }
+            
+            &.bg-secondary {
+              background-color: #6c757d;
+            }
+          }
+        }
+        
+        .card-body {
+          padding: 25px;
+          
+          .row {
+            display: flex;
+            flex-direction: row;
+            margin-bottom: 15px;
+            
+            &:last-child {
+              margin-bottom: 0;
+            }
+          }
+          
+          /* Better formatting for profile info */
+          .profile-info-row {
+            display: flex;
+            margin-bottom: 15px;
+            border-bottom: 1px solid #f0f0f0;
+            padding-bottom: 15px;
+            
+            &:last-child {
+              border-bottom: none;
+              margin-bottom: 0;
+              padding-bottom: 0;
+            }
+          }
+          
+          .profile-info-label {
+            flex: 0 0 200px;
+            color: #6c757d;
+            font-weight: 500;
+          }
+          
+          .profile-info-value {
+            flex: 1;
+          }
+          
+          a {
+            color: #9555c2;
+            text-decoration: none;
+            
+            &:hover {
+              text-decoration: underline;
+              color: #7b44a1;
+            }
+          }
+        }
+      }
+      
+      .list-group {
+        padding: 0;
+        
+        .list-group-item {
+          border: none;
+          border-bottom: 1px solid #eee;
+          padding: 15px 0;
+          
+          &:first-child {
+            padding-top: 0;
+          }
+          
+          &:last-child {
+            border-bottom: none;
+          }
+          
+          .d-flex {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 5px;
+          }
+          
+          strong {
+            color: #333;
+            margin-right: 10px;
+          }
+          
+          .badge {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-weight: 500;
+            font-size: 0.75rem;
+            background-color: #17a2b8;
+            color: white;
+          }
+          
+          .text-muted {
+            display: block;
+            margin-top: 5px;
+            font-size: 0.9rem;
+          }
+          
+          p.small {
+            margin-top: 8px;
+            margin-bottom: 0;
+          }
+        }
+      }
+    }
+  
     .search-area {
             margin-bottom: 20px;
             
