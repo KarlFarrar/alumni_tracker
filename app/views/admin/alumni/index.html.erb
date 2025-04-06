@@ -3,6 +3,7 @@
     <h1>Alumni Management</h1>
     <div class="header-actions">
       <%= link_to "Back to Dashboard", admin_dashboard_path, class: "btn btn-secondary" %>
+      <%= link_to "Create Alumnus Profile", new_admin_alumnus_path, class: "btn btn-secondary" %>
     </div>
   </header>
 
@@ -32,7 +33,10 @@
         <% @alumni.each do |alumnus| %>
           <tr>
             <td><%= alumnus.uin %></td>
-            <td><%= alumnus.biography.split("\n").first rescue "N/A" %></td>
+            <td>
+             <% user = User.find_by(uin: alumnus.uin) %>
+             <%= user ? "#{user.first_name} #{user.last_name}" : "N/A" %>
+            </td>
             <td><%= alumnus.cohort_year %></td>
             <td><%= alumnus.team_affiliation %></td>
             <td><%= alumnus.profession_title %></td>

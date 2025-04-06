@@ -1,0 +1,177 @@
+<div class="alumni-create">
+  <header class="page-header">
+    <h1>Create Alumnus Profile</h1>
+    <div class="header-actions">
+      <%= link_to "Back to Alumni List", admin_alumni_path, class: "btn btn-secondary" %>
+    </div>
+  </header>
+
+  <div class="card">
+    <div class="card-header">
+      <h3>New Alumnus Information</h3>
+    </div>
+    <div class="card-body">
+      <%= form_with(url: admin_alumni_path, method: :post, local: true) do |form| %>
+        <% if flash[:alert] %>
+          <div class="alert alert-danger">
+            <%= flash[:alert] %>
+          </div>
+        <% end %>
+        
+        <div class="form-grid">      
+          <div class="form-group">      
+            <div class="mb-3">
+              <%= form.label :first_name, "First Name", class: "form-label" %>
+              <%= form.text_field :first_name, id: "first_name", class: "form-control", required: true %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :last_name, "Last Name", class: "form-label" %>
+              <%= form.text_field :last_name, id: "last_name", class: "form-control", required: true %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :middle_initial, "Middle Initial", class: "form-label" %>
+              <%= form.text_field :middle_initial, id: "middle_initial", class: "form-control" %>
+            </div>
+          </div> 
+
+          <div class="form-group">
+            <div class="mb-3"> 
+              <%= form.label :cohort_year, "Class Year", class: "form-label" %>
+              <%= form.select :cohort_year, options_for_select((1950..(Date.today.year + 10)).to_a.reverse, selected: Date.today.year), {}, { class: "form-control", required: true } %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :phone_number, "Phone Number", class: "form-label" %>
+              <%= form.text_field :phone_number, id: "phone_number", class: "form-control", placeholder: "(123)-456-7890", maxlength: 14 %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :email, "Email", class: "form-label" %>
+              <%= form.email_field :email, class: "form-control", required: true %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="mb-3">
+              <%= form.label :team_affiliation, "Team Affiliation", class: "form-label" %>
+              <%= form.text_field :team_affiliation, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="mb-3">
+              <%= form.label :profession_title, "Profession Title", class: "form-label" %>
+              <%= form.text_field :profession_title, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <div class="mb-3">
+              <%= form.label :availability, "Availability", class: "form-label" %>
+              <%= form.select :availability, options_for_select([["Yes", true], ["No", false]], selected: false), { include_blank: true }, { class: "form-control" } %>
+            </div>
+          </div>
+
+          <div class="form-group full-width">
+            <div class="mb-3">
+              <%= form.label :LinkedIn, "LinkedIn", class: "form-label" %>
+              <%= form.text_field :LinkedIn, class: "form-control" %>
+            </div>
+          </div>
+
+          <div class="form-actions mt-4">
+            <%= form.submit "Create Alumnus", class: "btn btn-success" %>
+            <%= link_to "Cancel", admin_alumni_path, class: "btn btn-success" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener("turbo:load", function() {
+    const phoneInput = document.getElementById("phone_number");
+
+    if (phoneInput) {
+      phoneInput.addEventListener("input", function(e) {
+        let numbers = e.target.value.replace(/\D/g, ""); 
+        
+        if (numbers.length > 10) {
+          numbers = numbers.slice(0, 10);
+        }
+
+        let formattedNumber = "";
+        if (numbers.length > 0) {
+          formattedNumber += `(${numbers.slice(0, 3)}`;
+        }
+        if (numbers.length >= 4) {
+          formattedNumber += `)-${numbers.slice(3, 6)}`;
+        }
+        if (numbers.length >= 7) {
+          formattedNumber += `-${numbers.slice(6, 10)}`;
+        }
+
+        e.target.value = formattedNumber;
+      });
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const firstNameInput = document.getElementById("first_name");
+    
+    if (firstNameInput) {
+      firstNameInput.addEventListener("blur", function() {
+        let value = firstNameInput.value.trim();  // Remove trailing spaces
+        if (value.length > 0) {
+          // Capitalize the first letter
+          value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        }
+        firstNameInput.value = value;
+      });
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const lastNameInput = document.getElementById("last_name");
+    
+    if (lastNameInput) {
+      lastNameInput.addEventListener("blur", function() {
+        let value = lastNameInput.value.trim();  // Remove trailing spaces
+        if (value.length > 0) {
+          // Capitalize the first letter
+          value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        }
+        lastNameInput.value = value;
+      });
+    }
+  });
+
+  document.addEventListener("DOMContentLoaded", function() {
+    const middleInitialInput = document.getElementById("middle_initial");
+    
+    if (middleInitialInput) {
+      middleInitialInput.addEventListener("input", function(e) {
+        let value = e.target.value;
+
+        // Ensure only 1 character is entered
+        if (value.length > 1) {
+          value = value.slice(0, 1); // Trim to 1 character
+        }
+
+        if (!/^[A-Za-z]*$/.test(value)) {
+          value = value.slice(0, -1);  // Remove non-alphabetic character
+        }
+
+        if (value.length > 0) {
+          // Capitalize the first letter
+          value = value.charAt(0).toUpperCase() + value.slice(1).toLowerCase();
+        }
+
+        e.target.value = value; // Set the trimmed value
+      });
+    }
+  });
+</script>
