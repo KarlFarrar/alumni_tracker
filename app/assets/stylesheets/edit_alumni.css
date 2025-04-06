@@ -17,12 +17,12 @@
   }
   
  /* General Page Styling */
- body {
+  /*.title-bar body {
     font-family: Arial, sans-serif;
     position: relative;
     height: 100vh;
     background-color: #f4f4f4;
-  }
+  }*/
 
   
   .container {

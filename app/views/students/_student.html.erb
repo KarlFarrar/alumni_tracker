@@ -46,8 +46,12 @@
   </p>
 
   <p>
-    <strong>Biography:</strong>
-    <%= student.biography %>
+    <strong>LinkedIn:</strong>
+    <% if student.linkedin.present? %>
+      <%= link_to student.linkedin, student.linkedin, target: "_blank", rel: "noopener" %>
+    <% else %>
+      N/A
+    <% end %>
   </p>
 
 </div>

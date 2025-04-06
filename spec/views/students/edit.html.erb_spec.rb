@@ -10,7 +10,7 @@ RSpec.describe "students/edit", type: :view do
       resumelink: "MyString",
       email: "MyString",
       phone: "(123)-123-1234",
-      biography: "MyString",
+      linkedin: "MyString",
       user: user
     )
   }
@@ -36,7 +36,7 @@ RSpec.describe "students/edit", type: :view do
 
       assert_select "input[name=?]", "student[phone]"
 
-      assert_select "input[name=?]", "student[biography]"
+      assert_select "input[name=?]", "student[linkedin]"
     end
   end
 end

@@ -15,7 +15,7 @@ RSpec.describe "students/index", type: :view do
         resumelink: "Resumelink",
         email: "Email",
         phone: "(123)-123-1234",
-        biography: "Biography",
+        linkedin: "LinkedIn",
         user: user
       ),
       Student.create!(
@@ -25,7 +25,7 @@ RSpec.describe "students/index", type: :view do
         resumelink: "Resumelink",
         email: "Email",
         phone: "(123)-123-1234",
-        biography: "Biography",
+        linkedin: "LinkedIn",
         user: user2
       )
     ])
@@ -40,6 +40,6 @@ RSpec.describe "students/index", type: :view do
     assert_select cell_selector, text: Regexp.new("Resumelink".to_s), count: 2
     assert_select cell_selector, text: Regexp.new("Email".to_s), count: 2
     assert_select 'div>p', text: /\(\d{3}\)-\d{3}-\d{4}/, count: 2
-    assert_select cell_selector, text: Regexp.new("Biography".to_s), count: 2
+    assert_select cell_selector, text: Regexp.new("LinkedIn".to_s), count: 2
   end
 end
