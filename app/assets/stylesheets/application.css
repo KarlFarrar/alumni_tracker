@@ -1543,7 +1543,6 @@
     align-items: center; /* Center the text */
     justify-content: center;
     transition: background-color 0.3s ease; /* Smooth background color change */
-    text-decoration: none;
 
     &:hover {
       background: #9555c2;
