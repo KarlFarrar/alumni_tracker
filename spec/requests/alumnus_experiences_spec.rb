@@ -6,7 +6,7 @@ RSpec.describe "AlumnusExperiences", type: :request do
   before do
     # Skip authentication in tests if needed
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
-    allow_any_instance_of(ApplicationController).to receive(:current_gmail).and_return(OpenStruct.new(avatar_url: "assets/images/logo2.png"))
+    allow(view).to receive(:image_tag).and_return('<img src="test_avatar_url" alt="Profile" class="profile-img">')
   end
 
   let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: "123456789") }
