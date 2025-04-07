@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe "students/index", type: :view do
 
-  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456789) }
-  let(:user2) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456788) }
+  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456789, isAdmin: false) }
+  let(:user2) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456788, isAdmin: false) }
 
 
   before(:each) do

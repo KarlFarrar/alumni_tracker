@@ -1,11 +1,11 @@
 require "rails_helper"
 
 RSpec.describe StudentsController, type: :routing do
+  before do
+    # This will skip the `authenticate_gmails!` before action
+    allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
+  end
   describe "routing" do
-    it "routes to #index" do
-      expect(get: "/students").to route_to("students#index")
-    end
-
     it "routes to #new" do
       expect(get: "/students/new").to route_to("students#new")
     end

@@ -6,7 +6,7 @@ RSpec.describe "alumni/edit", type: :view do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
   end
 
-  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: "123456789") }
+  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456789, isAdmin: false) }
   let(:alumnus) {
     Alumnus.create!(
       uin: 123456789,
