@@ -1,31 +1,35 @@
+<%= render 'layouts/navbar' %>
+
 <h2>Edit Experience Details</h2>
 
-<%= form_with model: @student_experience, url: student_experience_path(@student_experience), method: :patch, html: { id: "experience_form" } do |f| %>
-  <div>
-    <%= f.label :date_received, "Date Received" %>
-    <%= f.date_field :date_received, required: true %>
-  </div>
+<div class="form-container">
+  <%= form_with model: @student_experience, url: student_experience_path(@student_experience), method: :patch, html: { id: "experience_form" } do |f| %>
+    <div>
+      <%= f.label :date_received, "Date Received" %>
+      <%= f.date_field :date_received, required: true %>
+    </div>
 
-  <div style="display: none;">
-    <%= f.label :experience_type, "Experience Type" %>
-    <%= f.text_field :experience_type, id: "experience_type_input", value: @student_experience.experience.experience_type, disabled: true %>
-  </div>
+    <div style="display: none;">
+      <%= f.label :experience_type, "Experience Type" %>
+      <%= f.text_field :experience_type, id: "experience_type_input", value: @student_experience.experience.experience_type, disabled: true %>
+    </div>
 
-  <div id="placement_field" style="display: none;">
-    <%= f.label :placement, "Placement " %>
-    <%= f.text_field :placement, id: "placement_input", placeholder: "Enter placement (e.g., 1st Place, Finalist)" %>
-    <p id="placement_warning" style="color: red; display: none;">Please enter a placement for this competition experience.</p>
-  </div>
+    <div id="placement_field" style="display: none;">
+      <%= f.label :placement, "Placement " %>
+      <%= f.text_field :placement, id: "placement_input", placeholder: "Enter placement (e.g., 1st Place, Finalist)" %>
+      <p id="placement_warning" style="color: red; display: none;">Please enter a placement for this competition experience.</p>
+    </div>
 
-  <div>
-    <%= f.label :custom_description, "Custom Description" %>
-    <%= f.text_area :custom_description, placeholder: "Describe how you received this award, certificate, etc.", rows: 5 %>
-  </div>
+    <div>
+      <%= f.label :custom_description, "Custom Description" %>
+      <%= f.text_area :custom_description, placeholder: "Describe how you received this award, certificate, etc.", rows: 5 %>
+    </div>
 
-  <%= f.submit "Update Experience", class: "btn btn-success" %>
-<% end %>
+    <%= f.submit "Update Experience", class: "btn btn-success" %>
+  <% end %>
+</div> 
 
-<p><%= link_to "Back", edit_student_path(@student_experience.student) %></p>
+<p><%= link_to "Back", edit_student_path(@student_experience.student), class: "back-button" %></p>
 
 <script>
   document.addEventListener("turbo:load", function() {
@@ -67,3 +71,83 @@
     });
   });
 </script>
+
+<style>
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  form {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 750px;
+    text-align: center;
+  }
+
+  div {
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #9555c2;
+    text-align: center;
+    
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 24px; 
+  }
+
+  input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px; 
+  }
+  
+  text_field {
+    font-size: 18px; 
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+    padding: 10px;
+    width: 90%;
+    border-radius: 5px;
+    font-size: 24px; 
+    cursor: pointer;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+  }
+
+  .back-button {
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 20px;
+    padding: 12px 20px; 
+    border-radius: 5px;
+    background-color: #6c757d; 
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 24px; 
+    transition: background 0.2s ease-in-out;
+  }
+
+  .back-button:hover {
+    background-color: #5a6268;
+  }
+</style> 

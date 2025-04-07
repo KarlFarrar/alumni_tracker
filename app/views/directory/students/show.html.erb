@@ -104,6 +104,10 @@
                       <small class="text-muted"><%= student_experience.date_received.strftime("%b %Y") %></small>
                     <% end %>
                   </div>
+                  <% if student_experience.experience.experience_type.downcase == "competition" %>
+                    <small><strong>Placement:</strong> <%= student_experience.placement.presence || "Not Set" %></small>
+                    <br>
+                  <% end %>
                   <% if student_experience.custom_description.present? %>
                     <p class="text-muted mt-1 small"><%= student_experience.custom_description %></p>
                   <% end %>

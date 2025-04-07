@@ -1,14 +1,130 @@
 <%= render 'layouts/navbar' %>
 <%= render 'layouts/flash' %>
-<h1>Your Student Profile</h1>
-<%= render @student %>
+<div class="student-profile alumni-view">
+  <header class="page-header mb-4">
+    <div class="d-flex justify-content-between align-items-center">
+      <h1>Your Student Profile</h1>
+      <div class="header-actions">
+        <%= link_to "Edit this student", edit_student_path(@student),  class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </header>
 
-<div>
-  <% if @current == @student %>
-  <%= link_to "Edit this student", edit_student_path(@student) %> |
-  <% end %>
+  <div class="row">
+    <div class="col-md-12">
+      <!-- Profile Information Card -->
+      <div class="card mb-4">
+        <div class="card-header">
+          <h2>Profile Information</h2>
+        </div>
+        <div class="card-body">
+          <!-- Name row (new) -->
+          <div class="profile-info-row">
+            <div class="profile-info-label">Name:</div>
+            <div class="profile-info-value">
+              <%= @student.user.present? ? "#{@student.user.first_name} #{@student.user.last_name}" : "Name not available" %>
+            </div>
+          </div>
+          
+          <div class="profile-info-row">
+            <div class="profile-info-label">Classification:</div>
+            <div class="profile-info-value"><%= @student.classification %></div>
+          </div>
+          
+          <div class="profile-info-row">
+            <div class="profile-info-label">Major:</div>
+            <div class="profile-info-value"><%= @student.major.present? ? @student.major : "Not specified" %></div>
+          </div>
+          
+          <div class="profile-info-row">
+            <div class="profile-info-label">Email:</div>
+            <div class="profile-info-value"><%= mail_to @student.email %></div>
+          </div>
+          
+          <% if @student.phone.present? %>
+            <div class="profile-info-row">
+              <div class="profile-info-label">Phone Number:</div>
+              <div class="profile-info-value"><%= @student.phone %></div>
+            </div>
+          <% end %>
+          
+          <% if @student.resumelink.present? %>
+            <div class="profile-info-row">
+              <div class="profile-info-label">Resume:</div>
+              <div class="profile-info-value">
+                <% 
+                  begin
+                    uri = URI.parse(@student.resumelink)
+                    is_valid = uri.is_a?(URI::HTTP) || uri.is_a?(URI::HTTPS)
+                  rescue URI::InvalidURIError
+                    is_valid = false
+                  end
+                %>
+                
+                <% if is_valid %>
+                  <%= link_to "View Resume", @student.resumelink, target: "_blank", rel: "noopener noreferrer" %>
+                <% else %>
+                  <span class="text-muted">No valid resume link available</span>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
 
-  <% if @current == @student %>
-  <%= button_to "Destroy this student", @student, method: :delete %>
-  <% end %>
+          <% if @student.uin.present? %>
+              <div class="profile-info-row">
+                <div class="profile-info-label">UIN:</div>
+                <div class="profile-info-value"><%= @student.uin %></div>
+              </div>
+            <% end %>
+        </div>
+      </div>
+
+      <!-- LinkedIn Card - Now below profile info -->
+      <% if @student.linkedin.present? %>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3>LinkedIn</h3>
+          </div>
+          <div class="card-body">
+            <%= simple_format @student.linkedin %>
+          </div>
+        </div>
+      <% end %>
+      
+      <!-- Experiences Card -->
+      <% if @student.student_experiences.present? %>
+        <div class="card mb-4">
+          <div class="card-header">
+            <h3>Experiences</h3>
+          </div>
+          <div class="card-body">
+            <ul class="list-group list-group-flush">
+              <% @student.student_experiences.includes(:experience).each do |student_experience| %>
+                <li class="list-group-item">
+                  <div class="d-flex justify-content-between">
+                    <div>
+                      <strong><%= student_experience.experience.title %></strong>
+                      <% if student_experience.experience.experience_type.present? %>
+                        <span class="badge bg-info text-dark ms-2"><%= student_experience.experience.experience_type %></span>
+                      <% end %>
+                    </div>
+                    <% if student_experience.date_received.present? %>
+                      <small class="text-muted"><%= student_experience.date_received.strftime("%b %Y") %></small>
+                    <% end %>
+                  </div>
+                  <% if student_experience.experience.experience_type.downcase == "competition" %>
+                    <small><strong>Placement:</strong> <%= student_experience.placement.presence || "Not Set" %></small>
+                    <br>
+                  <% end %>
+                  <% if student_experience.custom_description.present? %>
+                    <p class="text-muted mt-1 small"><%= student_experience.custom_description %></p>
+                  <% end %>
+                </li>
+              <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
 </div>
