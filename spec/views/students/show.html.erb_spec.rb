@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe "students/show", type: :view do
 
-  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456789, isAdmin: ) }
+  let(:user) { User.create!(first_name: "test_first", last_name: "test_last", middle_initial: "a", uin: 123456789, isAdmin: false) }
 
 
   before(:each) do
