@@ -1,4 +1,6 @@
 require 'rails_helper'
+require 'ostruct'
+
 
 RSpec.describe "AlumnusExperiences", type: :request do
   before do

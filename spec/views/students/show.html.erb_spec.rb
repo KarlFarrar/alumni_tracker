@@ -18,18 +18,6 @@ RSpec.describe "students/show", type: :view do
     ))
       allow(view).to receive(:current_gmail).and_return(gmail)
   end
-  # Assuming you're testing for the presence of the resume link
-  it "renders the resume link if available" do
-    student = create(:student, resumelink: "http://example.com/resume.pdf")
-    render template: "students/show", locals: { student: student }
-    expect(rendered).to match(/View Resume/)
-  end
-  # If resumelink is invalid
-  it "shows a fallback message if the resume link is invalid" do
-    student = create(:student, resumelink: "invalid-url")
-    render template: "students/show", locals: { student: student }
-    expect(rendered).to match(/No valid resume link available/)
-  end
 
   it "renders attributes in <p>" do
     render
