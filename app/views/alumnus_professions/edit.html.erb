@@ -1,10 +1,91 @@
+<%= render 'layouts/navbar' %>
 <h2>Edit Profession</h2>
 
-<%= form_with(model: @alumnus_profession, url: alumnus_profession_path(@alumnus_profession), method: :patch) do |f| %>
-  <div>
-    <%= f.label :field, "Field" %>
-    <%= f.text_field :field, required: true %>
-  </div>
+<div class="form-container">
+  <%= form_with(model: @alumnus_profession, url: alumnus_profession_path(@alumnus_profession), method: :patch) do |f| %>
+    <div>
+      <%= f.label :field, "Field" %>
+      <%= f.text_field :field, required: true %>
+    </div>
 
-  <%= f.submit "Save Changes", class: "btn btn-success" %>
-<% end %>
+    <%= f.submit "Save Changes", class: "btn btn-success" %>
+  <% end %>
+</div>
+
+<p><%= link_to "Back", edit_alumnus_path(@alumnus_profession.alumnus), class: "back-button" %></p>
+
+<style>
+  .form-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+  }
+
+  form {
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 750px;
+    text-align: center;
+  }
+
+  div {
+    margin-bottom: 15px;
+  }
+
+  h2 {
+    font-size: 32px;
+    margin-bottom: 20px;
+    color: #9555c2;
+    text-align: center;
+    
+  }
+
+  label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+    font-size: 28px; 
+  }
+
+  input[type="text"] {
+    width: 90%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 18px; 
+  }
+
+  .btn-success {
+    background-color: #28a745;
+    border: none;
+    padding: 10px;
+    width: 90%;
+    border-radius: 5px;
+    font-size: 24px; 
+    cursor: pointer;
+  }
+
+  .btn-success:hover {
+    background-color: #218838;
+  }
+
+  .back-button {
+    display: inline-block;
+    margin-top: 15px;
+    margin-left: 20px;
+    padding: 12px 20px; 
+    border-radius: 5px;
+    background-color: #6c757d; 
+    color: white;
+    text-decoration: none;
+    text-align: center;
+    font-size: 24px; 
+    transition: background 0.2s ease-in-out;
+  }
+
+  .back-button:hover {
+    background-color: #5a6268;
+  }
+</style> 
