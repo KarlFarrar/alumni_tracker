@@ -2,7 +2,7 @@
 <div class="student-profile alumni-view">
   <header class="page-header mb-4">
     <div class="d-flex justify-content-between align-items-center">
-      <h1><%= @student.user.present? ? "#{@student.user.first_name} #{@student.user.last_name}" : "Student Profile" %></h1>
+      <h1><%= @student.user.present? ? "#{@student.user.first_name} #{@student.user.last_name}'s Student Profile" : "Student Profile" %></h1>
       <div class="header-actions">
         <%= link_to "Back to Directory", directory_students_path, class: "btn btn-secondary" %>
       </div>
