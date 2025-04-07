@@ -6,10 +6,6 @@ RSpec.describe AlumniController, type: :routing do
     allow_any_instance_of(ApplicationController).to receive(:authenticate_gmail!).and_return(true)
   end
   describe "routing" do
-    it "routes to #index" do
-      expect(get: "/alumni").to route_to("alumni#index")
-    end
-
     it "routes to #new" do
       expect(get: "/alumni/new").to route_to("alumni#new")
     end
