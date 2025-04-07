@@ -1,7 +1,7 @@
 <div class="alumni-profile alumni-view">
   <header class="page-header mb-4">
     <div class="d-flex justify-content-between align-items-center">
-      <h1>Your Alumni Profile</h1>
+      <h1><%= @alumnus.user.present? ? "#{@alumnus.user.first_name} #{@alumnus.user.last_name}'s Alumnus Profile" : "Alumnus Profile" %></h1>
       <div class="header-actions">
         <%= link_to "Back to Directory", directory_alumni_path, class: "btn btn-secondary" %>
       </div>
