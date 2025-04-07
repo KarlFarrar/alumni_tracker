@@ -7,7 +7,7 @@
       <%= button_to "Admin View", admin_dashboard_path, class: "navbar-btn", method: :get %>
     <% end %>
     <button id ="navbar-profile" class = "navbar-profile">
-      <%= image_tag(current_gmail.avatar_url, alt: "Profile", class: "profile-img") %>
+      <%= image_tag(current_gmail.avatar_url, alt: "Profile", class: "profile-img", src: current_gmail.avatar_url) %>
     </button>
 
     <div id="profile-dropdown" class="profile-dropdown hidden">
