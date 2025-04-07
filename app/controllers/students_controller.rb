@@ -83,7 +83,7 @@ class StudentsController < ApplicationController
       sign_in(@student.user.gmail)
 
       respond_to do |format|
-        format.html { redirect_to @student, notice: "Student was successfully created." }
+        format.html { redirect_to root_path, notice: "Account creation successful! Welcome to the Sling Health Alumni Search Directory!" }
         format.json { render :show, status: :created, location: @alumnus }
       end
     else

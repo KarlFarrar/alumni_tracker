@@ -16,7 +16,7 @@
         <% elsif current_gmail&.user&.status == "student" %>
           <%= button_to "View Profile", student_path(current_gmail&.user&.student), class: "dropdown-btn", method: :get %>
         <% end %>
-        <%= button_to "logout", destroy_gmail_session_path, class: "dropdown-btn", method: :get %>
+        <%= button_to "Logout", destroy_gmail_session_path, class: "dropdown-btn", method: :get %>
     </div>
   </div>
 </nav>

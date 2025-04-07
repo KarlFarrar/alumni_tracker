@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   end
   
   
-  resources :alumni do
+  resources :alumni, except: [:index] do
     member do
       post "claim_experiences"
       delete "remove_experience", to: "alumni#remove_experience"
@@ -24,7 +24,7 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :students do
+  resources :students, except: [:index] do
     member do 
       post "claim_experiences"
       delete "remove_experiences", to: "students#remove_experience"
@@ -44,9 +44,7 @@ Rails.application.routes.draw do
     get 'dashboard/:id', to: 'dashboard#show', as: 'dashboard_show'
     get 'logs', to: 'logs#index', as: 'logs'
   end
-  
-  resources :students
-  resources :alumni
+
   resources :change_logs, only: [:index]
   resources :experiences
   resources :alumnus_experiences, only: [:edit, :update, :destroy]
