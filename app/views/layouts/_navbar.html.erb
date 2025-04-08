@@ -18,6 +18,11 @@
         <% elsif current_gmail&.user&.status == "student" %>
           <%= button_to "View Profile", student_path(current_gmail&.user&.student), class: "dropdown-btn", method: :get %>
         <% end %>
+        <% if current_gmail&.user&.isAdmin %>
+          <%= link_to "User Guide", "/documents/Alumni_Tracker_User_Guide_Admin.pdf", class: "dropdown-btn", style: "display: block; width: 100%;  text-decoration: none; cursor: pointer; border: none; background: none;  font-size: inherit;", target: "_blank" %>
+        <% else %>
+          <%= link_to "User Guide", "/documents/Alumni_Tracker_User_Guide.pdf", class: "dropdown-btn dropdown-btn:hover ", style: "display: block; width: 100%; text-decoration: none; cursor: pointer; border: none; background: none; font-size: inherit;", target: "_blank" %>
+        <% end %>
         <%= button_to "Logout", destroy_gmail_session_path, class: "dropdown-btn", method: :get %>
     </div>
   </div>

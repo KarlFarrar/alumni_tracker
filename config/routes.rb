@@ -13,6 +13,7 @@ Rails.application.routes.draw do
     resources :students, only: [:index, :show]
   end
   
+  get 'user_guide', to: 'user_guide#index', as: 'user_guide'
   
   resources :alumni, except: [:index] do
     member do
