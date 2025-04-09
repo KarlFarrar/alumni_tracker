@@ -13,22 +13,22 @@
   <div class="form-grid">      
     <div class="form-group">      
       <%= form.fields_for :user do |user_form| %>
-        <%= user_form.label :first_name%>
+        <%= user_form.label :first_name, "First Name*"%>
         <%= user_form.text_field :first_name, id: "first_name" %>
 
-        <%= user_form.label :last_name %>
+        <%= user_form.label :last_name, "Last Name*" %>
         <%= user_form.text_field :last_name, id: "last_name" %>
 
         <%= user_form.label :middle_initial %>
         <%= user_form.text_field :middle_initial, id: "middle_initial" %>
 
         <% if @alumnus.new_record? %>
-          <%= user_form.label :uin %>
+          <%= user_form.label :uin, "UIN*" %>
           <%= user_form.text_field :uin, id: "uin", placeholder: "Enter 9-digit UIN", 
               maxlength: 9, pattern: "[0-9]{9}", title: "UIN must be exactly 9 digits" %>
         <% else %>
           <div>
-            <%= user_form.label :uin %>
+            <%= user_form.label :uin%>
             <%= user_form.text_field :uin, readonly: true, value: @alumnus.user.uin %>
             <%= user_form.hidden_field :uin, value: @alumnus.user.uin %>
           </div>
