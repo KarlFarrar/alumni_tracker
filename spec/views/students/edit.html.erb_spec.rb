@@ -5,7 +5,7 @@ RSpec.describe "students/edit", type: :view do
   let(:student) {
     Student.create!(
       uin: 123456789,
-      classification: "MyString",
+      classification: "Freshman",
       major: "MyString",
       resumelink: "MyString",
       email: "MyString",

@@ -7,7 +7,7 @@ RSpec.describe "students/new", type: :view do
   before(:each) do
     assign(:student, Student.new(
       uin: 123456789,
-      classification: "MyString",
+      classification: "Freshman",
       major: "MyString",
       resumelink: "MyString",
       email: "MyString",
