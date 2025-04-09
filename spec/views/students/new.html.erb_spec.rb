@@ -7,7 +7,7 @@ RSpec.describe "students/new", type: :view do
   before(:each) do
     assign(:student, Student.new(
       uin: 123456789,
-      classification: "MyString",
+      classification: "Freshman",
       major: "MyString",
       resumelink: "MyString",
       email: "MyString",
@@ -24,7 +24,7 @@ RSpec.describe "students/new", type: :view do
 
       assert_select "input[name=?]", "student[user_attributes][uin]"
 
-      assert_select "input[name=?]", "student[classification]"
+      assert_select "select[name=?]", "student[classification]"
 
       assert_select "input[name=?]", "student[major]"
 
