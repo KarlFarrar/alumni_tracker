@@ -1962,6 +1962,7 @@
     align-items: center;
     justify-content: right;
     gap: 3%;
+    background-color: green;
   }
 
   .navbar-btn {
