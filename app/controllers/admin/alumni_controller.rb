@@ -74,6 +74,7 @@ class Admin::AlumniController < ApplicationController
   
   def edit
     @alumnus = Alumnus.find(params[:id])
+    redirect_to edit_alumnus_path(@alumnus)
   end
   
   def update

@@ -44,7 +44,7 @@
             <td><%= alumnus.email %></td>
             <td class="actions">
               <%= link_to "View", admin_alumnus_path(alumnus), class: "btn btn-sm btn-info" %>
-              <%= link_to "Edit", edit_admin_alumnus_path(alumnus), class: "btn btn-sm btn-primary" %>
+              <%= link_to "Edit", edit_alumnus_path(alumnus), class: "btn btn-sm btn-primary" %>
               <%= button_to "Delete", 
                  admin_alumnus_path(alumnus), 
                  method: :delete, 
