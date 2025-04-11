@@ -77,4 +77,51 @@
       No experience records found in the database.
     </div>
   <% end %>
+  <script>
+  document.addEventListener('DOMContentLoaded', function() {
+    // Get the search field, button, and table rows
+    const searchField = document.getElementById('experienceSearch');
+    const searchButton = document.querySelector('.filter-controls button');
+    const tableRows = document.querySelectorAll('.table tbody tr');
+    
+    // Function to perform the search
+    function performSearch() {
+      const searchTerm = searchField.value.toLowerCase().trim();
+      
+      // Loop through all table rows
+      tableRows.forEach(row => {
+        // Get the title cell (first cell in the row)
+        const titleCell = row.querySelector('td:first-child');
+        
+        if (!titleCell) return;
+        
+        const title = titleCell.textContent.toLowerCase();
+        
+        // Show/hide row based on whether title contains the search term
+        if (title.includes(searchTerm)) {
+          row.style.display = '';
+        } else {
+          row.style.display = 'none';
+        }
+      });
+    }
+    
+    // Add event listeners for button click and Enter key press
+    if (searchButton) {
+      searchButton.addEventListener('click', performSearch);
+    }
+    
+    if (searchField) {
+      searchField.addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          performSearch();
+        }
+      });
+      
+      // Optional: Real-time search as user types
+      searchField.addEventListener('input', performSearch);
+    }
+  });
+</script>
 </div>

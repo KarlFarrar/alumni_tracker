@@ -825,6 +825,257 @@
         box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
       }
     }
+
+    .professions-index {
+      padding: 30px;
+      background-color: #9555c2;
+      min-height: 100vh;
+      width: 100%;
+      box-sizing: border-box;
+      
+      .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 30px;
+        
+        h1 {
+          margin: 0;
+          color: #ffffff;
+          font-size: 2.5rem;
+          font-weight: 600;
+          text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .header-actions {
+          .btn-secondary {
+            background-color: #222222;
+            color: white;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            
+            &:hover {
+              background-color: #333333;
+              transform: translateY(-2px);
+              box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+      }
+      
+      /* Create New Profession Card Styling */
+      .card {
+        border: none;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px !important;
+        
+        .card-header {
+          background-color: #222222;
+          padding: 15px 20px;
+          border-bottom: none;
+          
+          h3 {
+            color: #ffffff;
+            margin: 0;
+            font-size: 1.3rem;
+            font-weight: 600;
+          }
+        }
+        
+        .card-body {
+          background-color: #ffffff;
+          padding: 3%;
+          
+          .row {
+            display: flex;
+            flex-direction: column;
+            gap: 3%;
+          }
+          
+          .col-md-6 {
+            width: 100%;
+            margin-bottom: 1.5%;
+          }
+          
+          .form-label {
+            font-weight: 500;
+            color: #333;
+            display: block;
+          }
+          
+          .form-control {
+            border-radius: 6px;
+            border: 1px solid #ddd;
+            padding: 12px 15px;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 500px;
+            
+            &:focus {
+              border-color: #9555c2;
+              box-shadow: 0 0 0 0.25rem rgba(149, 85, 194, 0.25);
+              outline: none;
+            }
+          }
+          
+          .btn-success {
+            background-color: #9555c2;
+            border-color: #9555c2;
+            color: white;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            margin-top: 15px;
+            
+            &:hover {
+              background-color: #7b44a1;
+              border-color: #7b44a1;
+              transform: translateY(-2px);
+              box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+            }
+          }
+        }
+      }
+      
+      .filter-controls {
+        background-color: #7b44a1;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        margin-bottom: 25px;
+        
+        .input-group {
+          display: flex;
+          width: 100%;
+          
+          input {
+            flex: 1;
+            padding: 12px 15px;
+            border: none;
+            outline: none;
+            border-radius: 6px 0 0 6px;
+            font-size: 1rem;
+            color: #333;
+            
+            &:focus {
+              box-shadow: 0 0 0 2px rgba(149, 85, 194, 0.5);
+            }
+            
+            &::placeholder {
+              color: #999;
+            }
+          }
+          
+          button {
+            background-color: #222222;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 0 6px 6px 0;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            
+            &:hover {
+              background-color: #9555c2;
+            }
+          }
+        }
+      }
+      
+      .table-responsive {
+        background-color: #ffffff;
+        border-radius: 8px;
+        overflow: hidden;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        
+        .table {
+          margin-bottom: 0;
+          width: 100%;
+          border-collapse: collapse;
+          
+          thead {
+            background-color: #222222;
+            
+            th {
+              padding: 15px;
+              color: #ffffff;
+              font-weight: 600;
+              text-align: left;
+              border-bottom: none;
+              white-space: nowrap;
+            }
+          }
+          
+          tbody {
+            tr {
+              transition: all 0.2s ease;
+              
+              &:nth-child(odd) {
+                background-color: #f8f9fa;
+              }
+              
+              &:hover {
+                background-color: #f0e6f7;
+              }
+              
+              td {
+                padding: 15px;
+                vertical-align: middle;
+                border-top: 1px solid #e9ecef;
+                color: #333;
+                
+                &.actions {
+                  white-space: nowrap;
+                  display: flex;
+                  justify-content: flex-end;
+                  gap: 10px;
+                  
+                  .btn {
+                    font-weight: 500;
+                    padding: 8px 14px;
+                    border-radius: 4px;
+                    transition: all 0.2s ease;
+                    min-width: 80px;
+                    text-align: center;
+                    
+                    &.btn-danger {
+                      background-color: #dc3545;
+                      border-color: #dc3545;
+                      color: white;
+                      font-family: inherit;
+                      font-size: inherit;
+                      
+                      &:hover {
+                        background-color: #c82333;
+                        transform: translateY(-2px);
+                        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+      
+      .alert-info {
+        background-color: #222222;
+        color: #ffffff;
+        border: none;
+        border-radius: 8px;
+        padding: 20px;
+        margin-top: 25px;
+        text-align: center;
+        font-size: 1.1rem;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+    }
   }
 
   .alumni-create {
