@@ -59,11 +59,13 @@ Run the app rails server --binding:0.0.0.0
 ## Environmental Variables/Files
 We have environment variables setup for Authentication
 Instructions
-Include gem ‘dotenv’ into the gemfile 
-Create a .env file 
-Inside .env include…
+- Include gem ‘dotenv’ into the gemfile 
+- Create a .env file 
+- Inside .env include…
+```bash
 GOOGLE_OAUTH_CLIENT_ID=<Your_Client_ID>
 GOOGLE_OAUTH_CLIENT_SECRET=<Your_Client_Secret>
+```
 *Note do not include <>
 
 ## Deployment
